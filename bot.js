@@ -348,7 +348,7 @@ welcomer.sendFile(canvas.toBuffer())
  }
 });
 client.on('ready', () => {
-  client.user.setGame(`Listening to Solo Orders`,'https://www.twitch.tv/TE');
+  client.user.setGame(`-help .`,'https://www.twitch.tv/TE');
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
@@ -868,7 +868,7 @@ client.on('message', message => {
         let args = message.content.split(' ').slice(1).join(' ');
     if(message.content.split(' ')[0] == '-bc') {
         if (!args[1]) {
-    message.channel.send("**-bc <message>**");
+    message.channel.send("**.bc <message>**");
     return;
     }
             message.guild.members.forEach(m => {
