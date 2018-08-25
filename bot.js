@@ -796,7 +796,7 @@ client.on("message", (message) => {
         if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Dont Have Permission");
 
         let args = message.content.split(' ').slice(1);
-        let channel = message.client.channels.find('name','log') args.join(' '));
+        let channel = message.client.channels.find('name','log')
         if (!channel) return message.reply('**لا يوجد روم بهذا الاسم**').catch(console.error);
         channel.delete()
     }
