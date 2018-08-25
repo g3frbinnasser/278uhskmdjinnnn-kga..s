@@ -348,7 +348,7 @@ welcomer.sendFile(canvas.toBuffer())
  }
 });
 client.on('ready', () => {
-  client.user.setGame(`-help .`,'https://www.twitch.tv/TE');
+  client.user.setGame(`-help by ! Solo ヅ # 8881`);
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
@@ -372,11 +372,8 @@ if (message.content === '-help') {
                 .addField("**AVATAR**" ,"**الاستخدام:** ``-avatar صورة حسابك ``")
                 .addField("**LINK**" ,"**الاستخدام:** ``-link أرسال رابط السيرفر ``")
                 .addField("**ID**" ,"**الاستخدام:** ``-id معلومات عن حسابك ``")
-	        .addField("**DT**" ,"**الاستخدام:** ``-dt يظهر لك الوقت في مكه المكرمه و الامارات و مصر ``")
 	        .addField("**MUSIC**" ,"**الاستخدام:** ``-music اوامر لتشغيل الاغاني ``")
-	        .addField("**QURAN**" ,"**الاستخدام:** ``-quran اوامر لتشغيل القرآن ``")
                 .addField("**ADMIN**" ,"**الاستخدام:** ``-admin الاوامر الادارية ``")
-	        .addField("**GAMES**" ,"**الاستخدام:** ``-games اوامر الالعاب ``")
                 .addField("**PLAYER**" ,"**الاستخدام:** ``-player لمعرفة عدد اعضاء السيرفر ``")
                 .addField("**SERVER**" ,"**الاستخدام:** ``-server معلومات عن السيرفر ``")
                 .addField("**INVITE**" ,"**الاستخدام:** ``-invite  لمعرفة انت كم جايب عضو ل السيرفر``")
@@ -406,9 +403,8 @@ if (message.content === '-admin') {
                 .addField("** 👑لاوامر الادارية👑 **","** **")
                 .addField("**BAN**" ,"**الاستخدام:** ``-ban لحظر الأعضاء ``")
                 .addField("**KICK**" ,"**الاستخدام:** ``-kick لطرد الأعضاء ``")
-                .addField("**SCHANNEL**" ,"**الاستخدام:** ``-mutec ل فك قفل الشات ``")
-                .addField("**SCHANNEL**" ,"**الاستخدام:** ``-unmutec ل فك قفل الشات ``")
-	        .addField("**BOT**" ,"**الاستخدام:** ``-bot عدد السيرفرات الي فيها بوتك ``")
+                .addField("**MUTEC**" ,"**الاستخدام:** ``-mutec ل فك قفل الشات ``")
+                .addField("**UNMUTEC**" ,"**الاستخدام:** ``-unmutec ل فك قفل الشات ``")
                 .addField("**MUTE**" ,"**الاستخدام:** ``-mute لعطاء الشخص ميوت ``")
                 .addField("**UNMUTE**" ,"**الاستخدام:** ``-unmute لفك الميوت عن الشخص ``")
                 .addField("**CV**" ,"**الاستخدام:** ``-cv انشاء روم صوتي ``")
@@ -416,7 +412,6 @@ if (message.content === '-admin') {
                 .addField("**DC**" ,"**الاستخدام:** ``-cd لمسح روم صوتي او كتابي  ``")
                 .addField("**CLEAR**" ,"**الاستخدام:** ``-clear مسح بعدد ``")
 		.addField("**BC**" ,"**الاستخدام:** ``-bc ارسال رسالة لجميع الي في السيرفر ``")
-		.addField("**BOT**" ,"**الاستخدام:** ``-bot لمعرفة عدد السيرفرات الي فيها بوتك ``")
                 .setColor('RANDOM')
 .setColor('RANDOM')
   message.author.sendEmbed(embed);
@@ -799,6 +794,22 @@ client.on("message", (message) => {
         let channel = message.client.channels.find('name','log')
         if (!channel) return message.reply('**لا يوجد روم بهذا الاسم**').catch(console.error);
         channel.delete()
+    }
+});
+client.on('message', message => {
+	var prefix = '-'; 
+    let args = message.content.split(" ").slice(1);
+    if (message.author.bot) return;
+    if (!message.channel.guild) return;
+    if (message.content.startsWith(prefix + 'clear')) {
+
+        if (isNaN(args[0])) return message.channel.send('**Please supply a valid amount of messages to purge**');
+        if (args[0] > 100) return message.channel.send('**Please supply a number less than 100**');
+
+        message.channel.bulkDelete(args[0])
+            .then(messages => message.channel.send(`**Successfully deleted \`${messages.size}/${args[0]}\` messages**`).then(msg => msg.delete({
+                timeout: 5000
+            })))
     }
 });
 client.login(process.env.BOT_TOKEN);
