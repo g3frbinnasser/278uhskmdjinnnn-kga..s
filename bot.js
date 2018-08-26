@@ -979,7 +979,6 @@ collector7.on('collect', r => {
 }
 });
 const d = require("discord.js");
-const fs = require("fs");
 var json = JSON.parse(fs.readFileSync("json.json", "utf8"));
 
 client.on("message", (message) => {
