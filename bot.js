@@ -1076,8 +1076,6 @@ j = 1;
        i = i+j;    
         client.user.setGame(setGame[i],`http://www.youtube.com/AlphaCodes!`);    // حقوقنا فضلا اتركها وشائنها
 }, ms);    
-    
-});
 bot.on("guildMemberAdd", member => {
       const welcomer = bot.channels.get("478823041741225985");
       //*let welcomer = member.guild.channels.find("name","welcome");
@@ -1162,5 +1160,5 @@ bot.on("guildMemberAdd", member => {
       })
       
       }
-      });
+      });    
 client.login(process.env.BOT_TOKEN);
