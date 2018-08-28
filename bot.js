@@ -290,7 +290,7 @@ client.on('guildMemberAdd', member => {
 
 
 
-const w = ['./img/w1.png'];
+const w = ['https://cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png'];
 
          let Image = Canvas.Image,
             canvas = new Canvas(400, 200),
