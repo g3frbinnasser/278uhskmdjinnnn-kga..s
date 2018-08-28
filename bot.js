@@ -304,7 +304,7 @@ const w = ['https://cdn.discordapp.com/attachments/450932860568862720/4813968743
              
           
 
-                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
+                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + "https://cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png" : member.user.displayAvatarURL;
                 jimp.read(url, (err, ava) => {
                     if (err) return console.log(err);
                     ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
