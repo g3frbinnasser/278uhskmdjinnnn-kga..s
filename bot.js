@@ -1061,7 +1061,7 @@ client.on('message', message => {
 
 });
 client.on("guildMemberAdd", member => {
-let welcomer = member.guild.channels.find("name","اسم روم الترحيب");
+let welcomer = member.guild.channels.find("name","478823041741225985");
       if(!welcomer) return;
       if(welcomer) {
          moment.locale('ar-ly');
