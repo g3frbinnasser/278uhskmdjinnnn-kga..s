@@ -1281,5 +1281,18 @@ let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
    fs.writeFile("./level.json", JSON.stringify(points), (err) => {
      if (err) console.error(err)
    });
- 
+ const profanities = require ('profanities')
+client.on("message", message => {
+    var sender = message.author;
+    let msg = message.content.toLowerCase();
+
+
+    for (x =0; x < profanities.length; x++) {
+        if (message.content.toUpperCase() == profanities[x].toUpperCase()) {
+            message.reply("ممنوع سب 😠 ").then(m => m.delete(1500));
+            message.delete();
+            return;
+        }
+    }
+});
 client.login(process.env.BOT_TOKEN);
