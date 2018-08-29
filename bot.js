@@ -1168,10 +1168,12 @@ client.on("roleCreate", rc => {
   if(channel) {
   var embed = new Discord.RichEmbed()
   .setTitle(rd.guild.name)
-  .setDescription(`***Deleted Role Name : *** **${rd.name}** <@${message.author.id}> with ID ${message.author.id} `)
+  .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
+  .addField(` <@${message.author.id}> with ID ${message.author.id} `)
   .setColor(`RANDOM`)
   .setTimestamp(); 
-  channel.sendEmbed(embed)
-  }
-  });
+                .setColor('RANDOM')
+  message.author.sendEmbed(embed);
+    }
+});
 client.login(process.env.BOT_TOKEN);
