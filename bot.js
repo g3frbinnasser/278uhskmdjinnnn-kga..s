@@ -210,7 +210,7 @@ function play(guild, song) {
 }
 
 const adminprefix = "-play";
-const devs = ['431150885549113344'];
+const devs = ['479469196380733470'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;//
@@ -1099,21 +1099,6 @@ channel.guild.owner.send(`<@!${channelremover.id}>
   setTimeout(() => {
  channelr[channelremover.id].deleted = 0;
   },Otime)
-  });
-const child_process = require("child_process");
-const adminprefix = "-";
-const devs = ['479469196380733470'];
-
-client.on('message', message => {
-if(message.content === adminprefix + "restart") {
-      if (!devs.includes(message.author.id)) return;
-          message.channel.send(⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**);
-        console.log(⚠️ جاري اعادة تشغيل البوت... ⚠️);
-        client.destroy();
-        child_process.fork(__dirname + "/الملف.js");
-        console.log(تم اعادة تشغيل البوت);
-    }
-  
   });
 client.on('guildCreate', guild => {
   client.channels.get("484025087431802902").send(`:white_check_mark: **تم اضافة البوت
