@@ -1155,15 +1155,6 @@ client.on("message", (message) => {
                 client.users.get("479469196380733470").send(yumz)
             }
 });
-client.on('ready', function(){
-  require("./antispam.js")(client, function(message){
-     message.delete().then(yumz => {
-     message.channel.send(`stop spamming kid <@${message.author.id}>`).then(spammer => {
-     spammer.delete(2000)
-   });
-   });
-  });
-});
 client.on('message', async message => {
             if(!message.channel.guild) return;
              if (message.content.startsWith("-sets")) {
