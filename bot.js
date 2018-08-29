@@ -711,22 +711,22 @@ client.on ("guildMemberRemove", member => {
 }); 
 client.on('message', message => {
     if(message.content === 'السلام عليكم'){
-        message.channel.send('وعليكم السلام')
+        message.channel.send('وعليــكــم الــســـلام ورحــمــة الله وبركاته')
     }
 });
 client.on('message', message => {
     if(message.content === 'السلام عليكم ورحمة الله وبركاتة'){
-        message.channel.send('وعليكم السلام ورحمة الله وبركاتة')
+        message.channel.send('وعليــكــم الــســـلام ورحــمــة الله وبركاته')
     }
 });
 client.on('message', message => {
     if(message.content === 'السلام عليكم و رحمة الله و بركاتة'){
-        message.channel.send('وعليكم السلام و رحمة الله و بركاتة')
+        message.channel.send('وعليــكــم الــســـلام ورحــمــة الله وبركاته')
     }
 });
 client.on('message', message => {
     if(message.content === 'سلام عليكم'){
-        message.channel.send('وعليكم السلام')
+        message.channel.send('وعليــكــم الــســـلام ورحــمــة الله وبركاته')
     }
 });
 client.on('message', message => {
@@ -979,60 +979,6 @@ collector7.on('collect', r => {
 })
 }
 });
-const d = require("discord.js");
-var json = JSON.parse(fs.readFileSync("json.json", "utf8"));
-
-client.on("message", (message) => {
-    var command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-    if (!message.content.startsWith(prefix)) return;
-    switch(command) {
-        case "mute" : 
-        if (!message.channel.type =="text") return;
-        if (!message.member.hasPermission("MANAGE_CHANNELS")) return;
-        if (!message.mentions.members.first()) return;
-        message.guild.channels.forEach(c => {
-            c.overwritePermissions(message.mentions.members.first().id, {
-                SEND_MESSAGES : false,
-                CONNECT : false
-            })
-        })
-        json[message.guild.id + message.mentions.members.first().id] = {muted : true};
-        fs.writeFile("json.json", JSON.stringify(json), err => {
-            if (err) console.error(err);
-        });
-        message.channel.send(`** <@${message.mentions.members.first().id}> Muted in the server!🤐**`);
-        break;
-        case "unmute" : 
-        if (!message.channel.type =="text") return;
-        if (!message.member.hasPermission("MANAGE_CHANNELS")) return;
-        if (!message.mentions.members.first()) return;
-        message.guild.channels.forEach(c => {
-            c.overwritePermissions(message.mentions.members.first().id, {
-                SEND_MESSAGES : null,
-                CONNECT : null
-            })
-        })
-        json[message.guild.id + message.mentions.members.first().id] = {muted : false};
-        fs.writeFile("json.json", JSON.stringify(json), err => {
-            if (err) console.error(err);
-        });
-        message.channel.send(`** <@${message.mentions.members.first().id}> Unmuted!😀**`);
-    }
-})
-
-.on("guildMemberAdd", (member) => {
-    if(json[member.guild.id + member.user.id]) {
-        if (json[member.guild.id + member.user.id].muted == true) {
-            member.guild.channels.forEach(c => {
-                c.overwritePermissions(member.user.id, {
-                    SEND_MESSAGES : false,
-                  CONNECT : false
-                })
-            })
-        }
-    }
-})
 client.on('message', message => {
      if(message.content.startsWith(prefix + "clear")) {
          var args = message.content.split(" ").slice(1);
@@ -1059,45 +1005,6 @@ client.on('message', message => {
   });
 };
 
-});
-client.on("ready", () => {
-    var guild;
-    while (!guild)
-        guild = client.guilds.get("382239191578312705");
-    guild.fetchInvites().then((data) => {
-        data.forEach((Invite, key, map) => {
-            var Inv = Invite.code;
-            dat[Inv] = Invite.uses;
-        });
-    });
-});
-
-
-
-client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("478823041741225985");
-    if (!channel) {
-        console.log("!the channel id it's not correct");
-        return;
-    }
-    if (member.id == client.user.id) {
-        return;
-    }
-    console.log('-');
-    var guild;
-    while (!guild)
-        guild = client.guilds.get("382239191578312705");
-    guild.fetchInvites().then((data) => {
-        data.forEach((Invite, key, map) => {
-            var Inv = Invite.code;
-            if (dat[Inv])
-                if (dat[Inv] < Invite.uses) {
- channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;         
- }
-            dat[Inv] = Invite.uses;
-       
-       });
-    });
 });
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -1192,5 +1099,175 @@ channel.guild.owner.send(`<@!${channelremover.id}>
   setTimeout(() => {
  channelr[channelremover.id].deleted = 0;
   },Otime)
+  });
+const child_process = require("child_process");
+const adminprefix = "-";
+const devs = ['479469196380733470'];
+
+client.on('message', message => {
+if(message.content === adminprefix + "restart") {
+      if (!devs.includes(message.author.id)) return;
+          message.channel.send(⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**);
+        console.log(⚠️ جاري اعادة تشغيل البوت... ⚠️);
+        client.destroy();
+        child_process.fork(__dirname + "/الملف.js");
+        console.log(تم اعادة تشغيل البوت);
+    }
+  
+  });
+client.on('guildCreate', guild => {
+  client.channels.get("484025087431802902").send(`:white_check_mark: **تم اضافة البوت
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('guildDelete', guild => {
+  client.channels.get("484025087431802902").send(`:negative_squared_cross_mark: **تم ازاله البوت
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('message',message =>{
+    var prefix = "-";
+    if(message.content.startsWith(prefix + 'top')) {
+  message.guild.fetchInvites().then(i =>{
+  var invites = [];
+   
+  i.forEach(inv =>{
+    var [invs,i]=[{},null];
+     
+    if(inv.maxUses){
+        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
+    }else{
+        invs[inv.code] =+ inv.uses;
+    }
+        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
+   
+  });
+  var embed = new Discord.RichEmbed()
+  .setColor("#000000")
+  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
+  .setThumbnail("https://i.imgur.com/OM00xyh.png")
+           message.channel.send({ embed: embed });
+   
+  });
+   
+    }
+  });
+client.on("message", (message) => {
+            if (message.channel.type === "dm") {
+        if (message.author.id === client.user.id) return;
+        let yumz = new Discord.RichEmbed()
+                    .setTimestamp()
+                    .setTitle("Direct Message To The Bot")
+                    .addField(`Sent By:`, `<@${message.author.id}>`)
+                    .setColor("RANDOM")
+                    .setThumbnail(message.author.displayAvatarURL)
+                    .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
+                    .setFooter(`DM Bot Messages | DM Logs`)
+                client.users.get("479469196380733470").send(yumz)
+            }
+});
+client.on('ready', function(){
+  require("./antispam.js")(client, function(message){
+     message.delete().then(yumz => {
+     message.channel.send(`stop spamming kid <@${message.author.id}>`).then(spammer => {
+     spammer.delete(2000)
+   });
+   });
+  });
+});
+client.on('message', async message => {
+            if(!message.channel.guild) return;
+             if (message.content.startsWith("-sets")) {
+let args = message.content.split(' ').slice(1).join(' ');
+            let sigMessage = await args;
+            
+            if (sigMessage === "online") {
+                client.user.setStatus("online");
+                message.author.send("Your status was set to online.");
+            }
+            if (sigMessage === "idle") {
+                client.user.setStatus("idle");
+                message.author.send("Your status was set to idle.");
+            }
+            if (sigMessage === "invisible") {
+                client.user.setStatus("invisible");
+                message.author.send("Your status was set to invisible.");
+            }
+            if (sigMessage === "dnd") {
+                client.user.setStatus("dnd");
+                message.author.send("Your status was set to dnd.");
+            }
+            // message.author.send("." + message.content);
+        
+}
+});
+client.on('message' , message => {
+  var prefix = "-";
+  if(message.author.bot) return;
+  if(message.content.startsWith(prefix + "ping")) {
+ message.channel.send('Pong...').then((msg) => {
+      msg.edit(`\`\`\`javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.\`\`\``);
+ })
+  }  
+ });
+client.on('message', message => {
+   if (message.content === "-id") {
+   let embed = new Discord.RichEmbed()
+  .setColor("RANDOM")
+  .setThumbnail(message.author.avatarURL)
+  .addField("Name:",`${message.author.username}`, true)
+  .addField('Discrim:',"#" +  message.author.discriminator, true)
+  .addField("ID:", message.author.id, true)
+  .addField("Create At:", message.author.createdAt, true)
+     
+     
+  message.channel.sendEmbed(embed);
+    }
+});
+client.on("guildMemberAdd", function(member) {
+    const wc = member.guild.channels.find("name", "log")
+        const embed = new Discord.RichEmbed()
+        .setColor('00FF01')
+        .setAuthor(member.user.tag, member.user.avatarURL)
+        .setFooter("User joined ")
+        .setTimestamp()
+        return wc.sendEmbed(embed);
+});
+
+client.on("guildMemberRemove", function(member) {
+    const wc = member.guild.channels.find("name", "log")
+        const embed = new Discord.RichEmbed()
+        .setColor('FF0000')
+        .setAuthor(member.user.tag, member.user.avatarURL)
+        .setFooter("User left ")
+        .setTimestamp()
+        return wc.sendEmbed(embed);
+});
+client.on("channelCreate",  cc => {
+  const channel = cc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(cc.guild.name)
+  .setDescription(`***Channel Created Name : *** **${cc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+   client.on("deleteChannel",  dc => {
+  const channel = dc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(dc.guild.name)
+  .setDescription(`***Channel Deleted Name : *** **${dc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
   });
 client.login(process.env.BOT_TOKEN);
