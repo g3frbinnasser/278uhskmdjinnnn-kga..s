@@ -1197,6 +1197,30 @@ client.on("guildMemberRemove", function(member) {
         .setTimestamp()
         return wc.sendEmbed(embed);
 });
+client.on("roleCreate", rc => {
+  const channel = rc.guild.channels.find("name", "log") //تقدر تغير اسم الشات
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(rc.guild.name)
+  .setDescription(`***Created Role Name : *** **${rc.name}** `)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+  
+  client.on("roleDelete",  rd => {
+  const channel = rd.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(rd.guild.name)
+  .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
 client.on("channelCreate",  cc => {
   const channel = cc.guild.channels.find("name", "log")
   if(channel) {
