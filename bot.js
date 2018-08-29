@@ -433,13 +433,12 @@ client.on('message', message => {
          let embed = new Discord.RichEmbed()
          .setAuthor(message.author.username, message.author.avatarURL)
       .setThumbnail(message.author.avatarURL)
-        .addField("**اسمك:**",  '**[ ' + `${message.author.username}` + ' ]**')
+        .addField("**Name:**",  '**[ ' + `${message.author.username}` + ' ]**')
           .setThumbnail(message.author.avatarURL)
                    .setFooter(`${message.author.username}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')
-      .addField('الكود الخاص بك:', message.author.discriminator)
-      .addField("**عدد الايام منذ افتتاح حسابك:**", message.author.createdAt.getDate())
-        .addField("** تم افتتاح حسابك عام:**", message.createdAt.getFullYear())
-            .addField("** عدد الشهور منذ افتتاح حسابك:**", message.createdAt.getMonth())
+      .addField('Discrim:', message.author.discriminator)
+      .addField("**The days of creating the account:**", message.author.createdAt.getDate())
+        .addField("**Your Account is created in:**", message.createdAt.getFullYear())
     
       message.channel.send({embed});
         }
@@ -621,21 +620,6 @@ client.on('message', message => {
          
     }
 });
-   client.on('message', message => {
-                                if(!message.channel.guild) return;
-                        if (message.content.startsWith('-ping')) {
-                            if(!message.channel.guild) return;
-                            var msg = `${Date.now() - message.createdTimestamp}`
-                            var api = `${Math.round(client.ping)}`
-                            if (message.author.bot) return;
-                        let embed = new Discord.RichEmbed()
-                        .setAuthor(message.author.username,message.author.avatarURL)
-                        .setColor('RANDOM')
-                        .addField('**Time Taken:**',msg + " ms :signal_strength: ")
-                        .addField('**WebSocket:**',api + " ms :signal_strength: ")
-         message.channel.send({embed:embed});
-                        }
-                    });
    client.on('message', async message => {
             if(message.content.includes('discord.gg')){ 
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
@@ -677,7 +661,7 @@ client.on('message', message => {
 })
 client.on ("guildMemberAdd", member => {
   
-   var role = member.guild.roles.find ("name", "member");
+   var role = member.guild.roles.find ("name", "Member");
    member.addRole (role);
   
 })
@@ -1137,20 +1121,6 @@ client.on('message' , message => {
  })
   }  
  });
-client.on('message', message => {
-   if (message.content === "-id") {
-   let embed = new Discord.RichEmbed()
-  .setColor("RANDOM")
-  .setThumbnail(message.author.avatarURL)
-  .addField("Name:",`${message.author.username}`, true)
-  .addField('Discrim:',"#" +  message.author.discriminator, true)
-  .addField("ID:", message.author.id, true)
-  .addField("Create At:", message.author.createdAt, true)
-     
-     
-  message.channel.sendEmbed(embed);
-    }
-});
 client.on("guildMemberAdd", function(member) {
     const wc = member.guild.channels.find("name", "log")
         const embed = new Discord.RichEmbed()
