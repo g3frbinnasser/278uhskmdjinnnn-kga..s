@@ -1257,30 +1257,6 @@ client.on('message', message =>{
 message.channel.stopTyping();
 }
 });
-let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
- client.on("message", message => {
-   if (!message.content.startsWith(prefix)) return;
-   if (message.author.bot) return; 
-
-   if (!points[message.author.id]) points[message.author.id] = {
-     points: 0,
-     level: 0
-   };
-   let userData = points[message.author.id];
-   userData.points++;
- 
-   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-   if (curLevel > userData.level) {
-     // Level up message
-     userData.level = curLevel;
-     message.channel.send(`**🆙 | ${message.author.username} You leveled up to ${curLevel}**`);
-   }
-   if (message.content.startsWith(prefix + "level")) {
-     message.channel.send(`**${message.author.username} You are level is ${userData.level}**`);
-   }
-   fs.writeFile("./level.json", JSON.stringify(points), (err) => {
-     if (err) console.error(err)
-   });
  const profanities = require ('profanities')
 client.on("message", message => {
     var sender = message.author;
@@ -1294,40 +1270,5 @@ client.on("message", message => {
             return;
         }
     }
-});
-	 const fs = require("fs");
-client.on('message', async message =>{
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
-    let xp = require("./xp.json");
-
-  let xpAdd = Math.floor(Math.random() * 7) + 8;
-  console.log(xpAdd);
-
-  if(!xp[message.author.id]){
-    xp[message.author.id] = {
-      xp: 0,
-      level: 1
-    };
-  }
-
-
-  let curxp = xp[message.author.id].xp;
-  let curlvl = xp[message.author.id].level;
-  let nxtLvl = xp[message.author.id].level * 300;
-  xp[message.author.id].xp =  curxp + xpAdd;
-  if(nxtLvl <= xp[message.author.id].xp){
-    xp[message.author.id].level = curlvl + 1;
-    let lvlup = new Discord.RichEmbed()
-    .setTitle("Level Up!")
-    .setColor(purple)
-    .addField("New Level", curlvl + 1);
-
-    message.channel.send(lvlup).then(msg => {msg.delete(5000)});
-  }
-  fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
-    if(err) console.log(err)
-  });
 });
 client.login(process.env.BOT_TOKEN);
