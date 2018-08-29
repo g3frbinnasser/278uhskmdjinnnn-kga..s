@@ -1168,8 +1168,7 @@ client.on("roleCreate", rc => {
   if(channel) {
   var embed = new Discord.RichEmbed()
   .setTitle(rd.guild.name)
-  .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
-  .setDescription('G3FRXDDD By', `<@${message.author.id}> with ID ${message.author.id}`)
+  .setDescription(`***Deleted Role Name : *** **${rd.name}** <@${message.author.id}> with ID ${message.author.id} `)
   .setColor(`RANDOM`)
   .setTimestamp(); 
   channel.sendEmbed(embed)
