@@ -348,7 +348,7 @@ welcomer.sendFile(canvas.toBuffer())
  }
 });
 client.on('ready', () => {
-  client.user.setGame(`-help by ! Solo ヅ # 8881`);
+  client.user.setGame(`Type -help`);
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
