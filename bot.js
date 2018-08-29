@@ -1171,9 +1171,7 @@ client.on("roleCreate", rc => {
   .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
   .setColor(`RANDOM`)
   .setTimestamp();
-	  .addField(` <@${message.author.id}> with ID ${message.author.id} `)
-                .setColor('RANDOM')
-  message.author.sendEmbed(embed);
-    }
-});
+  channel.sendEmbed(embed)
+  }
+  });
 client.login(process.env.BOT_TOKEN);
