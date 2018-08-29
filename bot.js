@@ -437,7 +437,7 @@ client.on('message', message => {
           .setThumbnail(message.author.avatarURL)
                    .setFooter(`${message.author.username}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')
       .addField('Discrim:', message.author.discriminator)
-      .addField("**The days of creating the account:**", message.author.createdAt.getDate())
+      .addField("**The days of created the account:**", message.author.createdAt.getDate())
         .addField("**Your Account is created in:**", message.createdAt.getFullYear())
     
       message.channel.send({embed});
@@ -788,7 +788,7 @@ client.on('message', message => {
     if (!message.channel.guild) return;
     if (message.content.startsWith(prefix + 'clear')) {
 
-        if (isNaN(args[0])) return message.channel.send('**Please supply a valid amount of messages to purge**');
+        if (isNaN(args[0])) return message.channel.send('**Please supply a valid amount of messages to clear**');
         if (args[0] > 100) return message.channel.send('**Please supply a number less than 100**');
 
         message.channel.bulkDelete(args[0])
@@ -1170,6 +1170,7 @@ client.on("roleCreate", rc => {
   .setTitle(rd.guild.name)
   .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
   .setColor(`RANDOM`)
+  .addField('G3FRXDDD By', `<@${message.author.id}> with ID ${message.author.id}`)
   .setTimestamp(); 
   channel.sendEmbed(embed)
   }
