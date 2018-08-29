@@ -1170,7 +1170,7 @@ client.on('message', message => {
   let log = message.guild.channels.find('name', "log") 
   let act = message.guild.roles.find('name', "Member")
   let user = message.mentions.members.first();
-  if(message.content.startsWith(prefix + "act"){
+  if(message.content.startsWith("-act"){
     var embed = new Discord.RichEmbed() 
     .setAuthor(message.author.username) 
     .setThumbnail(user.avatarURL)
