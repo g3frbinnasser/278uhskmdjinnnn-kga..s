@@ -787,6 +787,7 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (!message.channel.guild) return;
     if (message.content.startsWith(prefix + 'clear')) {
+	  if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You Dont Have Permission');
 
         if (isNaN(args[0])) return message.channel.send('**Please supply a valid amount of messages to clear**');
         if (args[0] > 100) return message.channel.send('**Please supply a number less than 100**');
@@ -1244,4 +1245,41 @@ client.on('messageUpdate', (message, newMessage) => {
 
 
 });
+client.on('message', message =>{
+    if (message.author.bot) return;
+    if(message.content == "!type"){
+message.channel.startTyping();
+}
+});
+client.on('message', message =>{
+    if (message.author.bot) return;
+    if(message.content == "!type"){
+message.channel.stopTyping();
+}
+});
+let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
+ client.on("message", message => {
+   if (!message.content.startsWith(prefix)) return;
+   if (message.author.bot) return; 
+
+   if (!points[message.author.id]) points[message.author.id] = {
+     points: 0,
+     level: 0
+   };
+   let userData = points[message.author.id];
+   userData.points++;
+ 
+   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+   if (curLevel > userData.level) {
+     // Level up message
+     userData.level = curLevel;
+     message.channel.send(`**🆙 | ${message.author.username} You leveled up to ${curLevel}**`);
+   }
+   if (message.content.startsWith(prefix + "level")) {
+     message.channel.send(`**${message.author.username} You are level is ${userData.level}**`);
+   }
+   fs.writeFile("./level.json", JSON.stringify(points), (err) => {
+     if (err) console.error(err)
+   });
+ 
 client.login(process.env.BOT_TOKEN);
