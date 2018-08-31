@@ -1149,9 +1149,6 @@ client.on('messageUpdate', (message, newMessage) => {
 
 
 });
-const Discord = require('discord.js');
- const client = new Discord.Client();
-console.log('mhstr');
 client.login("NDQ5NDY3MjcxNzM2MzI4MjAz.DmKdtQ.rzMmv9o2-gRERE6iQDOHNEIBJug" ); 
 client.on('message', message => {
 if (message.content === '1join') {
