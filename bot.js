@@ -1009,6 +1009,12 @@ client.on("guildMemberRemove", function(member) {
         .setTimestamp()
         return wc.sendEmbed(embed);
 });
+ client.on('guildMemberRemove', member => {
+  const channel = member.guild.channels.find('name', 'welcome');
+  if (!channel) return;
+  channel.send(`الله يستر عليك, ${member}`);
+  
+})
    client.on("deleteChannel",  dc => {
   const channel = dc.guild.channels.find("name", "log")
   if(channel) {
