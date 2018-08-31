@@ -1222,7 +1222,7 @@ client.on('message', async message => {
     },86400000);
     }
 });
- hero.on('message',async message => {
+ client.on('message',async message => {
   let messageArray = message.content.split(' ');
   let mention = message.mentions.users.first();
   if(message.content.startsWith('-t7wel')) {
