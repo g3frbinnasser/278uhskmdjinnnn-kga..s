@@ -207,32 +207,6 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
 
-const adminprefix = "-play";
-const devs = ['479469196380733470'];
-client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;//
-    
-if (message.content.startsWith(adminprefix + 'setgame')) {
-  client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
-} else 
-  if (message.content.startsWith(adminprefix + 'setname')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else     
-if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
-}
-
-});
-
 client.on("message", message => {
  if (message.content === `-music`) {
   const embed = new Discord.RichEmbed()
@@ -244,6 +218,7 @@ ${prefix}pause ⇏ إيقآف الأغنية مؤقتا
 ${prefix}resume ⇏ لموآصلة الإغنية بعد إيقآفهآ مؤقتا
 ${prefix}vol ⇏ لتغيير درجة الصوت 100 - 0
 ${prefix}stop ⇏ لإخرآج البوت من الروم
+${prefix}join ⇏ لادخال البوت في الروم
 ${prefix}np ⇏ لمعرفة الأغنية المشغلة حآليا
 ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
  `)
@@ -253,13 +228,7 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
    }); 
 
 client.on("message", message => {
-	 if (message.content === `join`) {
-		if (!message.member.voiceChannel) return message.reply('**Sorry,youre not on a voice channel**');
-		message.member.voiceChannel.join().then(message.react('✅'));
-	}
-});
-client.on("message", message => {
-	 if (message.content === `join`) {
+	 if (message.content === `-join`) {
 		if (!message.member.voiceChannel) return message.reply('**Sorry,youre not on a voice channel**');
 		message.member.voiceChannel.join().then(message.react('✅'));
 	}
@@ -1149,12 +1118,57 @@ client.on('messageUpdate', (message, newMessage) => {
 
 
 });
-client.login("NDQ5NDY3MjcxNzM2MzI4MjAz.DmKdtQ.rzMmv9o2-gRERE6iQDOHNEIBJug" ); 
+const child_process = require("child_process");
+const adminprefix = "-";
+const devs = ['479469196380733470'];
+
 client.on('message', message => {
-if (message.content === '1join') {
- if (message.author.id !== '479469196380733470') return message.react('');
-const channel = message.member.voiceChannel;
-channel.join().then(connection => console.log('Connected')).catch(console.error);
-}
-});
+if(message.content === adminprefix + "restart") {
+      if (!devs.includes(message.author.id)) return;
+          message.channel.send(`⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
+        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
+        client.destroy();
+        child_process.fork(__dirname + "/الملف.js");
+        console.log(`تم اعادة تشغيل البوت`);
+    }
+  
+  });
+client.on('message', message => {
+    var prefix = "-";
+
+      if (!message.content.startsWith(prefix)) return;
+      var args = message.content.split(' ').slice(1);
+      var argresult = args.join(' ');
+      if (message.author.id == 479469196380733470) return;
+
+
+    if (message.content.startsWith(prefix + 'playing')) {
+    if (message.author.id !== '479469196380733470') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
+    client.user.setGame(argresult);
+        message.channel.sendMessage(`**${argresult}** : تم تغيير الحالة`)
+    } else
+
+
+    if (message.content.startsWith(prefix + 'stream')) {
+    if (message.author.id !== '479469196380733470') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
+    client.user.setGame(argresult, "http://twitch.tv/HP");
+        message.channel.sendMessage(`**${argresult}** :تم تغيير الحالة الى ستريمنج`)
+    } else
+
+    if (message.content.startsWith(prefix + 'setname')) {
+    if (message.author.id !== '479469196380733470') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
+      client.user.setUsername(argresult).then
+          message.channel.sendMessage(`**${argresult}** : تم تغير الأسم`)
+      return message.reply("**لا تستطيع تغير الأسم الا بعد ساعتين**");
+    } else
+
+    if (message.content.startsWith(prefix + 'setavatar')) {
+    if (message.author.id !== '479469196380733470') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
+    client.user.setAvatar(argresult);
+        message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
+    }
+
+
+
+     });
 client.login(process.env.BOT_TOKEN);
