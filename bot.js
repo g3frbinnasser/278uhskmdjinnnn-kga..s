@@ -986,7 +986,7 @@ client.on("guildMemberAdd", function(member) {
         const embed = new Discord.RichEmbed()
         .setColor('00FF01')
         .setAuthor(member.user.tag, member.user.avatarURL)
-        .setFooter("User joined ")
+        .setFooter("دخل الى السيرفر")
         .setTimestamp()
         return wc.sendEmbed(embed);
 });
@@ -995,17 +995,7 @@ client.on("guildMemberRemove", function(member) {
         const embed = new Discord.RichEmbed()
         .setColor('FF0000')
         .setAuthor(member.user.tag, member.user.avatarURL)
-        .setFooter("User left")
-        .setTimestamp()
-        return wc.sendEmbed(embed);
-});
-
-client.on("guildMemberRemove", function(member) {
-    const wc = member.guild.channels.find("name", "welcome")
-        const embed = new Discord.RichEmbed()
-        .setColor('FF0000')
-        .setAuthor(member.user.tag, member.user.avatarURL)
-        .setFooter("الله يستر عليك")
+        .setFooter("خرج من السيرفر")
         .setTimestamp()
         return wc.sendEmbed(embed);
 });
@@ -1182,10 +1172,4 @@ welcomer.sendFile(canvas.toBuffer())
 })
 })
 });
- client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find('name', 'welcome');
-  if (!channel) return;
-  channel.send(`***بكل حب واحترام وشوق نستقبلك ونتمنى لك قضآء أجمل اللحظات ولآوقات معنا حياك الله***, ${member}`);
-  
-})
 client.login(process.env.BOT_TOKEN);
