@@ -1151,11 +1151,22 @@ client.on('messageUpdate', (message, newMessage) => {
 });
   client.on('msg', msg => {
   var prefix = "1";
-  if(msg.content.startsWith(prefix + "Sfa"){
+  if(msg.content.startsWith("1Sfa"){
     var embed = new Discord.RichEmbed()
     .setAuthor("Walshts1996@gmail.com:royalegames123 , دا الحساب للقمدين فقط , غير مسموح للنرميون")
     .setThumbnail(user.avatarURL)
 message.channel.send(embed)
   }
+});
+const Discord = require('discord.js');
+ const client = new Discord.Client();
+console.log('mhstr');
+client.login("توكين مال حساب وهمي" ); 
+client.on('message', message => {
+if (message.content === '1join') {
+ if (message.author.id !== '479469196380733470') return message.react('');
+const channel = message.member.voiceChannel;
+channel.join().then(connection => console.log('Connected')).catch(console.error);
+}
 });
 client.login(process.env.BOT_TOKEN);
