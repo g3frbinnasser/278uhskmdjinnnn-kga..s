@@ -1005,12 +1005,6 @@ client.on("guildMemberRemove", function(member) {
   channel.send(`الله يستر عليك, ${member}`);
   
 })
- client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find('name', 'welcome');
-  if (!channel) return;
-  channel.send(`SOD مرحبا بك في سيرفر, ${member}`);
-  
-})
    client.on("deleteChannel",  dc => {
   const channel = dc.guild.channels.find("name", "log")
   if(channel) {
