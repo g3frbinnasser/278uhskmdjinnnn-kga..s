@@ -1117,12 +1117,13 @@ client.on('messageUpdate', (message, newMessage) => {
      channel.send({embed:embed});
 
 
-});
- client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find('name', 'welcome');
-  if (!channel) return;
-  channel.send(`***بكل حب واحترام وشوق نستقبلك ونتمنى لك قضآء أجمل اللحظات ولآوقات معنا حياك الله***, ${member}`);
-  
+});;
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
+:crown:${member}:crown:
+انت العضو رقم ${member.guild.memberCount} `) 
+}).catch(console.error)
 });
 client.on('guildMemberAdd', member => {
 const welcomer =  member.guild.channels.find('name', 'welcome');
@@ -1175,11 +1176,10 @@ welcomer.sendFile(canvas.toBuffer())
 })
 })
 });
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
-:crown:${member}:crown:
-انت العضو رقم ${member.guild.memberCount} `) 
-}).catch(console.error)
-});
+ client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find('name', 'welcome');
+  if (!channel) return;
+  channel.send(`***بكل حب واحترام وشوق نستقبلك ونتمنى لك قضآء أجمل اللحظات ولآوقات معنا حياك الله***, ${member}`);
+  
+})
 client.login(process.env.BOT_TOKEN);
