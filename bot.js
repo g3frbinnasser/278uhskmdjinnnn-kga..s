@@ -1159,13 +1159,13 @@ if (err) return console.log(err);
 ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
 if (err) return console.log(err);
 
-//AVATAR�
+
 let Avatar = Canvas.Image;
 let ava = new Avatar;
 ava.src = buf;
 ctx.drawImage(ava, 152, 27, 95, 95);
 
-//wl
+
 ctx.font = '12px Arial Bold';
 ctx.fontSize = '10px';
 ctx.fillStyle = "#000000";
@@ -1177,26 +1177,5 @@ welcomer.sendFile(canvas.toBuffer())
 
 })
 })
-});
-  client.on('guildMemberAdd', member => {
-  member.addRole('name', "Member")
-});
-
-client.on('message', message => {
-  let log = message.guild.channels.find('name', "log") 
-  let act = message.guild.roles.find('name', "Member")
-  let user = message.mentions.members.first();
-  if(message.content.startsWith(prefix + "act")){
-    var embed = new Discord.RichEmbed() 
-    .setAuthor(message.author.username) 
-    .setThumbnail(user.avatarURL)
-    .addField('User Activated', ${user} get rank ${act})
-    .addField('By', <@${message.author.id}>)
-    .setTimestamp()
-    .setFooter("SOD SERVER")
-  log.send({embed})
-  message.channel.send({embed})
-  user.addRole(${act})
-  }
 });
 client.login(process.env.BOT_TOKEN);
