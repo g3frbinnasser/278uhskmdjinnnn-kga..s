@@ -1005,6 +1005,12 @@ client.on("guildMemberRemove", function(member) {
   channel.send(`الله يستر عليك, ${member}`);
   
 })
+ client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find('name', 'welcome');
+  if (!channel) return;
+  channel.send(`SOD مرحبا بك في سيرفر, ${member}`);
+  
+})
    client.on("deleteChannel",  dc => {
   const channel = dc.guild.channels.find("name", "log")
   if(channel) {
@@ -1171,5 +1177,26 @@ welcomer.sendFile(canvas.toBuffer())
 
 })
 })
+});
+  client.on('guildMemberAdd', member => {
+  member.addRole('name', "Member")
+});
+
+client.on('message', message => {
+  let log = message.guild.channels.find('name', "log") 
+  let act = message.guild.roles.find('name', "Member")
+  let user = message.mentions.members.first();
+  if(message.content.startsWith(prefix + "act")){
+    var embed = new Discord.RichEmbed() 
+    .setAuthor(message.author.username) 
+    .setThumbnail(user.avatarURL)
+    .addField('User Activated', ${user} get rank ${act})
+    .addField('By', <@${message.author.id}>)
+    .setTimestamp()
+    .setFooter("SOD SERVER")
+  log.send({embed})
+  message.channel.send({embed})
+  user.addRole(${act})
+  }
 });
 client.login(process.env.BOT_TOKEN);
