@@ -1188,11 +1188,6 @@ const bannedwords = [
   "-ct",
   "-cv",
   "-dc",
-  "-skip"
-  "-resume"
-  "-vol"
-  "-join"
-  "-queue"
   "-ban"
   "-unban"	
   "-mute"	
