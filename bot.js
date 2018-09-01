@@ -1189,7 +1189,6 @@ const bannedwords = [
   "-cv",
   "-dc",
   "-skip"
-  "-pause"
   "-resume"
   "-vol"
   "-join"
