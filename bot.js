@@ -1177,23 +1177,48 @@ const bannedwords = [
   "#profile",
   "#rep",
   "#top",
-  "%level",
-  "%تقديم",
+  "-mutec",
+  "-unmutec",
   "-play",
   "-stop",
   "-p",
   "-s",
-  "!invites",
-  "!top",
-  "G.play",
-  "G.stop",
-  "G.skip",
+  "-invite",
+  "-ping",
+  "-ct",
+  "-cv",
+  "-dc",
   "-skip"
-
+  "-np"
+  "-pause"
+  "-resume"
+  "-vol"
+  "-join"
+  "-queue"
+  "-ban"
+  "-unban"	
+  "-mute"	
+  "-unmute"
+  "-admin"
+  "-link"
+  "-avatar"
+  "-id"
+  "-player"
+  "-clear"
+  "-bc"
+	
+	
+	
+	
+	
+	
+	
+	
+	
 ]
 client.on('message', message => {
-  var Muted = message.guild.roles.find("name", "muted");
-  var warn = message.guild.roles.find("name", "warn");
+  var Muted = message.guild.roles.find("name", "Muted");
+  var warn = message.guild.roles.find("name", "Warn");
   if(bannedwords.some(word => message.content.includes(word))) {
   if(message.channel.id !== '478824398258831371') return;
   if (message.author.bot) return;
@@ -1205,7 +1230,7 @@ client.on('message', message => {
   if(message.member.roles.has(warn.id)) {
       message.member.addRole(Muted)
       message.member.removeRole(warn)
-      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالتة` 🤐**")
+      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالتها` 🤐**")
   }
   }
   })
