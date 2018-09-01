@@ -1172,56 +1172,11 @@ welcomer.sendFile(canvas.toBuffer())
 })
 })
 });
-const bannedwords = [
-  "#credit",
-  "#profile",
-  "#rep",
-  "#top",
-  "-mutec",
-  "-unmutec",
-  "-play",
-  "-stop",
-  "-p",
-  "-s",
-  "-invite",
-  "-ping",
-  "-ct",
-  "-cv",
-  "-dc",
-  "-ban"
-	
-	
-	
-	
-	
-	
-	
-	
-	
-]
-client.on('message', message => {
-  var Muted = message.guild.roles.find("name", "Muted");
-  var warn = message.guild.roles.find("name", "Warn");
-  if(bannedwords.some(word => message.content.includes(word))) {
-  if(message.channel.id !== '478824398258831371') return;
-  if (message.author.bot) return;
-  if(message.member.roles.has(warn)) return;
-  if(!message.member.roles.has(warn.id)) {
-  message.member.addRole(warn)
-  message.reply("**`تم اعطائك تحذير لاستخدام اوامر البوت فى الشات العام` 😠**")
-  }
-  if(message.member.roles.has(warn.id)) {
-      message.member.addRole(Muted)
-      message.member.removeRole(warn)
-      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالتها` 🤐**")
-  }
-  }
-  })
 client.on('message', message => {
     if(message.content === '-play'){
   if(message.channel.id !== '478824398258831371') return;
-  if (message.author.bot) return;
-        message.reply('yg3fr ma h4a go #صور و زق')
+  if (message.author.bot) return; message.reply('kl z8 ro7 chat IDK')
+        
     }
 });
 client.login(process.env.BOT_TOKEN);
