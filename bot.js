@@ -1189,16 +1189,6 @@ const bannedwords = [
   "-cv",
   "-dc",
   "-ban"
-  "-unban"	
-  "-mute"	
-  "-unmute"
-  "-admin"
-  "-link"
-  "-avatar"
-  "-id"
-  "-player"
-  "-clear"
-  "-bc"
 	
 	
 	
