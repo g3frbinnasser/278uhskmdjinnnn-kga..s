@@ -1221,7 +1221,7 @@ client.on('message', message => {
     if(message.content === 'السلام عليكم و رحمة الله و بركاتة'){
   if(message.channel.id !== '478824398258831371') return;
   if (message.author.bot) return;
-        message.channel.send('وعليــكــم الــســـلام ورحــمــة الله وبركاته')
+        message.reply('ss')
     }
 });
 client.login(process.env.BOT_TOKEN);
