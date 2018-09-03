@@ -1172,44 +1172,4 @@ welcomer.sendFile(canvas.toBuffer())
 })
 })
 });
-client.on('message', message => {
-    if(message.content === '-play'){
-  if(message.channel.id !== '478824398258831371') return;
-  if (message.author.bot) return; message.reply('kl z8 ro7 chat IDK')
-        
-    }
-});
-client.on('channelCreate', channel => {
-    
-    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
-    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
-    
-    var logChannel = channel.guild.channels.find(c => c.name === 'log');
-    if(!logChannel) return;
-    
-    if(channel.type === 'text') {
-        var roomType = 'Text';
-    }else
-    if(channel.type === 'voice') {
-        var roomType = 'Voice';
-    }else
-    if(channel.type === 'category') {
-        var roomType = 'Category';
-    }
-    
-    channel.guild.fetchAuditLogs().then(logs => {
-        var userID = logs.entries.first().executor.id;
-        var userAvatar = logs.entries.first().executor.avatarURL;
-        
-        let channelCreate = new Discord.RichEmbed()
-        .setTitle('**[CHANNEL CREATE]**')
-        .setThumbnail(userAvatar)
-        .setDescription(`**\n**:white_check_mark: Successfully \`\`CREATE\`\` **${roomType}** channel.\n\n**Channel Name:** \`\`${channel.name}\`\` (ID: ${channel.id})\n**By:** <@${userID}> (ID: ${userID})`)
-        .setColor('GREEN')
-        .setTimestamp()
-        .setFooter(channel.guild.name, channel.guild.iconURL)
-        
-        logChannel.send(channelCreate);
-    })
-});
 client.login(process.env.BOT_TOKEN);
