@@ -315,7 +315,7 @@ welcomer.sendFile(canvas.toBuffer())
  }
 });
 client.on('ready', () => {
-  client.user.setActivity("Type -help", {type: 'LISTENING'});
+  client.user.setActivity("by ksa #3201", {type: 'LISTENING'});
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
