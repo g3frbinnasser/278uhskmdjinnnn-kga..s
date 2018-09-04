@@ -626,6 +626,24 @@ client.on('message', message => {
        
     }
 })
+const adminprefix = "H";
+const devs = ['479469196380733470', '382238711573905419'];
+
+client.on('message', message => {
+  var argresult = message.content.split(` `).slice(1).join(' ');
+    if (!devs.includes(message.author.id)) return;
+if(message.content === adminprefix + "restart") {
+  if (!devs.includes(message.author.id)) return;
+      message.channel.send(`:warning:️ **Bot restarting by ${message.author.username}**`);
+    console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log(`⚠️ Bot restarting... ⚠️`);
+    console.log("===============================================\n\n");
+    client.destroy();
+    child_process.fork(__dirname + "/bot.js");
+    console.log(`Bot Successfully Restarted`);
+}
+
+});
 client.on ("guildMemberAdd", member => {
   
    var role = member.guild.roles.find ("name", "Member");
