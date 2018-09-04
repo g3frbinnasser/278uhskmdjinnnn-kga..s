@@ -257,7 +257,7 @@ client.on('guildMemberAdd', member => {
 
 
 
-const w = ['https://cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png'];
+const w = [`./welcome_2.png`];
 
          let Image = Canvas.Image,
             canvas = new Canvas(400, 200),
@@ -1127,7 +1127,7 @@ const welcomer =  member.guild.channels.find('name', 'welcome');
 var Canvas = require('canvas')
 var jimp = require('jimp')
 
-const w = [`./welcome 2.png`];
+const w = [`./welcome_2.png`];
 
 let Image = Canvas.Image,
 canvas = new Canvas(401, 202),
