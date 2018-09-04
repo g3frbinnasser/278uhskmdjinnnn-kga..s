@@ -1127,7 +1127,7 @@ const welcomer =  member.guild.channels.find('name', 'welcome');
 var Canvas = require('canvas')
 var jimp = require('jimp')
 
-const w = [`./welcome_2.png`];
+const w = [`./welcome2.png`];
 
 let Image = Canvas.Image,
 canvas = new Canvas(401, 202),
