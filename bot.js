@@ -1147,7 +1147,7 @@ ctx.drawImage(ground, 0, 0, 401, 202);
 
 })
 
-let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL; cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png
+let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL;
 jimp.read(url, (err, ava) => {
 if (err) return console.log(err);
 ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
