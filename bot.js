@@ -1190,7 +1190,6 @@ welcomer.sendFile(canvas.toBuffer())
 })
 })
 });
-var Canvas = require('canvas');//npm i canvas
 var jimp = require('jimp');//npm i jimp
 const prefix = '-'
 
