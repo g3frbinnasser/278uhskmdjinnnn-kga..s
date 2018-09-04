@@ -1147,14 +1147,14 @@ ctx.drawImage(ground, 0, 0, 401, 202);
 
 })
 
-let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL;
+let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL; cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png
 jimp.read(url, (err, ava) => {
 if (err) return console.log(err);
 ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
 if (err) return console.log(err);
 
 
-let Avatar = Canvas.Image; cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png
+let Avatar = Canvas.Image;
 let ava = new Avatar;
 ava.src = buf;
 ctx.drawImage(ava, 152, 27, 95, 95);
@@ -1171,23 +1171,5 @@ welcomer.sendFile(canvas.toBuffer())
 
 })
 })
-});
-client.on('ready', function(){
-    client.user.setStatus("online");
-    var ms = 10000 ;
-    var setGame = [`on g3fr server`,`!1`,`!2`, '!3'];
-    var i = -1;
-    var j = 0;
-    setInterval(function (){
-        if( i == -1 ){
-            j = 1;
-        }
-        if( i == (setGame.length)-1 ){
-            j = -1;
-        }
-        i = i+j;
-        client.user.setGame(setGame[i],`G3FR -HELP`);
-    }, ms);10000
-
 });
 client.login(process.env.BOT_TOKEN);
