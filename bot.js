@@ -1155,7 +1155,7 @@ if (err) return console.log(err);
 
 
 let Avatar = Canvas.Image; https://cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png
-let ava = new Avatar; https://cdn.discordapp.com/attachments/450932860568862720/481396874390274048/welcome_4.png
+let ava = new Avatar;
 ava.src = buf;
 ctx.drawImage(ava, 152, 27, 95, 95);
 
