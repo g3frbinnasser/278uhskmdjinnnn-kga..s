@@ -1172,4 +1172,22 @@ welcomer.sendFile(canvas.toBuffer())
 })
 })
 });
+client.on('ready', function(){
+    client.user.setStatus("online");
+    var ms = 10000 ;
+    var setGame = [`on g3fr server`,`!1`,`!2`, '!3'];
+    var i = -1;
+    var j = 0;
+    setInterval(function (){
+        if( i == -1 ){
+            j = 1;
+        }
+        if( i == (setGame.length)-1 ){
+            j = -1;
+        }
+        i = i+j;
+        client.user.setGame(setGame[i],`G3FR -HELP`);
+    }, ms);10000
+
+});
 client.login(process.env.BOT_TOKEN);
