@@ -257,24 +257,8 @@ client.on('guildMemberAdd', member => {
 
 
 
-      const w = ['./img/w1.png',
-      './img/w2.png',
-      './img/w3.png',
-      './img/w4.png',
-      './img/w5.png',
-      './img/w6.png',
-      './img/w7.png',
-      './img/w8.png',
-      './img/w9.png',
-      './img/w10.png',
-      './img/w11.png',
-      './img/w12.png',
-      './img/w13.png',
-      './img/w14.png',
-      './img/w15.png',
-      './img/w16.png',
-      './img/w17.png',
-      './img/w18.png',]
+      const w = ['welcome_0.png'.]
+
 
          let Image = Canvas.Image,
             canvas = new Canvas(400, 200),
@@ -1155,14 +1139,8 @@ var jimp = require('jimp')
       './img/w9.png',
       './img/w10.png',
       './img/w11.png',
-      './img/w12.png',
-      './img/w13.png',
-      './img/w14.png',
-      './img/w15.png',
-      './img/w16.png',
-      './img/w17.png',
-      './img/w18.png',]
-
+      './img/w12.png',]
+     
 let Image = Canvas.Image,
 canvas = new Canvas(401, 202),
 ctx = canvas.getContext('2d');
