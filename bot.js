@@ -1218,7 +1218,7 @@ client.on('message' , message => {
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
   const jimp = require('jimp');
-  const w = ['w1.png'];
+  const w = ['mango.png'];
         let Image = Canvas.Image,
             canvas = new Canvas(800, 300),
             ctx = canvas.getContext('2d');
@@ -1273,4 +1273,30 @@ client.on('guildMemberAdd',async member => {
 });
 });
 });
+let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
+ client.on("message", message => {
+   if (!message.content.startsWith(prefix)) return;
+   if (message.author.bot) return; 
+
+   if (!points[message.author.id]) points[message.author.id] = {
+     points: 0,
+     level: 0
+   };
+   let userData = points[message.author.id];
+   userData.points++;
+ 
+   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+   if (curLevel > userData.level) {
+     
+     userData.level = curLevel;
+     message.channel.send(`**🆙 | ${message.author.username} You leveled up to ${curLevel}**`);
+   }
+   if (message.content.startsWith(prefix + "level")) {
+     message.channel.send(`**${message.author.username} You are level is ${userData.level}**`);
+   }
+   fs.writeFile("./level.json", JSON.stringify(points), (err) => {
+     if (err) console.error(err)
+   });
+ 
+ });
 client.login(process.env.BOT_TOKEN);
