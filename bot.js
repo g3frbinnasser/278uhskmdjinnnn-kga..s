@@ -257,7 +257,24 @@ client.on('guildMemberAdd', member => {
 
 
 
-const w = [`./welcome_0.png`];
+      const w = ['./img/w1.png',
+      './img/w2.png',
+      './img/w3.png',
+      './img/w4.png',
+      './img/w5.png',
+      './img/w6.png',
+      './img/w7.png',
+      './img/w8.png',
+      './img/w9.png',
+      './img/w10.png',
+      './img/w11.png',
+      './img/w12.png',
+      './img/w13.png',
+      './img/w14.png',
+      './img/w15.png',
+      './img/w16.png',
+      './img/w17.png',
+      './img/w18.png',]
 
          let Image = Canvas.Image,
             canvas = new Canvas(400, 200),
@@ -626,24 +643,6 @@ client.on('message', message => {
        
     }
 })
-const adminprefix = "H";
-const devs = ['479469196380733470', '382238711573905419'];
-
-client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
-if(message.content === adminprefix + "restart") {
-  if (!devs.includes(message.author.id)) return;
-      message.channel.send(`:warning:️ **Bot restarting by ${message.author.username}**`);
-    console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(`⚠️ Bot restarting... ⚠️`);
-    console.log("===============================================\n\n");
-    client.destroy();
-    child_process.fork(__dirname + "/bot.js");
-    console.log(`Bot Successfully Restarted`);
-}
-
-});
 client.on ("guildMemberAdd", member => {
   
    var role = member.guild.roles.find ("name", "Member");
