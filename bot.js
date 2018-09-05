@@ -257,7 +257,7 @@ client.on('guildMemberAdd', member => {
 
 
 
-const w = [`./welcomep4646747444.png`];
+const w = [`./welcome_0.png`];
 
          let Image = Canvas.Image,
             canvas = new Canvas(400, 200),
