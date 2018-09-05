@@ -1215,6 +1215,4 @@ client.channels.get("457753370954825728").send(`**__WELCOME TO SOD SERVER__**✨
 
 
 
-
-bot.login(process.env.BOT_TOKEN);
 client.login(process.env.BOT_TOKEN);
