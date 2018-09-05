@@ -1169,7 +1169,17 @@ client.on('message' , message => {
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
   const jimp = require('jimp');
-  const w = ['mango.png'];
+       const w = ['w2.png',
+      'w3.png',
+      'w4.png',
+      'w5.png',
+      'w6.png',
+      'w7.png',
+      'w8.png',
+      'w9.png',
+      'w10.png',
+      'w11.png',
+      'w12.png'];
         let Image = Canvas.Image,
             canvas = new Canvas(800, 300),
             ctx = canvas.getContext('2d');
