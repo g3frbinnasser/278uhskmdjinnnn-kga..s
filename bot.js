@@ -316,7 +316,7 @@ welcomer.sendFile(canvas.toBuffer())
  }
 });
 client.on('ready', () => {
-  client.user.setActivity("Maric Douglas ORDERS" #3201", {type: 'LISTENING'});
+  client.user.setActivity("Maric Douglas ORDERS", {type: 'LISTENING'});
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
