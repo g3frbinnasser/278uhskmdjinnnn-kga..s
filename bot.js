@@ -378,10 +378,23 @@ if (message.content === '-admin') {
   if(!message.member.hasPermission("ADMINISTRATOR"))
  return message.channel.send('**You Dont Have Permission **' );
 	var embed  = new Discord.RichEmbed() 
-❖${prefix}** bc ** ==>**لارسال رسالة لكل اعضاء السيرفر**
-❖${prefix}** ct ** ==>**لانشاء روم صوتي او كتابي او حافضة**
+                 
+	  client.on('message', message => {
+  if (message.author.bot) return;
+   if (message.content === prefix + "admin") {
+      message.react("☑")            
+
+   
+
+
+      message.author.sendMessage(`**شكرا لك لاستعمال البوت**
+
+      __**الاوامر الادارية :gear:**__
+
+❖${prefix}** bc ** ==>**لارسال رسالة لكل الاعضاء**
+❖${prefix}** channels ** ==>**لانشاء روم صوتي او كتابي او حافضة**
 ❖${prefix}** kick ** ==>**لطرد شخص من السيرفر**
-❖${prefix}** ban ** ==>**لحصر شخص من السيرفر**
+❖${prefix}** band ** ==>**لحصر شخص من السيرفر**
 ❖${prefix}** mute ** ==>**لاسكات عضو في السيرفر**
 ❖${prefix}** unmute ** ==>**لفك الاسكات عن عضو في السيرفر**
 ❖${prefix}** clear ** ==>**لمسح كل رسائل الشات**
@@ -409,6 +422,7 @@ By :<@280749272498962432> | __**شكرا لكم لاستعمال البوت**__
 `);
 
 }
+});
 client.on('message', message => {
     var args = message.content.split(/[ ]+/)
     if(message.content.includes('discord.gg')){
