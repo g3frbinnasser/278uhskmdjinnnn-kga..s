@@ -363,12 +363,7 @@ client.on('message', msg => {
   if (msg.content === '7892bs782bs') {
     msg.reply('s7u2bs298');
   }
-});
-if (message.content === '-admin') {
-  if(!message.member.hasPermission("ADMINISTRATOR"))
- return message.channel.send('**You Dont Have Permission **' );
-	var embed  = new Discord.RichEmbed() 
-                 
+});                 
 	  client.on('message', message => {
   if (message.author.bot) return;
    if (message.content === prefix + "admin") {
