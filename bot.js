@@ -1139,19 +1139,22 @@ client.on("guildMemberAdd", member => {
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
 });
-
-
-
-
-
-
-client.on('guildMemberAdd', member => {
-
-     if (member.guild.id === "457577473941438476") {
-    
-    
-
-
+client.on("guildMemberAdd", member => {
+      //*const welcomer = client.channels.get("447512988954394624");
+      let welcomer = member.guild.channels.find("name","welcome");
+      if(!welcomer) return;
+      if(welcomer) {
+         moment.locale('ar-ly');
+         var h = member.user;
+        let heroo = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(h.avatarURL)
+        .setAuthor(h.username,h.avatarURL)
+        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+         .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)      
+         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+     welcomer.send({embed:heroo});          
+      
       const w = ['./img/w1.png',
       './img/w2.png',
       './img/w3.png',
@@ -1159,8 +1162,18 @@ client.on('guildMemberAdd', member => {
       './img/w5.png',
       './img/w6.png',
       './img/w7.png',
-      './img/w8.png'];
-
+      './img/w8.png',
+      './img/w9.png',
+      './img/w10.png',
+      './img/w11.png',
+      './img/w12.png',
+      './img/w13.png',
+      './img/w14.png',
+      './img/w15.png',
+      './img/w16.png',
+      './img/w17.png',
+      './img/w18.png',];
+      
               let Image = Canvas.Image,
                   canvas = new Canvas(401, 202),
                   ctx = canvas.getContext('2d');
@@ -1176,43 +1189,147 @@ client.on('guildMemberAdd', member => {
                   let ground = new Image;
                   ground.src = Background;
                   ctx.drawImage(ground, 0, 0, 401, 202);
-
+      
       })
-
-                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".png" : member.user.displayAvatarURL;
-                jimp.read(url, (err, ava) => {
-                    if (err) return console.log(err);
-                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                        if (err) return console.log(err);
-
-                              //AVATAR�
+      
+                      let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL;
+                      jimp.read(url, (err, ava) => {
+                          if (err) return console.log(err);
+                          ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                              if (err) return console.log(err);
+      
+                              //AVATARً
                               let Avatar = Canvas.Image;
                               let ava = new Avatar;
                               ava.src = buf;
                               ctx.drawImage(ava, 152, 27, 95, 95);
-
+                              
                                                       //wl
                               ctx.font = '20px Arial Bold';
-                              ctx.fontSize = '15px';
+                              ctx.fontSize = '20px';
                               ctx.fillStyle = "#FFFFFF";
                               ctx.textAlign = "center";
-                                                         ctx.fillText(member.user.username, 200, 154);
-
-                        
-                        
-client.channels.get("457753370954825728").sendFile(canvas.toBuffer())
-client.channels.get("457753370954825728").send(`**__WELCOME TO SOD SERVER__**✨ ${member}`)
-
-
-
-})
-})
-
-}
+                                                         ctx.fillText(member.user.username, 200, 190);
+                              
+                              //NAMEً
+                              ctx.font = '20px Arial';
+                              ctx.fontSize = '18px';
+                              ctx.fillStyle = "#FFFFFF";
+                              ctx.textAlign = "center";
+                                                         ctx.fillText(`Welcome To 5AMSA World !!`, 200, 154);
+    welcomer.sendFile(canvas.toBuffer())
+      
+      
+      
+      })
+      })
+      
+      }
+      });
+client.on('guildMemberRemove', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('RED')
+       .setDescription(`📤 <@${member.user.id}> **خرج من السيرفر**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
 });
+client.on('guildMemberAdd', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const isNew = (new Date() - member.user.createdTimestamp) < 900000 ? '🆕' : '';
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('GREEN')
+       .setDescription(`📥 <@${member.user.id}> **دخل السيرفر**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+  -js client.on('channelCreate', channel => {
+    
+    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
+    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
+    
+    var logChannel = channel.guild.channels.find(c => c.name === 'log');
+    if(!logChannel) return;
+    
+    if(channel.type === 'text') {
+        var roomType = 'Text';
+    }else
+    if(channel.type === 'voice') {
+        var roomType = 'Voice';
+    }else
+    if(channel.type === 'category') {
+        var roomType = 'Category';
+    }
+    
+    channel.guild.fetchAuditLogs().then(logs => {
+        var userID = logs.entries.first().executor.id;
+        var userAvatar = logs.entries.first().executor.avatarURL;
+        
+        let channelCreate = new Discord.RichEmbed()
+        .setTitle('**[CHANNEL CREATE]**')
+        .setThumbnail(userAvatar)
+        .setDescription(`**\n**:white_check_mark: Successfully \`\`CREATE\`\` **${roomType}** channel.\n\n**Channel Name:** \`\`${channel.name}\`\` (ID: ${channel.id})\n**By:** <@${userID}> (ID: ${userID})`)
+        .setColor('GREEN')
+        .setTimestamp()
+        .setFooter(channel.guild.name, channel.guild.iconURL)
+        
+        logChannel.send(channelCreate);
+    })
+});
+  client.on('message' , async (message) => {
+var prefix = "-"
+    if(message.content.startsWith(prefix + "Topinv")) {
+if(message.author.bot) return;
+if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
+  var invites = await message.guild.fetchInvites();
+    invites = invites.array();
+    arraySort(invites, 'uses', { reverse: true });
+    let possibleInvites = ['User Invited |  Uses '];
+    invites.forEach(i => {
+        if (i.uses === 0) { 
+            return;
+        }
+      possibleInvites.push(['\n\ ' +'<@'+ i.inviter.id +'>' + '  :  ' +   i.uses]);
+      if (i.uses === 500) {
+          message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+}
+if (i.uses === 20) {
+message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+}
+if (i.uses === 30) {
+message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+      }
+    })
+    const embed = new Discord.RichEmbed()
+ .setColor('#36393e')
+    .addField("Top Invites." ,`${(possibleInvites)}`)
 
-
-
-
-
+    message.channel.send(embed)
+    }
+});
 client.login(process.env.BOT_TOKEN);
