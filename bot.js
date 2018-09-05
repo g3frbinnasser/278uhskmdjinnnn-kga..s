@@ -336,28 +336,6 @@ client.on('message', msg => {
 });
 if (message.content === '-help') {
 	var embed  = new Discord.RichEmbed()
-                .addField("**👫الاوامر العامة👫**","** **")
-                .addField("**AVATAR**" ,"**الاستخدام:** ``-avatar صورة حسابك ``")
-                .addField("**LINK**" ,"**الاستخدام:** ``-link أرسال رابط السيرفر ``")
-                .addField("**ID**" ,"**الاستخدام:** ``-id معلومات عن حسابك ``")
-	        .addField("**MUSIC**" ,"**الاستخدام:** ``-music اوامر لتشغيل الاغاني ``")
-                .addField("**ADMIN**" ,"**الاستخدام:** ``-admin الاوامر الادارية ``")
-                .addField("**PLAYER**" ,"**الاستخدام:** ``-player لمعرفة عدد اعضاء السيرفر ``")
-                .addField("**SERVER**" ,"**الاستخدام:** ``-server معلومات عن السيرفر ``")
-                .addField("**INVITE**" ,"**الاستخدام:** ``-invite  لمعرفة انت كم جايب عضو ل السيرفر``")
-                .addField("**PING**" ,"**الاستخدام:** ``-ping  سرعة اتصال البوت ``")
-                .setColor('RANDOM')
-.setColor('RANDOM')
-  message.author.sendEmbed(embed);
-    }
-});
-client.on('message', msg => {
-  if (msg.content === '7892bs782bs') {
-    msg.reply('s7u2bs298');
-  }
-});
-if (message.content === '-help') {
-	var embed  = new Discord.RichEmbed()
       __**👫الاوامر العامة👫**__
 ⤠ ** -avatar ** **لكي يعطيك رابط صورتك او صورة صديقك**
 ⤠ ** -server ** **لمعلومات السيرفر**
@@ -369,6 +347,11 @@ if (message.content === '-help') {
 ⤠ ** -quran ** **لتشغيل القرآن الکریم**
 ⤠ ** -admin ** **الاوامر الادارية**
 ⤠ ** -player ** **لمعرفة عدد اعضاء السيرفر**
+                .setColor('RANDOM')
+.setColor('RANDOM')
+  message.author.sendEmbed(embed);
+    }
+});
 client.on('message', message => {
      if (message.content === ".servers") {
      let embed = new Discord.RichEmbed()
