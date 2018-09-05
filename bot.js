@@ -1139,7 +1139,6 @@ client.on("guildMemberAdd", member => {
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
 });
-const prefix = '+'
 
 
 
