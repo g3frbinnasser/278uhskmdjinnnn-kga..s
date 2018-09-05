@@ -1140,7 +1140,7 @@ client.on("guildMemberAdd", member => {
 }).catch(console.error)
 });
 client.on("guildMemberAdd", member => {
-      //*const welcomer = client.channels.get("447512988954394624");
+      
       let welcomer = member.guild.channels.find("name","welcome");
       if(!welcomer) return;
       if(welcomer) {
@@ -1259,7 +1259,7 @@ client.on('guildMemberAdd', member => {
        .setTimestamp();
      channel.send({embed:embed});
 });
-  -js client.on('channelCreate', channel => {
+client.on('channelCreate', channel => {
     
     if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
     if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
