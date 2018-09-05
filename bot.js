@@ -1139,7 +1139,6 @@ client.on("guildMemberAdd", member => {
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
 });
-var Canvas = require('canvas')
 var jimp = require('jimp');//npm i jimp
 const prefix = '+'
 
