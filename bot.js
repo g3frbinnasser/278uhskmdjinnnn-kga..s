@@ -1648,66 +1648,32 @@ message.channel.stopTyping()
 })
 }
 });
+let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 client.on("message", message => {
-if (message.content === ("-yag3fr")) {
-let channel = message.client.channels.find('name', "member");
-let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'member');
-if (!muteRole) return message.reply("** قم بإنشآء الرومات اولا عن طريق الامر R-Ch **").catch(console.error);
-if(!message.channel.guild) return message.reply('**Commands in the server**');
-if(!message.member.hasPermission('ADMINISTRATOR')) return    message.channel.send('**أنت ليس لديك برمشن** `ADMINISTRATOR`' );
-channel.edit({name : `memberCount「${message.guild.memberCount}」`});
-message.channel.sendMessage("تم تفعيل الروم بنجاح")
-      
-  }
-});
-const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
-const coolDown = new Set();
+  if (!message.content.startsWith(prefix)) return;
+  if (message.author.bot) return;
 
-client.on('message',async message => {
+  if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+    level: 0
+  };
+  let userData = points[message.author.id];
+  userData.points++;
+
+  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+  if (curLevel > userData.level) {
     
-if(message.author.bot) return;
-if(!credits[message.author.id]) credits[message.author.id] = {
-    credits: 50
-};
+    userData.level = curLevel;
+     message.reply(`**لقد وصلت الى المستوى ${curLevel}**`).then(m => m.delete(100000));
+  }
 
-let userData = credits[message.author.id];
-let m = userData.credits;
+  if (message.content.startsWith(prefix + "level")) {
+    
+      message.reply(` ** انت في المستوى ${userData.level}  مع ${userData.points} نقاط . ** `).then(m => m.delete(100000));
 
-fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
-    if (err) console.error(err);
+  }
+  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+    if (err) console.error(err)
   });
-  credits[message.author.id] = {
-      credits: m + 0.5,
-  }
-  
-    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
-message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
-}
-});
 
-client.on('message', async message => {
-    let amount = 250;
-    if(message.content.startsWith(prefix + "daily")) {
-    if(message.author.bot) return;
-    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
-    
-    let userData = credits[message.author.id];
-    let m = userData.credits + amount;
-    credits[message.author.id] = {
-    credits: m
-    };
-
-    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
-    if (err) console.error(err);
-    });
-    
-    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
-        coolDown.add(message.author.id);
-    });
-    
-    setTimeout(() => {
-       coolDown.remove(message.author.id);
-    },86400000);
-    }
-});
 client.login(process.env.BOT_TOKEN);
