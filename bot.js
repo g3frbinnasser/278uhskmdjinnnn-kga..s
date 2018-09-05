@@ -1139,6 +1139,7 @@ client.on("guildMemberAdd", member => {
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
 });
+var Canvas = require('canvas')
 var jimp = require('jimp');//npm i jimp
 const prefix = '+'
 
@@ -1152,8 +1153,6 @@ client.on('guildMemberAdd', member => {
      if (member.guild.id === "457577473941438476") {
     
     
-var Canvas = require('canvas')
-var jimp = require('jimp')
 
 
       const w = ['./img/w1.png',
