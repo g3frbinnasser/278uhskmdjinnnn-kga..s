@@ -1362,13 +1362,12 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
   }
 });
 client.on('message', async message => {
-      var prefix = "*";
   let Client = require('fortnite');
   let fortnite = new Client('2bb97881-c068-4cba-b3b5-152abfc71c83');
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
-    if(message.content.startsWith(prefix + "fortnite")) {
+    if(message.content.startsWith("-fortnite")) {
         let username = args[0];
         let platform = args[2] || 'pc';
         let gamemode = args[1];
