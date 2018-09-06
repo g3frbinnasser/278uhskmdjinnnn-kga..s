@@ -1362,7 +1362,7 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
   }
 });
 client.on('message', async message => {
-      var prefix = "*"
+      var prefix = "*";
   let Client = require('fortnite');
   let fortnite = new Client('2bb97881-c068-4cba-b3b5-152abfc71c83');
   let messageArray = message.content.split(" ");
