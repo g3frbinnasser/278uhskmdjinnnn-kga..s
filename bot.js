@@ -566,14 +566,6 @@ client.on('message', message =>{
       msg.channel.send({embed:embed});
     }
   });
-client.on('message', message => {
-    if (message.content.startsWith("-invite")) {
-
-    message.guild.fetchInvites()
-    .then(invites => message.channel.send(` انت جبت  [${invites.find(invite => invite.inviter.id === message.author.id).uses}]      عضو للسيرفر   `))
-         
-    }
-});
    client.on('message', async message => {
             if(message.content.includes('discord.gg')){ 
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
