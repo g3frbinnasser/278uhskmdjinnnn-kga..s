@@ -1441,7 +1441,7 @@ if (games[sender.id].lastDaily != moment().format('day')) {
 
 	
     }
-    });*/
+    });
 client.on('message', message => { 
 
     if(message.content.startsWith(prefix + 'rep')) {
