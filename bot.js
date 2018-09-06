@@ -1232,7 +1232,7 @@ client.on('guildMemberAdd',async member => {
             var Canvas = module.require('canvas');
             var jimp = module.require('jimp');
     
-     const w = ['./ID1.png', './ID2.png', './ID3.png', './ID4.png', './ID5.png', './ID6.png', './ID7.png', './ID8.png', './ID9.png', './ID10.png', './ID11.png', './ID12.png', './ID13.png',];
+     const w = ['./ID1.png', './ID2.png', './ID3.png', './ID4.png', './ID5.png',];
     
              let Image = Canvas.Image,
                  canvas = new Canvas(802, 404),
@@ -1361,23 +1361,4 @@ client.on('ready', function(){
    });
   });
 });
-client.on("message", async message => {
-  
-  if(!message.member.hasPermission("ADMINISTRATOR")) {
-    if(/(?:Heroku?:\/)?discord(?:app.com\/invite|.gg)/gi.test(message.content)) {
-        message.delete();
-        let inviteEmbed = new Discord.RichEmbed()
-  
-        .setDescription("__**Auto Suppression**__")
-        .addField("> Envoyé par :", `<@${message.author.id}> avec l'ID ${message.author.id}`)
-        .addField("> Suppression dans :", message.channel)
-        .addField(`> Reasson :`, `Envoie une invitation discord : ${message.content}`)
-        .setColor(violet);
-  
-        let incidentchannel = message.guild.channels.find(`name`, "log");
-        if(!incidentchannel) return message.channel.send("⛔ Je n'est pas trouvé le channel 'logs' !");
-        return incidentchannel.send(inviteEmbed);
-    }
-  }
-  });
 client.login(process.env.BOT_TOKEN);
