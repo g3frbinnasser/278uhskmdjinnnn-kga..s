@@ -1419,14 +1419,14 @@ client.on("message", (message) => {
         role : null,
         work : false
     };
-}).on("guildMemberAdd", (member) => {
+})
+	client.on("guildMemberAdd", (member) => {
     if (lol[member.guild.id].work == true) {
         var role = member.guild.roles.get(lol[member.guild.id].role);
         if (!role) return;
         member.addRole(role);
     }
 });
-
   client.on('message' , async (message) => {
     if(message.content.startsWith("tInv")) {
 if(message.author.bot) return;
@@ -1446,13 +1446,13 @@ console.log('`Error`: ' + RebeL);
 });
 }
 if (i.uses === 20) {
-message.member.addRole(message.member.guild.roles.find("name",""))
+message.member.addRole(message.member.guild.roles.find("name","g3fr"))
 .catch(RebeL =>{
 console.log('`Error`: ' + RebeL);
 });
 }
 if (i.uses === 30) {
-message.member.addRole(message.member.guild.roles.find("name",""))
+message.member.addRole(message.member.guild.roles.find("name","g3fr"))
 .catch(RebeL =>{
 console.log('`Error`: ' + RebeL);
 });
