@@ -1391,58 +1391,31 @@ console.log(MEGA[member.user.id].roles.length);
 for(let i = 0; i < MEGA[member.user.id].roles.length + 1; i++) {
 member.addRole(MEGA[member.user.id].roles.shift());
 }});
-client.on('message', ALPHACODES => { 
-  var sender = ALPHACODES.author
-  if(!ALPHACODES.guild) return
-  if(!sw[ALPHACODES.guild.id]) sw[ALPHACODES.guild.id] = {
-  onoff: 'Off',
-  ch:    'Welcome',
-  msk:   'Welcome'
-}
-        if(ALPHACODES.content.startsWith(prefix + `set-wlc`)) {        
-        let perms = ALPHACODES.member.hasPermission(`MANAGE_CHANNELS`)
-        if(!perms) return ALPHACODES.channel.send('**You need `Manage Channels` permission**')
-        let args = ALPHACODES.content.split(" ").slice(1)
-        if(!args.join(" ")) return ALPHACODES.reply(`
-  ** ${prefix}set-wlc toggle **
-  ** ${prefix}set-wlc set [Channel Name] **
-  ** ${prefix}set-wlc msg [Welcome ALPHACODES] **`) // ->set-wlc toggle - ->set-wlc set - ->set-wlc msg
-        let state = args[0]
-        if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'set' || !state.trim().toLowerCase() == 'msg' ) return ALPHACODES.reply(`
- ** ${prefix}set-wlc toggle **
- ** ${prefix}set-wlc set [Channel Name] **
- ** ${prefix}set-wlc msg [Welcome ALPHACODES] **`) // ->set-wlc toggle - ->set-wlc set - ->set-wlc msg
-        if(state.trim().toLowerCase() == 'toggle') { 
-        if(sw[ALPHACODES.guild.id].onoff === 'Off') return [ALPHACODES.channel.send(`**Welcome ALPHACODES Is **on** !**`), sw[ALPHACODES.guild.id].onoff = 'On']
-        if(sw[ALPHACODES.guild.id].onoff === 'On')  return [ALPHACODES.channel.send(`**Welcome ALPHACODES Is **off** !**`), sw[ALPHACODES.guild.id].onoff = 'Off']
-}
-        if(state.trim().toLowerCase() == 'set') {
-        let newch = ALPHACODES.content.split(" ").slice(2).join(" ")
-        if(!newch) return ALPHACODES.reply(`${prefix}set-wlc set [Channel name]`)
-        if(!ALPHACODES.guild.channels.find(`name`,newch)) return ALPHACODES.reply(`**I Cant Find This Channel.**`)
-            sw[ALPHACODES.guild.id].ch = newch
-            ALPHACODES.channel.send(`**Welcome channel Has Been Changed to ${newch}.**`)
-} 
-        if(state.trim().toLowerCase() == 'msg') {
-        let newmsg = ALPHACODES.content.split(" ").slice(2).join(" ")
-        if(!newmsg) return ALPHACODES.reply(`${prefix}set-wlc msg [New ALPHACODES]`)
-            sw[ALPHACODES.guild.id].msk = newmsg
-            ALPHACODES.channel.send(`**Welcome ALPHACODES Has Been Changed to ${newmsg}.**`)
-} 
-}
-        if(ALPHACODES.content === prefix + 'set-wlc info') {
-        let perms = ALPHACODES.member.hasPermission(`MANAGE_GUILD`) 
-        if(!perms) return ALPHACODES.reply(`You don't have permissions.`)
-        var embed = new Discord.RichEmbed()
-        .addField(`Welcome ALPHACODES  `, `
-On/Off  : __${sw[ALPHACODES.guild.id].onoff}__
-Channel : __${sw[ALPHACODES.guild.id].ch}__
-ALPHACODES : __${sw[ALPHACODES.guild.id].msk}__`)
-        .setColor(`BLUE`)
-        ALPHACODES.channel.send({embed})
-}
-        fs.writeFile("./setwlc.json", JSON.stringify(sw), (err) => {
-        if (err) console.error(err)
-});
-})
+client.on('message',message =>{
+    var prefix = "/";
+    if(message.content.startsWith(prefix + 'top')) {
+  message.guild.fetchInvites().then(i =>{
+  var invites = [];
+   
+  i.forEach(inv =>{
+    var [invs,i]=[{},null];
+     
+    if(inv.maxUses){
+        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
+    }else{
+        invs[inv.code] =+ inv.uses;
+    }
+        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
+   
+  });
+  var embed = new Discord.RichEmbed()
+  .setColor("#000000")
+  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
+  .setThumbnail("https://i.imgur.com/OM00xyh.png")
+           message.channel.send({ embed: embed });
+   
+  });
+   
+    }
+  });
 client.login(process.env.BOT_TOKEN);
