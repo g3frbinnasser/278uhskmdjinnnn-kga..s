@@ -327,10 +327,10 @@ if (message.content.startsWith(prefix + 'help')) {
 ⤠ ${prefix}clear ⥨ مسح الشات
 ⤠ ${prefix}mute @user ⥨ اعطاء العضو ميوت
 ⤠ ${prefix}unmute @user ⥨ لفك الميوت عن الشخص
-⤠ ${prefix}kick @user <reason> ⥨ طرد الشخص من السيرفر
-⤠ ${prefix}ban @user <reason> ⥨ حضر الشخص من السيرفر
-⤠ ${prefix}mutec ⥨ لقفل الشات
 ⤠ ${prefix}unmutec ⥨ لفتح الشات
+⤠ ${prefix}mutec ⥨ لقفل الشات
+⤠ ${prefix}ban @user <reason> ⥨ حضر الشخص من السيرفر
+⤠ ${prefix}kick @user <reason> ⥨ طرد الشخص من السيرفر
 ⤠ ${prefix}ct <name> ⥨ انشاء روم كتابي
 ⤠ ${prefix}cv <name> ⥨ انشاء روم صوتي
 **
@@ -660,7 +660,7 @@ client.on('message', message => {
     }
 });
 client.on('message', message => {
-    if(message.content === '-help'){
+    if(message.content === '*help'){
         message.channel.send('📩 | تم ارسال الرسالة في الخاص')
     }
 });
