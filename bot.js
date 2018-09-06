@@ -1359,63 +1359,55 @@ client.on('ready', function(){
    });
   });
 });
-client.on('message' , async (message) => {
-
-    if(message.content.startsWith("-topinvite")) {
-
-  let invites = await message.guild.fetchInvites();
-
-    invites = invites.array();
-
-    arraySort(invites, 'uses', { reverse: true });
-
-    let possibleInvites = [['الدعوات', 'الاشخاص']];
-    invites.forEach(i => {
-      possibleInvites.push([i.inviter.username , i.uses]);
-    })
-    const embed = new Discord.RichEmbed()
-    .setColor(0x7289da)
-    .setTitle("دعوات السيرفر")
-    .addField(' المتصدرين' , `${table.table(possibleInvites)}`)
-
-    message.channel.send(embed)
-    }
+client.on('message', message => {
+  if(message.content.startsWith(`${prefix}invites`)) {
+    message.guild.fetchInvites().then(invs => {
+      let user = message.mentions.users.first() || message.author
+      let personalInvites = invs.filter(i => i.inviter.id === user.id);
+      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+message.channel.send(`${user} has ${inviteCount} invites.`);
 });
-  var MEGA = {};
-client.on('guildMemberRemove', member => {
-MEGA[member.id] = {roles: member.roles.array()};
-}); 
-client.on('guildMemberAdd', member => {
-if(!MEGA[member.user.id]) return;
-console.log(MEGA[member.user.id].roles.length);
-for(let i = 0; i < MEGA[member.user.id].roles.length + 1; i++) {
-member.addRole(MEGA[member.user.id].roles.shift());
-}});
-client.on('message',message =>{
-    var prefix = "/";
-    if(message.content.startsWith(prefix + 'top')) {
-  message.guild.fetchInvites().then(i =>{
-  var invites = [];
-   
-  i.forEach(inv =>{
-    var [invs,i]=[{},null];
-     
-    if(inv.maxUses){
-        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
-    }else{
-        invs[inv.code] =+ inv.uses;
+  }
+});
+var dat = JSON.parse("{}");
+function forEachObject(obj, func) {
+    Object.keys(obj).forEach(function (key) { func(key, obj[key]) })
+}
+client.on("ready", () => {
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", "Member")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            dat[Inv] = Invite.uses;
+        })
+    })
+})
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.find('name', 'welcome');
+    if (!channel) {
+        console.log("!channel fails");
+        return;
     }
-        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
-   
-  });
-  var embed = new Discord.RichEmbed()
-  .setColor("#000000")
-  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
-  .setThumbnail("https://i.imgur.com/OM00xyh.png")
-           message.channel.send({ embed: embed });
-   
-  });
-   
+    if (member.id == client.user.id) {
+        return;
     }
-  });
+    console.log('made it till here!');
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", "Member")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+                    console.log(3);
+                    console.log(`${member} joined over ${Invite.inviter}'s invite ${Invite.code}`)
+ channel.send(` ♥ **تم دعوته من قبل ${Invite.inviter} ♥ `)            
+ }
+            dat[Inv] = Invite.uses;
+        })
+    })
+});
 client.login(process.env.BOT_TOKEN);
