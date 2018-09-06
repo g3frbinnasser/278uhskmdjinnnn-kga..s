@@ -1359,9 +1359,6 @@ client.on('ready', function(){
    });
   });
 });
-  const arraySort = require('array-sort'),
-table = require('table');
-
 client.on('message' , async (message) => {
 
     if(message.content.startsWith("-topinvite")) {
