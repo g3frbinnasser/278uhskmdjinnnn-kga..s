@@ -322,70 +322,152 @@ client.on('ready', () => {
   console.log('---------------')
 });
 client.on('message', message => {
-     if (message.content === ".servers") {
-     let embed = new Discord.RichEmbed()
-  .setColor("#0000FF")
-  .addField("**Server: **" , client.guilds.size)
-  message.channel.sendEmbed(embed);
-    }
+if (message.content.startsWith(prefix + 'help')) { /// This is The DMS Code Send The Help In DMS // Code By NotGucci
+    let pages = [`
+***__وصف عن البوت__***
+**
+:gem:  البوت فيه كثير ميزات حلوة و جميلة
+ ا:rocket: البوت يعمل 24 ساعه 
+**
+        ***__General orders__***
+**
+『${prefix}allbots/لعرض جميع البوتات الي بالسيرفر』
+『${prefix}server/يعرض لك معلومات عن السيرفر』
+『${prefix}bot/يعرض لك كل معلومات البوت』
+『${prefix}count/يعرض لك عدد الاشخاص بالسيرفر بدون بوتات』
+『${prefix}invites/ يعرض لك  عدد انفايتاتك بالسيرفر 』
+『${prefix}invinfo <invitelink here> / لمعلومات عن الدعوه』
+『 مثال : invinfo m82n8P
+『${prefix}invite-codes/يعرض لك روابط الانفايتات حكك في السيرفر 』
+『${prefix}cal/اله حاسبة』 
+『${prefix}trans <language> <any thing>/يترجم لك الي تبيه من اي لغة』
+『${prefix}short/يختصر لك رابط كبير الى رابط صغير』
+『${prefix}tag/يكتب لك الكلمة بشكل جميل وكبير』
+『${prefix}google/للبحث في قوقل عن طريق الدسكورد』
+『${prefix}perms/يعرض لك برمشناتك بالسيرفر』
+『${prefix}z5rf/يزخرف لك كلمة او جملة』
+『${prefix}rooms/يعرض لك كل الرومات الي بالسيرفر مع عددها』
+『${prefix}roles/يعرض لك كل الرانكات بالسيرفر بشكل جميل』
+『${prefix}emojilist/يعرض لك كل الايموجيات الي بالسيرفر』
+『${prefix}say/يكرر الكلام الي تكتبو』
+『${prefix}image/صورة السيرفر』
+『${prefix}members/عرض لك عدد كل حالات الاشخاص وعدد البوتات وعدد الاشخاص』
+『${prefix}id/معلومات عنك』
+『${prefix}bans / عدد الاشخاص المبندة 』
+『${prefix}avatar/صورتك او صورة الي تمنشنو』
+『${prefix}embed/يكرر الي تقولو بشكل حلو』 
+『${prefix}emoji <any things>/لتحويل اي كلمه تقولها الي ايموجي』
+『${prefix}inv/لدعوة البوت الى سيرفرك』
+『${prefix}support/سيرفر الدعم』
+『${prefix}contact/ارسال اقتراح او لمراسلة صاحب البوت』
+**
+  `
+,`
+        ***__Administrative Orders__***
+**
+『${prefix}move @user /  لسحب الشخص الى روومك』  
+『${prefix}bc / رسالة جماعية الى كل اعضاء السيرفر』
+『${prefix}bk / رسالة جماعيه مع』
+『${prefix}rolebc <everyone or @role> / راسال رساله جماعيه لرتبه محدده』
+『${prefix}role @user <rank> / لأعطاء رتبة لعضو معين』
+『${prefix}roleremove @user <rank> / لازالة الرتبة من شخص معين』
+『${prefix}give all <rank> / لأعطاء رتبة للجميع』
+『${prefix}give humans <rank> / لأعطاء رتبة للاشخاص فقط』
+『${prefix}give bots <rank> / لأعطاء رتبة لجميع البوتات』
+『${prefix}hchannel / اخفاء الشات』
+『${prefix}schannel / اضهار الشات المخفية』
+『${prefix}clr <numbr> / مسح الشات بعدد』
+『${prefix}clear / مسح الشات』
+『${prefix}mute @user <time> / اعطاء العضو ميوت 』
+『${prefix}unmute @user / لفك الميوت عن الشخص 』
+『${prefix}kick @user <reason> / طرد الشخص من السيرفر』
+『${prefix}ban @user <reason> / حضر الشخص من السيرفر』
+『${prefix}mutechannel / تقفيل الشات』
+『${prefix}unmutechannel / فتح الشات』
+『${prefix}dc / مسح كل الرومات』
+『${prefix}dr / <مسح كل الرانكات <لازم تكون رانك البوت فوق كل الرانكات』
+『${prefix}ct <name> / انشاء شات』
+『${prefix}cv <name> / انشاء رووم فويس』
+『${prefix}temp / لانشاء روم مؤقت』
+『${prefix}delet <name> / مسح الشات او الرووم فويس』
+『${prefix}make <number> / ينشا لك الوان مع كم الوان تبي』
+『${prefix}color <number> / لختيار لون』
+『${prefix}deletecolors <number> / لحذف الالوان』
+**
+   `,`
+        ***__Music orders__***
+**
+『${prefix}play / لتشغيل أغنية برآبط أو بأسم』
+『${prefix}skip / لتجآوز الأغنية الحآلية』
+『${prefix}pause / إيقآف الأغنية مؤقتا』
+『${prefix}resume / لموآصلة الإغنية بعد إيقآفهآ مؤقتا』
+『${prefix}vol / لتغيير درجة الصوت 100 - 0』
+『${prefix}stop / لإخرآج البوت من الروم』
+『${prefix}np / لمعرفة الأغنية المشغلة حآليا』
+『${prefix}queue / لمعرفة قآئمة التشغيل』
+**
+        ***__Games orders__***
+ **       
+『${prefix}rps / حجر ورقة مقص』
+『${prefix}speed / اسرع كتابة』
+『${prefix}quas / اسئلة عامة』
+『${prefix}نكت / نكت 』
+『${prefix}لعبة فكك / فكك』
+『${prefix}عواصم عشوائي/عواصم』
+『${prefix}لعبة كت تويت / كت تويت』
+『${prefix}roll <number> / قرعة』
+『${prefix}لو خيروك بطريقة حلوة / لو خيروك』
+『${prefix}لعبة مريم / مريم』
+『${prefix}فوائد ونصائح  / هل تعلم』
+『${prefix}يعطيك عقابات قاسية / عقاب 』
+『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
+『welcome يتم الترحيب فى روم باسم』
+『G.setwelcomer <text channel name> لاختيار روم للترحيب』
+『${prefix}voiceonline / لتفعيل روم الفويس اونلاين』
+**
+   
+`]
+    let page = 1;
 
-client.on('message', msg => {
-  if (msg.content === '7892bs782bs') {
-    msg.reply('s7u2bs298');
-  }
-});
-if (message.content === '-help') {
-	var embed  = new Discord.RichEmbed()
-              var embed  = new Discord.RichEmbed()
-                .addField("**👫الاوامر العامة👫**","** **")
-                .addField("**AVATAR**" ,"**الاستخدام:** ``-avatar صورة حسابك ``")
-                .addField("**LINK**" ,"**الاستخدام:** ``-link أرسال رابط السيرفر ``")
-                .addField("**ID**" ,"**الاستخدام:** ``-id معلومات عن حسابك ``")
-	        .addField("**MUSIC**" ,"**الاستخدام:** ``-music اوامر لتشغيل الاغاني ``")
-                .addField("**ADMIN**" ,"**الاستخدام:** ``-admin الاوامر الادارية ``")
-                .addField("**PLAYER**" ,"**الاستخدام:** ``-player لمعرفة عدد اعضاء السيرفر ``")
-                .addField("**SERVER**" ,"**الاستخدام:** ``-server معلومات عن السيرفر ``")
-                .addField("**INVITE**" ,"**الاستخدام:** ``-invite  لمعرفة انت كم جايب عضو ل السيرفر``")
-                .addField("**PING**" ,"**الاستخدام:** ``-ping  سرعة اتصال البوت ``")
-                .setColor('RANDOM')
-.setColor('RANDOM')
-  message.author.sendEmbed(embed);
-    }
-});
-client.on('message', message => {
-     if (message.content === ".servers") {
-     let embed = new Discord.RichEmbed()
-  .setColor("#0000FF")
-  .addField("**Server: **" , client.guilds.size)
-  message.channel.sendEmbed(embed);
-    }
+    let embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setFooter(`Page ${page} of ${pages.length}`)
+    .setDescription(pages[page-1])
 
-client.on('message', msg => {
-  if (msg.content === '7892bs782bs') {
-    msg.reply('s7u2bs298');
-  }
-});                 
-if (message.content === '-admin') {
-  if(!message.member.hasPermission("ADMINISTRATOR"))
- return message.channel.send('**You Dont Have Permission **' );
-              var embed  = new Discord.RichEmbed()
-                .addField("** 👑لاوامر الادارية👑 **","** **")
-                .addField("**BAN**" ,"**الاستخدام:** ``-ban لحظر الأعضاء ``")
-                .addField("**KICK**" ,"**الاستخدام:** ``-kick لطرد الأعضاء ``")
-                .addField("**MUTEC**" ,"**الاستخدام:** ``-mutec ل فك قفل الشات ``")
-                .addField("**UNMUTEC**" ,"**الاستخدام:** ``-unmutec ل فك قفل الشات ``")
-                .addField("**MUTE**" ,"**الاستخدام:** ``-mute لعطاء الشخص ميوت ``")
-                .addField("**UNMUTE**" ,"**الاستخدام:** ``-unmute لفك الميوت عن الشخص ``")
-                .addField("**CV**" ,"**الاستخدام:** ``-cv انشاء روم صوتي ``")
-                .addField("**CT**" ,"**الاستخدام:** ``-ct انشاء روم كتابي ``")
-                .addField("**DC**" ,"**الاستخدام:** ``-cd لمسح روم صوتي او كتابي  ``")
-                .addField("**CLEAR**" ,"**الاستخدام:** ``-clear مسح بعدد ``")
-		.addField("**BC**" ,"**الاستخدام:** ``-bc ارسال رسالة لجميع الي في السيرفر ``")
-                .setColor('RANDOM')
-.setColor('RANDOM')
-  message.author.sendEmbed(embed);
+    message.author.sendEmbed(embed).then(msg => {
+
+        msg.react('◀').then( r => {
+            msg.react('▶')
+
+
+        const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
+        const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
+
+
+        const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
+        const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
+
+
+
+        backwards.on('collect', r => {
+            if (page === 1) return;
+            page--;
+            embed.setDescription(pages[page-1]);
+            embed.setFooter(`Page ${page} of ${pages.length}`);
+            msg.edit(embed)
+        })
+        forwards.on('collect', r => {
+            if (page === pages.length) return;
+      
+      page++;
+            embed.setDescription(pages[page-1]);
+            embed.setFooter(`Page ${page} of ${pages.length}`);
+            msg.edit(embed)
+        })
+        })
+    })
     }
-});
+}); 
 client.on('message', message => {
     var args = message.content.split(/[ ]+/)
     if(message.content.includes('discord.gg')){
@@ -1361,30 +1443,4 @@ client.on('ready', function(){
    });
   });
 });
-client.on('message',message =>{
-if(message.content.startsWith('-top')) {
-  message.guild.fetchInvites().then(i =>{
-  var invites = [];
-   
-  i.forEach(inv =>{
-    var [invs,i]=[{},null];
-     
-    if(inv.maxUses){
-        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
-    }else{
-        invs[inv.code] =+ inv.uses;
-    }
-        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
-   
-  });
-  var embed = new Discord.RichEmbed()
-  .setColor("#000000")
-  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
-  .setThumbnail("https://i.imgur.com/GnR2unD.png")
-           message.channel.send({ embed: embed });
-   
-  });
-   
-    }
-  });
 client.login(process.env.BOT_TOKEN);
