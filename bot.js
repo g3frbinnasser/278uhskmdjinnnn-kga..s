@@ -310,7 +310,7 @@ if (message.content.startsWith(prefix + 'help')) {
         ***👫الاوامر العامة👫***
 **
 ⤠ ${prefix}server ⥨ يعرض لك معلومات عن السيرفر
-⤠ ${prefix}invite ⥨ يعرض لك  عدد انفايتاتك بالسيرفر
+⤠ ${prefix}invites ⥨ يعرض لك  عدد انفايتاتك بالسيرفر
 ⤠ ${prefix}id ⥨ معلومات عن حسابك
 ⤠ ${prefix}player ⥨ لمعرفة عدد اعضاء السيرفر
 ⤠ ${prefix}server ⥨ معلومات عن السيرفر
@@ -622,7 +622,7 @@ client.on ("guildMemberAdd", member => {
 
 client.on ("guildMemberRemove", member => {
    
-})
+});
  client.on('message', message => {
     if (message.content.startsWith("-link")) {
         message.channel.createInvite({
