@@ -1461,7 +1461,7 @@ console.log('`Error`: ' + RebeL);
     const embed = new Discord.RichEmbed()
  .setColor('#36393e')
     .addField("Top Invites." ,`${(possibleInvites)}`)
-
+    });
     message.channel.send(embed)
 client.on('message', async message=>{
     if(message.author.bot) return;
