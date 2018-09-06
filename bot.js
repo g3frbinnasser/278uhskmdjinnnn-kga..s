@@ -1403,7 +1403,7 @@ client.on('message', async message=>{
         var _Array = Object.values(_point)
      message.channel.send(_Array.slice(1,11).map((data,num)=>`**\`${num+1}\`.** ${data.name+` (${data.points})`}`));
     }});
-onst profile = JSON.parse(fs.readFileSync('./Storage/profile.json', "utf8"));
+const profile = JSON.parse(fs.readFileSync('./Storage/profile.json', "utf8"));
 
 client.on("message", message => {
   if (message.author.bot) return;
