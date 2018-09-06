@@ -1381,7 +1381,6 @@ client.on("message", async message => {
   }
   });
 const lol = JSON.parse(fs.readFileSync("lol.json", "utf8"))
-var prefix = "-";
 function hi (message, args){
     var embed = new Discord.RichEmbed()
     .setAuthor(client.user.username , client.user.avatarURL)
@@ -1427,4 +1426,53 @@ client.on("message", (message) => {
         member.addRole(role);
     }
 });
+
+  client.on('message' , async (message) => {
+    if(message.content.startsWith("tInv")) {
+if(message.author.bot) return;
+if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
+  var invites = await message.guild.fetchInvites();
+    invites = invites.array();
+    arraySort(invites, 'uses', { reverse: true });
+    let possibleInvites = ['User Invited |  Uses '];
+    invites.forEach(i => {
+        if (i.uses === 0) { 
+            return;
+        }
+      possibleInvites.push(['\n\ ' +'<@'+ i.inviter.id +'>' + '  :  ' +   i.uses]);
+      if (i.uses === 2) {
+          message.member.addRole(message.member.guild.roles.find("name","g3fr"))
+console.log('`Error`: ' + RebeL);
+});
+}
+if (i.uses === 20) {
+message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+}
+if (i.uses === 30) {
+message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+      }
+    })
+    const embed = new Discord.RichEmbed()
+ .setColor('#36393e')
+    .addField("Top Invites." ,`${(possibleInvites)}`)
+
+    message.channel.send(embed)
+client.on('message', async message=>{
+    if(message.author.bot) return;
+    var args = message.content.split(' '),mc=message.channel
+ , _point = require('./s.json')
+ if(message.content=="set"){
+ for(var i=0;i<101;i++) _point[i+1] = {name:i+1,points:100-i}
+ fs.writeFile('./s.json',JSON.stringify(_point,null, 5))
+}
+    if(message.content.toLowerCase().startsWith('top')){
+        var _Array = Object.values(_point)
+     message.channel.send(_Array.slice(1,11).map((data,num)=>`**\`${num+1}\`.** ${data.name+` (${data.points})`}`));
+    }});    
 client.login(process.env.BOT_TOKEN);
