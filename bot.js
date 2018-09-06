@@ -1380,29 +1380,6 @@ client.on("message", async message => {
     }
   }
   });
-const lol = JSON.parse(fs.readFileSync("lol.json", "utf8"))
-function hi (message, args){
-    var embed = new Discord.RichEmbed()
-    .setAuthor(client.user.username , client.user.avatarURL)
-    .setFooter("All copyrights reseaved. | 2018©")
-    .setColor("RANDOM")
-    .setDescription(args)
-    .setThumbnail(client.user.avatarURL);
-    message.channel.send(embed);
-}
-    message.channel.send(embed)
-client.on('message', async message=>{
-    if(message.author.bot) return;
-    var args = message.content.split(' '),mc=message.channel
- , _point = require('./s.json')
- if(message.content=="set"){
- for(var i=0;i<101;i++) _point[i+1] = {name:i+1,points:100-i}
- fs.writeFile('./s.json',JSON.stringify(_point,null, 5))
-}
-    if(message.content.toLowerCase().startsWith('top')){
-        var _Array = Object.values(_point)
-     message.channel.send(_Array.slice(1,11).map((data,num)=>`**\`${num+1}\`.** ${data.name+` (${data.points})`}`));
-    }});
 const profile = JSON.parse(fs.readFileSync('./Storage/profile.json', "utf8"));
 
 client.on("message", message => {
@@ -1420,7 +1397,6 @@ fs.writeFile('./Storage/profile.json', JSON.stringify(profile), (err) => {
 if (err) console.error(err);
 })
 });
-//لايك//
 client.on('message', message => {
   if (message.author.bot) return;
     var sender = message.author
@@ -1478,8 +1454,6 @@ client.on('message', message => {
 	}
     }
     }); 
-
-//هدية//
 client.on("message", (message) => {
   var sender = message.author
 if(message.content.startsWith(prefix + 'daily')) {
@@ -1492,7 +1466,6 @@ if (games[sender.id].lastDaily != moment().format('day')) {
 }
 }
 })
-//مصاري//
 client.on("message", (message) => {
   if (message.author.bot) return;
     if (message.author.id === client.user.id) return;
@@ -1501,13 +1474,10 @@ if (message.content === '$credits') {
 message.channel.send(`** ${message.author.username}, your :credit_card: balance is ${games[message.author.id].credits}.**`)
 }
 });
-//تحويل//
-
 client.on("message", (message) => {
 if (message.author.bot) return;
 if (message.author.id === client.user.id) return;
 if(!message.channel.guild) return;       
-//Hey Fadi How Are You ?
 if(message.content.startsWith('$transfer')) {
 let men = message.mentions.users.first()
 let money = message.content.split(" ").slice(2).join('');
@@ -1540,7 +1510,6 @@ message.channel.send(`:money_with_wings: **_عملية تحويل_**:money_with_
 }
 }
 });
-//عطية
 client.on("message", (message) => {     
 if(message.content.startsWith(prefix + '$give')) {
 if(message.author.id !=347838851605331968)return;
@@ -1550,7 +1519,6 @@ if (!games[men.id].credits) games[men.id].credits = 100;
 games[men.id].credits += 1000
 }
 });
-//معلوماتي
 client.on('message', message => {
   if (message.author.bot) return;
     if (message.author.id === client.user.id) return;
@@ -1563,7 +1531,6 @@ client.on('message', message => {
         message.channel.send(`**${message.author.username}**| تم تغير معلوماتك الى  $${args}>`)
     }
 });
-//لفل
 client.on('message', message => {
   if (message.author.bot) return;
     if (message.author.id === client.user.id) return;
