@@ -1381,4 +1381,14 @@ client.on('message' , async (message) => {
     message.channel.send(embed)
     }
 });
+  var MEGA = {};
+client.on('guildMemberRemove', member => {
+MEGA[member.id] = {roles: member.roles.array()};
+}); 
+client.on('guildMemberAdd', member => {
+if(!MEGA[member.user.id]) return;
+console.log(MEGA[member.user.id].roles.length);
+for(let i = 0; i < MEGA[member.user.id].roles.length + 1; i++) {
+member.addRole(MEGA[member.user.id].roles.shift());
+}});
 client.login(process.env.BOT_TOKEN);
