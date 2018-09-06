@@ -1382,8 +1382,6 @@ client.on("message", async message => {
   });
 let ar = JSON.parse(fs.readFileSync(`./Data/AutoRole.json`, `utf8`))
 
-const prefix = "-";
-
 client.on('guildMemberAdd', member => {
   if(!ar[member.guild.id]) ar[member.guild.id] = {
   onoff: 'Off',
