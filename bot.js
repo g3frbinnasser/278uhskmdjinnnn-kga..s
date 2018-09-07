@@ -394,7 +394,7 @@ client.on('message', message => {
     if(message.content.includes('discord.gg')){
       if(!message.member.hasPermission('ADMINISTRATOR'))
         message.delete()
-    return message.reply(`** No Invite Links :angry: ! **`)
+    return message.reply(`** يمنع نشر الروابط بهذا السيرفر :angry: **`)
     }
 });
 client.on("message", message => {
@@ -969,7 +969,7 @@ client.on("roleCreate", rc => {
   channel.sendEmbed(embed)
   }
   });
-  client.on("guildBanAdd", (guild, member) => {
+    client.on("guildBanRemove", (guild, member) => {
   client.setTimeout(() => {
     guild.fetchAuditLogs({
         limit: 1,
@@ -982,10 +982,11 @@ client.on("roleCreate", rc => {
           if (!log) return;
           client.fetchUser(member.id).then(myUser => {
           let embed = new Discord.RichEmbed()
-        .setAuthor(exec)
-        .setThumbnail(myUser.avatarURL)
-        .addField('- Banned User:',`**${myUser.username}**`,true)
-        .addField('- Banned By:',`**${exec}**`,true)
+        .setAuthor("ازالة الباند !")
+		.setColor("BLACK")
+		 .setThumbnail(myUser.avatarURL)
+        .addField('= العضو المبند',`**${myUser.username}**`,true)
+        .addField('= تم ازالة الباند بواستطة',`**${exec}**`,true)
         .setFooter(myUser.username,myUser.avatarURL)
             .setTimestamp();
           log.send(embed).catch(e => {
@@ -998,7 +999,7 @@ client.on("roleCreate", rc => {
       });
   }, 1000);
 });
-client.on("roleDelete", role => {
+      client.on("roleDelete", role => {
   client.setTimeout(() => {
     role.guild.fetchAuditLogs({
         limit: 1,
@@ -1012,10 +1013,39 @@ client.on("roleDelete", role => {
           if (!log) return;
           let embed = new Discord.RichEmbed()
             .setColor('#fd0101')            
-            .setTitle('❌ RoleDeleted')
-            .addField('اسم الرتبة:', role.name, true)
-            .addField('أيدي الرتبة:', role.id, true)
-            .addField('تم مسح الرتبة من قبل:', exec, true)
+            .setTitle('❌ حذف الرتبة')
+            .addField('اسم الرتبة', role.name, true)
+            .addField('الرتبة ID', role.id, true)
+            .addField('بواستطة', exec, true)
+            .setTimestamp()
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      })
+  }, 1000)
+})
+
+
+client.on('roleCreate', role => {
+  client.setTimeout(() => {
+    role.guild.fetchAuditLogs({
+        limit: 1,
+        type: 30
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username)
+        try {
+
+          let log = role.guild.channels.find('name', 'log');
+          if (!log) return;
+          let embed = new Discord.RichEmbed()
+            .setTitle('➕ انشاء رتبة')
+            .addField('اسم الرتبة', role.name, true)
+            .addField('الرتبة ID', role.id, true)
+            .addField('بواستطة', exec, true)
             .setTimestamp()
           log.send(embed).catch(e => {
             console.log(e);
@@ -1139,22 +1169,35 @@ client.on('guildMemberAdd', member => {
     }
   })
 });
-client.on('message' , message => {
-    var prefix = "*";
-    let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
-    if(message.content.startsWith(prefix + 'unban')) {
-        if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
-        message.guild.unban(user);
-        message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
-        var embed = new Discord.RichEmbed()
-        .setThumbnail(message.author.avatarURl)
-        .setColor("RANDOM")
-        .setTitle('**●Unban** !')
-        .addField('**●User Unban :** ', `${user}` , true)
-        .addField('**●By :**' ,       ` <@${message.author.id}> ` , true)
-        .setAuthor(message.guild.name)
-        message.channel.sendEmbed(embed)
-    }
+  client.on("guildBanAdd", (guild, member) => {
+  client.setTimeout(() => {
+    guild.fetchAuditLogs({
+        limit: 1,
+        type: 22
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username);
+        try {
+          let log = guild.channels.find('name', 'log');
+          if (!log) return;
+          client.fetchUser(member.id).then(myUser => {
+          let embed = new Discord.RichEmbed()
+        .setAuthor("تم التبنيد")
+	    .setColor("BLACK")
+        .setThumbnail(myUser.avatarURL)
+        .addField('= العضو المبند:',`**${myUser.username}**`,true)
+        .addField('= تم تبنيده بواستطة:',`**${exec}**`,true)
+        .setFooter(myUser.username,myUser.avatarURL)
+            .setTimestamp();
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      });
+  }, 1000);
 });
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
@@ -1361,4 +1404,144 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 });
   }
 });
+client.on("message", message => {
+if(message.content.startsWith(prefix + 'server')) {
+if (!message.channel.guild) returnverificationLevel = message.guild.verificationLevel;
+const verificationLevels = ["None","Low","Meduim","High","Extreme"];var Y1 = message.guild.createdAt.getFullYear() - 2000
+var M2 = message.guild.createdAt.getMonth()
+var D3 = message.guild.createdAt.getDate()
+const xNiTRoZ = new Discord.RichEmbed()
+.setAuthor(message.author.username , message.author.avatarURL)
+.setColor("#070000").setTimestamp()
+.setTitle(message.guild.name,message.guild.iconURL)
+.addField(":crown: اونر السيرفر",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
+.addField(":id: اي دي السيرفر",`${message.guild.id}`,true)
+.addField("**:date: انشأ في**", message.guild.createdAt.toLocaleString(),true)
+.addField(":busts_in_silhouette: الاعضاء " + ` ${message.guild.memberCount} `,"Online "+`[ ${message.guild.members.filter(m=>m.presence.status == "online","idle","dnd").size} ]`+ ","+"Offline "+`[ ${message.guild.members.filter(m=>m.presence.status == "offline").size} ]`,true)
+.addField(":speech_balloon: قنوات" +" "+message.guild.channels.size+" ",`Text [ ${message.guild.channels.filter(m => m.type === "text").size} ]`+", "+`Voice [ ${message.guild.channels.filter(m => m.type === "voice").size} ]`,true)
+.addField(":earth_asia: الدوله",message.guild.region)
+.addField(":ribbon: ايموجي السيرفر",`${message.guild.emojis.size}`,true).addField(":construction: مستوى التحقق",`${verificationLevels[message.guild.verificationLevel]}`,true).addField("🏆 الرتب  "+message.guild.roles.size+" ","Type`!roles` To See The Server Roles!")
+ message.channel.send({embed:xNiTRoZ});
+  console.log('[server] Send By: ' + message.author.username)
+}
+});
+let ar = JSON.parse(fs.readFileSync(`./AutoRole.json`, `utf8`))
+
+client.on('guildMemberAdd', member => {
+  if(!ar[member.guild.id]) ar[member.guild.id] = {
+  onoff: 'Off',
+  role: 'Visitors'
+  }
+  if(ar[member.guild.id].onoff === 'Off') return;
+member.addRole(member.guild.roles.find(`name`, ar[member.guild.id].role)).catch(console.error)
+})
+
+client.on('message', message => { 
+  var whitelisted = "331975722283302912"// ايديك
+  var sender = message.author
+
+if(!message.guild) return
+  if(!ar[message.guild.id]) ar[message.guild.id] = {
+  onoff: 'Off',
+  role: 'Visitors'
+  }
+
+if(message.content.startsWith(prefix + `autorole`)) {
+         if(whitelisted.includes(sender.id)) {
+  let perms = message.member.hasPermission(`MANAGE_ROLES`)
+
+  if(!perms) return message.reply(`You don't have permissions, required permission : Manage Roles.`)
+  let args = message.content.split(" ").slice(1)
+  if(!args.join(" ")) return message.reply(`${prefix}autorle toggle/set [ROLE NAME]`)
+  let state = args[0]
+  if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'setrole') return message.reply(`Please type a right state, ${prefix}modlogs toggle/setrole [ROLE NAME]`) 
+    if(state.trim().toLowerCase() == 'toggle') { 
+     if(ar[message.guild.id].onoff === 'Off') return [message.channel.send(`**The Autorole Is __𝐎𝐍__ !**`), ar[message.guild.id].onoff = 'On']
+     if(ar[message.guild.id].onoff === 'On') return [message.channel.send(`**The Autorole Is __𝐎𝐅𝐅__ !**`), ar[message.guild.id].onoff = 'Off']
+    }
+   if(state.trim().toLowerCase() == 'set') {
+   let newRole = message.content.split(" ").slice(2).join(" ")
+   if(!newRole) return message.reply(`${prefix}autorole setrole [ROLE NAME]`)
+     if(!message.guild.roles.find(`name`,newRole)) return message.reply(`I Cant Find This Role.`)
+    ar[message.guild.id].role = newRole
+     message.channel.send(`**The AutoRole Has Been Changed to ${newRole}.**`)
+   } 
+         }
+  }  
+ 
+if(message.content === prefix + 'autoinfo') {
+    let perms = message.member.hasPermission(`MANAGE_GUILD`) 
+    if(!perms) return message.reply(`You don't have permissions.`)
+    var embed = new Discord.RichEmbed()
+
+.addField(`Autorole : :sparkles:  `, `
+State : __${ar[message.guild.id].onoff}__
+Role : __${ar[message.guild.id].role}__`)
+
+
+    .setColor(`BLUE`)
+    message.channel.send({embed})
+  }
+
+
+    fs.writeFile("./AutoRole.json", JSON.stringify(ar), (err) => {
+    if (err) console.error(err)
+  });
+
+
+})
+client.on('message' , message => {
+    let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
+    if(message.content.startsWith(prefix + 'unban')) {
+        if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send('* انت لا تمتلك صلاحية *');
+        if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
+        message.guild.unban(user);
+        message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
+        var embed = new Discord.RichEmbed()
+        .setThumbnail(message.author.avatarURl)
+        .setColor("RANDOM")
+        .setTitle('**●تم فك الباند** !')
+        .addField('**●تم فك الباند عن :** ', `${user}` , true)
+        .addField('**●بواسطة :**' ,       ` <@${message.author.id}> ` , true)
+        .setAuthor(message.guild.name)
+        message.channel.sendEmbed(embed)
+	    console.log('[unban] Send By: ' + message.author.username)
+    }
+});
+let points = JSON.parse(fs.readFileSync('points.json', 'utf8'));
+client.on('message', message => {
+    if (!points[message.author.id]) points[message.author.id] = {points : 0}
+    if (message.content == prefix + 'نقاطي'){
+         let embed = new Discord.RichEmbed()
+        .setAuthor(message.author.username,message.author.avatarURL)
+        .addField(`نقاطك : ${points[message.author.id].points}`,'By : Rando³².🇵🇸#6966',   true)
+        .setColor('RANDOM')
+        .setFooter('StarBot-Games', client.user.avatarURL);
+	message.channel.send({embed});
+	    console.log('[نقاطي] Send By: ' + message.author.username)
+    };
+    if (message.content == prefix + "فكك") {    
+        var x = ['ضفدع', 'طيارة', 'رعودي', 'تفكيك', 'تجربة', 'مدرسة', 'معلم' , 'نقاط' , 'اكسيفو' , 'مكوه' , 'هكونا مطاطا' , 'اكسيفو ذا بيست'];
+        var x2 = ['ض ف د ع', 'ط ي ا ر ة', 'ر ع و د ي', 'ت ف ك ي ك', 'ت ج ر ب ة', 'م د ر س ة', 'م ع ل م', 'ن ق ا ط', 'ا ك س ي ف و', 'م ك و ه', 'ه ك و ن ا م ط ا ط ا', 'ا ك س ي ف و ذ ا ب ي س ت'];
+        var x3 = Math.floor(Math.random()*x.length)
+        message.channel.send(`فكك الكلمة الآتية :${x[x3]}, لديك 20 ثانية`).then(msg1=> {
+            var r = message.channel.awaitMessages(msg => msg.content == x2[x3], {
+                maxMatches : 1,
+                time : 20000,
+                errors : ['time']
+            })
+        r.catch(() => {
+            return message.channel.send('❌ لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح')
+                    message.channel.sendEmbed(embed)
+		console.log('[فكك] Send By: ' + message.author.username)
+        })
+        r.then(s=> {
+
+            points[message.author.id].points +=1
+            message.channel.send(`✅ لقد قمت بكتابة الجواب الصحيح بالوقت المناسب
+ ─═════**{نقاطك:${points[message.author.id].points}}**═════─`);
+               message.channel.sendEmbed(embed)
+        })
+        })
+    }
 client.login(process.env.BOT_TOKEN);
