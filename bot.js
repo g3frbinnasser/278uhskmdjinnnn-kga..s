@@ -549,20 +549,17 @@ client.on('message', message =>{
     };
 });
   client.on('message', function(msg) {
-    if(msg.content.startsWith ('-server')) {
+    if(msg.content.startsWith ('*server')) {
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
       .addField('🌐** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-      .addField('🏅** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField('🔴**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField('🔵**__ عدد الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField('📝**__ الرومات الكتابية__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-      .addField('🎤**__ رومات الصوت__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField('👑**__ صاحب السيرفر__**',`**${msg.guild.owner}**`,true)
-      .addField('🆔**__ ايدي السيرفر__**',`**${msg.guild.id}**`,true)
-      .addField('📅**__ تم عمل السيرفر في__**',msg.guild.createdAt.toLocaleString())
+      .addField('🏅**الرتب**',`[** __${msg.guild.roles.size}__ **]`,true)
+      .addField('🔴**عدد الاعضاء**',`[** __${msg.guild.memberCount}__ **]`,true)
+      .addField('📝**الرومات الكتابية**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
+      .addField('🎤**الرومات الصوتية**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
+      .addField('👑**صاحب السيرفر**',`**${msg.guild.owner}**`,true)
+      .addField('📅**انشأ السيرفر في**',msg.guild.createdAt.toLocaleString())
       msg.channel.send({embed:embed});
     }
   });
@@ -1404,25 +1401,6 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 });
   }
 });
-client.on("message", message => {
-if(message.content.startsWith(prefix + 'server')) {
-if (!message.channel.guild) returnverificationLevel = message.guild.verificationLevel;
-const verificationLevels = ["None","Low","Meduim","High","Extreme"];var Y1 = message.guild.createdAt.getFullYear() - 2000
-var M2 = message.guild.createdAt.getMonth()
-var D3 = message.guild.createdAt.getDate()
-const xNiTRoZ = new Discord.RichEmbed()
-.setAuthor(message.author.username , message.author.avatarURL)
-.setColor("#070000").setTimestamp()
-.setTitle(message.guild.name,message.guild.iconURL)
-.addField(":crown: صاحب السيرفر",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
-.addField("**:date: انشأ في**", message.guild.createdAt.toLocaleString(),true)
-.addField(":busts_in_silhouette: الاعضاء " + ` ${message.guild.memberCount} `,"Online "+`[ ${message.guild.members.filter(m=>m.presence.status == "online","idle","dnd").size} ]`+ ","+"Offline "+`[ ${message.guild.members.filter(m=>m.presence.status == "offline").size} ]`,true)
-.addField(":speech_balloon: قنوات" +" "+message.guild.channels.size+" ",`Text [ ${message.guild.channels.filter(m => m.type === "text").size} ]`+", "+`Voice [ ${message.guild.channels.filter(m => m.type === "voice").size} ]`,true)
-.addField(":earth_asia: الدوله",message.guild.region)
-  message.channel.send({embed:xNiTRoZ});
-  console.log('[server] Send By: ' + message.author.username)
-}
-});
 client.on('message' , message => {
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
     if(message.content.startsWith(prefix + 'unban')) {
@@ -1441,4 +1419,7 @@ client.on('message' , message => {
 	    console.log('[unban] Send By: ' + message.author.username)
     }
 });
+client.on('guildMemberAdd', member=> {
+    member.addRole(member.guild.roles.find("name","Member"));
+    });
 client.login(process.env.BOT_TOKEN);
