@@ -1382,7 +1382,7 @@ client.on('ready', function(){
   console.log('SOD is Online');
   require("./antispam.js")(client, function(message){
      message.delete().then(loloz => {
-     message.channel.send("لا تسوي سبام").then(spammer => {
+     message.channel.send("ليرجى التوقف عن السبام").then(spammer => {
      spammer.delete(2000)
    });
    });
