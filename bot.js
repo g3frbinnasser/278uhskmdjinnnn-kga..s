@@ -1546,9 +1546,6 @@ userData[message.author.id].Xp+= 0.25;
 userData[message.author.id].Money+= 0.25;
 
 });
-
-////////////LEVEL
-
  let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
  client.on("message", message => {
    if (!message.content.startsWith(prefix)) return;
