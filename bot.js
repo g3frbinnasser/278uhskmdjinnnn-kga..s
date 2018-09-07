@@ -1012,8 +1012,7 @@ client.on("roleCreate", rc => {
             .setColor('#fd0101')            
             .setTitle('❌ حذف الرتبة')
             .addField('اسم الرتبة', role.name, true)
-            .addField('الرتبة ID', role.id, true)
-            .addField('بواستطة', exec, true)
+            .addField('بواسطة', exec, true)
             .setTimestamp()
           log.send(embed).catch(e => {
             console.log(e);
