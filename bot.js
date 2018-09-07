@@ -1413,15 +1413,14 @@ var D3 = message.guild.createdAt.getDate()
 const xNiTRoZ = new Discord.RichEmbed()
 .setAuthor(message.author.username , message.author.avatarURL)
 .setColor("#070000").setTimestamp()
+.setThumbnail(msg.guild.iconURL)
 .setTitle(message.guild.name,message.guild.iconURL)
-.addField(":crown: اونر السيرفر",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
-.addField(":id: اي دي السيرفر",`${message.guild.id}`,true)
+.addField(":crown: صاحب السيرفر",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
 .addField("**:date: انشأ في**", message.guild.createdAt.toLocaleString(),true)
 .addField(":busts_in_silhouette: الاعضاء " + ` ${message.guild.memberCount} `,"Online "+`[ ${message.guild.members.filter(m=>m.presence.status == "online","idle","dnd").size} ]`+ ","+"Offline "+`[ ${message.guild.members.filter(m=>m.presence.status == "offline").size} ]`,true)
 .addField(":speech_balloon: قنوات" +" "+message.guild.channels.size+" ",`Text [ ${message.guild.channels.filter(m => m.type === "text").size} ]`+", "+`Voice [ ${message.guild.channels.filter(m => m.type === "voice").size} ]`,true)
 .addField(":earth_asia: الدوله",message.guild.region)
-.addField(":ribbon: ايموجي السيرفر",`${message.guild.emojis.size}`,true).addField(":construction: مستوى التحقق",`${verificationLevels[message.guild.verificationLevel]}`,true).addField("🏆 الرتب  "+message.guild.roles.size+" ","Type`!roles` To See The Server Roles!")
- message.channel.send({embed:xNiTRoZ});
+  message.channel.send({embed:xNiTRoZ});
   console.log('[server] Send By: ' + message.author.username)
 }
 });
