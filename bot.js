@@ -403,7 +403,7 @@ client.on("message", message => {
   let command = message.content.split(" ")[0];
  
   if (command === "-unmute") {
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("انت لا تمتلك صلاحية الميوت").catch(console.error);
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر").catch(console.error);
   let user = message.mentions.users.first();
   let modlog = client.channels.find('name', 'log');
   let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
@@ -416,7 +416,7 @@ client.on("message", message => {
     .addField('تم فك الميوت عن:', `${user.username}#${user.discriminator} (${user.id})`)
     .addField('بواسطة:', `${message.author.username}#${message.author.discriminator}`)
  
-  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** You Dont Have Permission **').catch(console.error);
+  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر').catch(console.error);
  
   if (message.guild.member(user).removeRole(muteRole.id)) {
       return message.reply("** تم فك الميوت عن الشخص المحدد  .. **").catch(console.error);
@@ -435,7 +435,7 @@ client.on("message", message => {
   let command = message.content.split(" ")[0];
   
   if (command === "-mute") {
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("انت لا تمتلك صلاحية الميوت").catch(console.error);
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر").catch(console.error);
   let user = message.mentions.users.first();
   let modlog = client.channels.find('name', 'log');
   let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
@@ -471,13 +471,13 @@ client.on('message', message => {
   var args = message.content.split(" ").slice(1);
   if (command == "ban") {
    if(!message.channel.guild) return message.reply('** This command only for servers**');
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("انت لا تمتلك صلاحية الحظر");
-if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("انت لا تمتلك صلاحية الحظر");
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
+if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
 var user = message.mentions.users.first();
   var reason = message.content.split(" ").slice(2).join(" ");
   if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
   if(!reason) return message.reply ("**اكتب سبب الطرد**");
-  if (!message.guild.member(user).banable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  if (!message.guild.member(user).banable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالية");
   const banembed = new Discord.RichEmbed()
   .setAuthor(`BAN!`, user.displayAvatarURL)
   .setColor("RANDOM")
@@ -502,14 +502,14 @@ client.on('message', message => {
   if (command == "kick") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
          
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("انت لا تمتلك صلاحية الطرد");
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("انت لا تمتلك صلاحية الطرد");
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
   if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
   if(!reason) return message.reply ("**اكتب سبب الطرد**");
   if (!message.guild.member(user)
-  .kickable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  .kickable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالية");
 
   message.guild.member(user).kick();
 
@@ -658,7 +658,7 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if(message.content === '*help'){
-        message.channel.send('📩 | تم ارسال الرسالة في الخاص')
+        message.channel.send('✉ | تم ارسال الرسالة في الخاص')
     }
 });
 client.on('message', message => {
@@ -677,7 +677,7 @@ client.on('message', message => {
        if(message.content ==="-mutec") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
 
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('انت لا تمتلك صلاحية اخفاء الشات');
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
               message.channel.overwritePermissions(message.guild.id, {
             SEND_MESSAGES: false
 
@@ -689,7 +689,7 @@ client.on('message', message => {
     if(message.content === "-unmutec") {
                         if(!message.channel.guild) return message.reply('** This command only for servers**');
 
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('انت لا تمتلك صلاحية اظهار الشات');
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
               message.channel.overwritePermissions(message.guild.id, {
             SEND_MESSAGES: true
 
@@ -702,7 +702,7 @@ client.on('message', message => {
 });
 client.on("message", (message) => {
 if (message.content.startsWith("-ct")) {
-            if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("انت لا تمتلك صلاحية انشاء روم كتابي");
+            if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
         let args = message.content.split(" ").slice(1);
 	let modlog = client.channels.find('name', 'log');
     message.guild.createChannel(args.join(' '), 'text');
@@ -712,7 +712,7 @@ message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
 });
 client.on("message", (message) => {
 if (message.content.startsWith("-cv")) {
-            if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("انت لا تمتلك صلاحية انشاء روم صوتي");
+            if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
         let args = message.content.split(" ").slice(1);
     message.guild.createChannel(args.join(' '), 'voice');
     message.channel.sendMessage('تـم إنـشاء روم صـوتي')
@@ -725,7 +725,7 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (!message.channel.guild) return;
     if (message.content.startsWith(prefix + 'clear')) {
-	  if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('انت لا تمتلك صلاحية المسح');
+	  if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
 
         if (isNaN(args[0])) return message.channel.send('يرجى تقديم كمية صالحة من الرسائل لمسحها');
         if (args[0] > 100) return message.channel.send('يرجى تقديم رقم أقل من 100');
@@ -905,7 +905,7 @@ collector7.on('collect', r => {
 client.on('message', message => {
      if(message.content.startsWith(prefix + "clear")) {
          var args = message.content.split(" ").slice(1);
- if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You Dont Have Permission');
+ if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ا تمتلك الصلاحيات الازمة لهذا الأمر');
   if (!args[0]) return message.channel.send('يجب عليك كتابة أي رقم');
 
   message.channel.bulkDelete(args[0]).then(() => {
@@ -1401,7 +1401,7 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 client.on('message' , message => {
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
     if(message.content.startsWith(prefix + 'unban')) {
-        if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send('* انت لا تمتلك صلاحية *');
+        if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send('لا تمتلك الصلاحيات الازمة لهذا الأمر');
         if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
         message.guild.unban(user);
         message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
@@ -1419,4 +1419,54 @@ client.on('message' , message => {
 client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name","Member"));
     });
+const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
+const coolDown = new Set();
+
+client.on('message',async message => {
+    
+if(message.author.bot) return;
+if(!credits[message.author.id]) credits[message.author.id] = {
+    credits: 50
+};
+
+let userData = credits[message.author.id];
+let m = userData.credits;
+
+fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
+    if (err) console.error(err);
+  });
+  credits[message.author.id] = {
+      credits: m + 0.5,
+  }
+  
+    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
+message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
+}
+});
+
+client.on('message', async message => {
+    let amount = 250;
+    if(message.content.startsWith(prefix + "daily")) {
+    if(message.author.bot) return;
+    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
+    
+    let userData = credits[message.author.id];
+    let m = userData.credits + amount;
+    credits[message.author.id] = {
+    credits: m
+    };
+
+    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
+    if (err) console.error(err);
+    });
+    
+    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
+        coolDown.add(message.author.id);
+    });
+    
+    setTimeout(() => {
+       coolDown.remove(message.author.id);
+    },86400000);
+    }
+});
 client.login(process.env.BOT_TOKEN);
