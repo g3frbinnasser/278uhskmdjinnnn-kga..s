@@ -1416,7 +1416,4 @@ client.on('message' , message => {
 	    console.log('[unban] Send By: ' + message.author.username)
     }
 });
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","Member"));
-    });
 client.login(process.env.BOT_TOKEN);
