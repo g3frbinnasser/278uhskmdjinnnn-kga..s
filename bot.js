@@ -449,7 +449,7 @@ client.on("message", message => {
     .addField('تم ميوت:', `${user.username}#${user.discriminator} (${user.id})`)
     .addField('بواسطة:', `${message.author.username}#${message.author.discriminator}`)
    
-   if (!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES_OR_PERMISSIONS')) return message.reply('** You Dont Have Permission **').catch(console.error);
+   if (!message.guild.member(client.user).hasPermission('MANAGE_MESSAGES_OR_PERMISSIONS')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر').catch(console.error);
  
   if (message.guild.member(user).roles.has(muteRole.id)) {
      return message.reply("** تم اعطاء العضو المحدد ميوت  **").catch(console.error);
@@ -905,7 +905,7 @@ collector7.on('collect', r => {
 client.on('message', message => {
      if(message.content.startsWith(prefix + "clear")) {
          var args = message.content.split(" ").slice(1);
- if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ا تمتلك الصلاحيات الازمة لهذا الأمر');
+ if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
   if (!args[0]) return message.channel.send('يجب عليك كتابة أي رقم');
 
   message.channel.bulkDelete(args[0]).then(() => {
