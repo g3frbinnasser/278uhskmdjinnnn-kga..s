@@ -1522,30 +1522,6 @@ if (message.content.startsWith(prefix + "rank")) {
           var x5bzm = message.author;
           
       }
-	fs.writeFile("./userData.json",JSON.stringify(userData), function(err){
-		if (err) console.log(err);
-	})
-	var CulLevel = Math.floor(0.25 * Math.sqrt(userData[message.author.id].Xp +1));
-	if (CulLevel > userData[message.author.id].Level) {userData[message.author.id].Level +=CulLevel}
-	let pEmbed = new Discord.RichEmbed()
-	.setColor("Random")
-	.addField("Name:", message.author.tag)
-	.addField("Level:", userData[message.author.id].Level)
-	.addField("Xp:",Math.floor(userData[message.author.id].Xp))
-	.addField("Money:",Math.floor(userData[x5bzm.id].money))
-	message.channel.send(pEmbed);
-}
-if (!userData[message.author.id]) {
-	userData[message.author.id] = {Money:0,Xp:0,Level:0,Like:0}
-	}
-
-	fs.writeFile("./userData.json",JSON.stringify(userData), function(err){
-		if (err) console.log(err);
-	})
-userData[message.author.id].Xp+= 0.25;
-userData[message.author.id].Money+= 0.25;
-
-});
  let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
  client.on("message", message => {
    if (!message.content.startsWith(prefix)) return;
