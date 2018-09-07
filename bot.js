@@ -725,7 +725,7 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (!message.channel.guild) return;
     if (message.content.startsWith(prefix + 'clear')) {
-	  if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('** You Dont Have Permission **');
+	  if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('انت لا تمتلك صلاحية المسح');
 
         if (isNaN(args[0])) return message.channel.send('يرجى تقديم كمية صالحة من الرسائل لمسحها');
         if (args[0] > 100) return message.channel.send('يرجى تقديم رقم أقل من 100');
@@ -906,7 +906,7 @@ client.on('message', message => {
      if(message.content.startsWith(prefix + "clear")) {
          var args = message.content.split(" ").slice(1);
  if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You Dont Have Permission');
-  if (!args[0]) return message.channel.send('You didn\'t provide any number!!!');
+  if (!args[0]) return message.channel.send('يجب عليك كتابة أي رقم');
 
   message.channel.bulkDelete(args[0]).then(() => {
     const embed = new Discord.RichEmbed()
@@ -920,9 +920,8 @@ client.on('message', message => {
     const embedlog = new Discord.RichEmbed()
       .setDescription('CLEAR')
       .setColor(0xF16104)
-      .addField('Cleared By', `<@${message.author.id}> with ID ${message.author.id}`)
-      .addField('Cleared in', message.channel)
-      .addField('Time', message.createdAt);
+      .addField('تم المسح بواسطة', `<@${message.author.id}>`)
+      .addField('مسح في', message.channel)
     actionlog.send(embedlog);
    
   });
@@ -1040,7 +1039,6 @@ client.on('roleCreate', role => {
           let embed = new Discord.RichEmbed()
             .setTitle('➕ انشاء رتبة')
             .addField('اسم الرتبة', role.name, true)
-            .addField('الرتبة ID', role.id, true)
             .addField('بواستطة', exec, true)
             .setTimestamp()
           log.send(embed).catch(e => {
