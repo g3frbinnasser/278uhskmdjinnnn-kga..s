@@ -1479,4 +1479,145 @@ hours = 12;
   }
  
 });
+  client.on("guildCreate", guild => {
+client.channels.get("ايدي الشات الي تجي فيه الرساله").send(' ***  BOT  ***   **Join To**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+});
+
+client.on("guildDelete", guild => {
+client.channels.get("ايدي الشات الي تجي فيه الرساله").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+});
+  client.on("ready", () => {
+
+    var guild;
+
+    while (!guild)
+
+        guild = client.guilds.get("اي دي سيرفرك - Server id");
+
+    guild.fetchInvites().then((data) => {
+
+        data.forEach((Invite, key, map) => {
+
+            var Inv = Invite.code;
+
+            dat[Inv] = Invite.uses;
+
+        });
+
+    });
+
+});
+
+ 
+
+ 
+
+ 
+
+client.on("guildMemberAdd", (member) => {
+
+    let channel = member.guild.channels.get("اي دي الروم - Room id");
+
+    if (!channel) {
+
+        console.log("!the channel id it's not correct");
+
+        return;
+
+    }
+
+    if (member.id == client.user.id) {
+
+        return;
+
+    }
+
+    console.log('-');
+
+    var guild;
+
+    while (!guild)
+
+        guild = client.guilds.get("اي دي سيرفرك - Server id");
+
+    guild.fetchInvites().then((data) => {
+
+        data.forEach((Invite, key, map) => {
+
+            var Inv = Invite.code;
+
+            if (dat[Inv])
+
+                if (dat[Inv] < Invite.uses) {
+
+ channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;       
+
+ }
+
+            dat[Inv] = Invite.uses;
+
+       
+
+       });
+
+    });
+
+});
+client.on('message', message => {
+    
+    if(message.author.bot) return;
+    if(message.channel.type === 'dm') return;
+    
+    var command = message.content.toLowerCase().split(' ')[0];
+    var prefix = '*'; 
+    
+    if(command == prefix + 'guilds') {
+        if(message.member.hasPemrission('ADMINISTRATOR')) return message.channel.send('⛔ | You dont have **ADMINISTRATOR** Permission!');
+        
+        var number = 1;
+        
+        let serversInfo = new Discord.RichEmbed()
+        .setAuthor(message.guild.name, message.guild.iconURL)
+        .setDescription(client.guilds.map(g => `${number++}- ${g.name} (ID: ${g.id})`).slice(0, 10).join('\n'))
+        .setColor('GREEN')
+        .setTimestamp()
+        .setFooter(message.author.tag, message.author.avatarURL)
+        
+        message.channel.send(serversInfo);
+    }
+});
+client.on('guildDelete', guild => {
+  client.channels.get("ايدي الروم")
+const embed = new Discord.RichEmbed()
+   .setAuthor(`Nameless Bot left a server ❎`)
+   .setDescription(`**
+Server name: __${guild.name}__
+Server id: __${guild.id}__
+Server owner: __${guild.owner}__
+Members Count: __${guild.memberCount}__
+Servers Counter : __${client.guilds.size}__**`)
+         .setColor("#f3ae10")
+         .setFooter('اسم بوتك' , client.user.avatarURL)
+           client.channels.get("ايدي الروم").send({embed});
+}
+
+);
+client.on('guildCreate', guild => {
+    
+  client.channels.get("ايدي الروم")
+const embed = new Discord.RichEmbed()
+   .setAuthor(`بوتك دخل سيرفر جديد مبروك ✅`)
+   .setDescription(`**
+Server name: __${guild.name}__
+Server id: __${guild.id}__
+Server owner: __${guild.owner}__
+Member Count: __${guild.memberCount}__
+Servers Counter : __${client.guilds.size}__**`)
+         .setColor("#f3ae10")
+         .addField("New Server!")
+         .setFooter('اسم بوتك' , client.user.avatarURL)
+           client.channels.get("ايدي الروم").send({embed});
+}
+
+);
 client.login(process.env.BOT_TOKEN);
