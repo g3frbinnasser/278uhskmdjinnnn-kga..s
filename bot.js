@@ -1476,77 +1476,45 @@ client.channels.get("478826880921763840").send(' ***  BOT  ***   **Join To**   *
 client.on("guildDelete", guild => {
 client.channels.get("478826880921763840").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
 });
-client.on("roleCreate", role => {
-  let embed = new Discord.RichEmbed()
-  .setTitle(`لوق جديد`)
-  .addField(`اللوق : `, `انشاء رتبة`)
-  .addField(`معلومات الرتبة : `, `اسم الرتبة : **${role.name}** \n\ لون الرتبة : **${role.color}** \n\ ايدي الرتبة : **${role.id}**`)
-  .addField(`البرمشنات : `, `${role.permissions}`)
-  .setColor('RANDOM')
-  if (log) {log.send(embed)}
-})
-client.on('message', async message =>{
-      let messageArray = message.content.split(" ");
-      let cmd = messageArray[0];
-      let args = messageArray.slice(1);
-      let xp = require("./xp.json");
-  
-    let xpAdd = Math.floor(Math.random() * 7) + 8;
-    console.log(xpAdd);
-  
-    if(!xp[message.author.id]){
-      xp[message.author.id] = {
-        xp: 0,
-        level: 1
-      };
-    }
-  
-  
-    let curxp = xp[message.author.id].xp;
-    let curlvl = xp[message.author.id].level;
-    let nxtLvl = xp[message.author.id].level * 300;
-    xp[message.author.id].xp =  curxp + xpAdd;
-    if(nxtLvl <= xp[message.author.id].xp){
-      xp[message.author.id].level = curlvl + 1;
-      let lvlup = new Discord.RichEmbed()
-      .setTitle("Level Up!")
-      .setColor("blue")
-      .addField("New Level", curlvl + 1);
-  
-      message.channel.send(lvlup).then(msg => {msg.delete(5000)});
-    }
-    fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
-      if(err) console.log(err)
-    });
-  });
+client.on('message',function(message) {
+    let w = ['Rock','Paper','Scissors'];
+    var prefix ="$$"
+   if(message.content.startsWith(prefix + "rps")) {
+       message.channel.send(`\`\`\`css
+Choose one of the following.
+#1 ( Rock )
+#2 ( Paper )
+#3 ( Scissors )
+\`\`\`
 
-  client.on('message', message => {
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(0);
-    let prefix = '$$';
-    let xp = require("./xp.json");
-    
-if(cmd === `${prefix}level`) {
-if(!xp[message.author.id]){
-    xp[message.author.id] = {
-      xp: 0,
-      level: 1
-   };
- }
-   let curxp = xp[message.author.id].xp;
-   let curlvl = xp[message.author.id].level;
-   let nxtLvlXp = curlvl * 300;
-   let difference = nxtLvlXp - curxp;
- 
-   let lvlEmbed = new Discord.RichEmbed()
-   .setAuthor(message.author.username)
-   .setColor("blue")
-   .addField("Level", curlvl, true)
-   .addField("XP", curxp, true)
-   .setFooter(`${difference} XP til level up`, message.author.displayAvatarURL);
- 
-   message.channel.send(lvlEmbed).then(msg => {msg.delete(5000)});
-}
+__امامك  5 توان للاختيار__`)
+.then(() => {
+  message.channel.awaitMessages(response => response.content === '1', {
+    max: 1,
+    time: 5000,
+    errors: ['time'],
+  })
+  .then((collected) => {
+      if(message.author !== message.author)return;
+     message.channel.send('🏵 ' + w[Math.floor(Math.random() * w.length)]);
+    });
+});
+  message.channel.awaitMessages(response => response.content === '2', {
+    max: 1,
+    time: 5000,
+    errors: ['time'],
+  })
+  .then((collected) => {
+     message.channel.send('🏵 ' + w[Math.floor(Math.random() * w.length)]);
+    });
+      message.channel.awaitMessages(response => response.content === '3', {
+    max: 1,
+    time: 5000,
+    errors: ['time'],
+  })
+  .then((collected) => {
+     message.channel.send('🏵 ' + w[Math.floor(Math.random() * w.length)]);
+    });
+   } 
 });
 client.login(process.env.BOT_TOKEN);
