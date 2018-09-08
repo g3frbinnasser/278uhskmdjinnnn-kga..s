@@ -2698,7 +2698,7 @@ client.on('message',async msg => {
 Year = currentTime.getFullYear(),
 Month = currentTime.getMonth() + 1,
 Dat = currentTime.getDate()
-      time.setName(`الاعضاء : ◤ → ${client.users.size} ← ◢`);
+      time.setName(`الاعضاء → : ◤  ${client.users.size}  ◢ ←`);
  },1000);
   });
   }
