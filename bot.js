@@ -906,7 +906,7 @@ client.on('message', message => {
 
 });
 client.on('message' , message => {
-  var prefix = "*";
+  var prefix = "-";
   if(message.author.bot) return;
   if(message.content.startsWith(prefix + "ping")) {
  message.channel.send('Pong...').then((msg) => {
