@@ -1476,81 +1476,77 @@ client.channels.get("478826880921763840").send(' ***  BOT  ***   **Join To**   *
 client.on("guildDelete", guild => {
 client.channels.get("478826880921763840").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
 });
-  client.on("ready", () => {
-
-    var guild;
-
-    while (!guild)
-
-        guild = client.guilds.get("382239191578312705");
-
-    guild.fetchInvites().then((data) => {
-
-        data.forEach((Invite, key, map) => {
-
-            var Inv = Invite.code;
-
-            dat[Inv] = Invite.uses;
-
-        });
-
+client.on("roleCreate", role => {
+  let embed = new Discord.RichEmbed()
+  .setTitle(`لوق جديد`)
+  .addField(`اللوق : `, `انشاء رتبة`)
+  .addField(`معلومات الرتبة : `, `اسم الرتبة : **${role.name}** \n\ لون الرتبة : **${role.color}** \n\ ايدي الرتبة : **${role.id}**`)
+  .addField(`البرمشنات : `, `${role.permissions}`)
+  .setColor('RANDOM')
+  if (log) {log.send(embed)}
+})
+client.on('message', async message =>{
+      let messageArray = message.content.split(" ");
+      let cmd = messageArray[0];
+      let args = messageArray.slice(1);
+      let xp = require("./xp.json");
+  
+    let xpAdd = Math.floor(Math.random() * 7) + 8;
+    console.log(xpAdd);
+  
+    if(!xp[message.author.id]){
+      xp[message.author.id] = {
+        xp: 0,
+        level: 1
+      };
+    }
+  
+  
+    let curxp = xp[message.author.id].xp;
+    let curlvl = xp[message.author.id].level;
+    let nxtLvl = xp[message.author.id].level * 300;
+    xp[message.author.id].xp =  curxp + xpAdd;
+    if(nxtLvl <= xp[message.author.id].xp){
+      xp[message.author.id].level = curlvl + 1;
+      let lvlup = new Discord.RichEmbed()
+      .setTitle("Level Up!")
+      .setColor("blue")
+      .addField("New Level", curlvl + 1);
+  
+      message.channel.send(lvlup).then(msg => {msg.delete(5000)});
+    }
+    fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
+      if(err) console.log(err)
     });
+  });
 
-});
-
- 
-
- 
-
- 
-
-client.on("guildMemberAdd", (member) => {
-
-    let channel = member.guild.channels.get("478823041741225985");
-
-    if (!channel) {
-
-        console.log("!the channel id it's not correct");
-
-        return;
-
-    }
-
-    if (member.id == client.user.id) {
-
-        return;
-
-    }
-
-    console.log('-');
-
-    var guild;
-
-    while (!guild)
-
-        guild = client.guilds.get("382239191578312705");
-
-    guild.fetchInvites().then((data) => {
-
-        data.forEach((Invite, key, map) => {
-
-            var Inv = Invite.code;
-
-            if (dat[Inv])
-
-                if (dat[Inv] < Invite.uses) {
-
- channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;       
-
+  client.on('message', message => {
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(0);
+    let prefix = '$$';
+    let xp = require("./xp.json");
+    
+if(cmd === `${prefix}level`) {
+if(!xp[message.author.id]){
+    xp[message.author.id] = {
+      xp: 0,
+      level: 1
+   };
  }
-
-            dat[Inv] = Invite.uses;
-
-       
-
-       });
-
-    });
-
+   let curxp = xp[message.author.id].xp;
+   let curlvl = xp[message.author.id].level;
+   let nxtLvlXp = curlvl * 300;
+   let difference = nxtLvlXp - curxp;
+ 
+   let lvlEmbed = new Discord.RichEmbed()
+   .setAuthor(message.author.username)
+   .setColor("blue")
+   .addField("Level", curlvl, true)
+   .addField("XP", curxp, true)
+   .setFooter(`${difference} XP til level up`, message.author.displayAvatarURL);
+ 
+   message.channel.send(lvlEmbed).then(msg => {msg.delete(5000)});
+}
 });
 client.login(process.env.BOT_TOKEN);
