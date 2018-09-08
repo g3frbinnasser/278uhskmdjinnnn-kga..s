@@ -647,6 +647,11 @@ client.on('message', message => {
     }
 });
 client.on('message', message => {
+    if(message.content === 'سلام عليكم'){
+        message.channel.send('https://cdn.discordapp.com/attachments/472743324084731914/478685035730305036/color.png')
+    }
+});
+client.on('message', message => {
     if(message.content === '*help'){
         message.channel.send('✉ | تم ارسال الرسالة في الخاص')
     }
@@ -2638,7 +2643,7 @@ const prefix = '*'
 	
 	client.on('message', msg => {
     if (msg.content === 'الوان') {
-      if (msg.channel.id !== "487289914728382484") return;
+      if (msg.channel.id !== "48728991472838248438291250028893") return;
       msg.channel.send({file : "https://cdn.discordapp.com/attachments/472743324084731914/478685035730305036/color.png"})
     }
   });
@@ -2678,4 +2683,20 @@ setInterval(function(){})
       
 }
 });
+client.on('message', ra3d => {
+var prefix = "-";
+                        let args = ra3d.content.split(" ").slice(1).join(" ")
+if(ra3d.content.startsWith(prefix + 'ccolors')) {
+    if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
+             if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**'); 
+              ra3d.channel.send(`**✅ |Created __${args}__ Colors**`);
+                  setInterval(function(){})
+                    let count = 0;
+                    let ecount = 0;
+          for(let x = 1; x < `${parseInt(args)+1}`; x++){
+            ra3d.guild.createRole({name:x,
+              color: 'RANDOM'})
+              }
+            }
+       });
 client.login(process.env.BOT_TOKEN);
