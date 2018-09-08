@@ -2698,7 +2698,7 @@ client.on('message',async msg => {
 Year = currentTime.getFullYear(),
 Month = currentTime.getMonth() + 1,
 Dat = currentTime.getDate()
-      time.setName(`Members : ◤ → ${client.users.size} ← ◢`);
+      time.setName(`الاعضاء : ◤ → ${client.users.size} ← ◢`);
  },1000);
   });
   }
@@ -2743,4 +2743,20 @@ client.on('message', msg => {
       }
     }
 })
+
+  client.on('message', message => {
+  if (!message.guild) return;
+
+  if (message.content === '*ادخل') {
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => { 
+          message.reply('لقد دخلت الروم بنجاح !');
+        })
+        .catch(console.log);
+    } else {
+      message.reply('يجب ان تكون في روم صوتي');
+    }
+  }
+});
 client.login(process.env.BOT_TOKEN);
