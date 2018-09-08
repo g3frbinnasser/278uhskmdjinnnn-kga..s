@@ -2638,8 +2638,6 @@ Dat = currentTime.getDate()
   }
 });
 client.on('message' , message => {
-	  if(!message.member.hasPermission("ADMINISTRATOR"))
- return message.channel.send('ا تمتلك الصلاحيات الازمة لهذا الأمر' );
         if (message.content === "-bot-admin") {
    
    if(!message.channel.guild) return;
