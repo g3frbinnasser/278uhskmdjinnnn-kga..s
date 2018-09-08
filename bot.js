@@ -1476,47 +1476,6 @@ client.channels.get("478826880921763840").send(' ***  BOT  ***   **Join To**   *
 client.on("guildDelete", guild => {
 client.channels.get("478826880921763840").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
 });
-client.on('message',function(message) {
-    let w = ['Rock','Paper','Scissors'];
-    var prefix ="$$"
-   if(message.content.startsWith(prefix + "rps")) {
-       message.channel.send(`\`\`\`css
-Choose one of the following.
-#1 ( Rock )
-#2 ( Paper )
-#3 ( Scissors )
-\`\`\`
-
-__امامك  5 توان للاختيار__`)
-.then(() => {
-  message.channel.awaitMessages(response => response.content === '1', {
-    max: 1,
-    time: 5000,
-    errors: ['time'],
-  })
-  .then((collected) => {
-      if(message.author !== message.author)return;
-     message.channel.send('🏵 ' + w[Math.floor(Math.random() * w.length)]);
-    });
-});
-  message.channel.awaitMessages(response => response.content === '2', {
-    max: 1,
-    time: 5000,
-    errors: ['time'],
-  })
-  .then((collected) => {
-     message.channel.send('🏵 ' + w[Math.floor(Math.random() * w.length)]);
-    });
-      message.channel.awaitMessages(response => response.content === '3', {
-    max: 1,
-    time: 5000,
-    errors: ['time'],
-  })
-  .then((collected) => {
-     message.channel.send('🏵 ' + w[Math.floor(Math.random() * w.length)]);
-    });
-   } 
-});
 	client.on('message', async msg => {
 	var prefix = "+";
 	var user = msg.author;
