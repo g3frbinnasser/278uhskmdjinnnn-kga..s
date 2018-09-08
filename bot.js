@@ -1470,11 +1470,11 @@ hours = 12;
  
 });
   client.on("guildCreate", guild => {
-client.channels.get("ايدي الشات الي تجي فيه الرساله").send(' ***  BOT  ***   **Join To**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+client.channels.get("478826880921763840").send(' ***  BOT  ***   **Join To**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
 });
 
 client.on("guildDelete", guild => {
-client.channels.get("ايدي الشات الي تجي فيه الرساله").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+client.channels.get("478826880921763840").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
 });
   client.on("ready", () => {
 
@@ -1482,7 +1482,7 @@ client.channels.get("ايدي الشات الي تجي فيه الرساله").s
 
     while (!guild)
 
-        guild = client.guilds.get("اي دي سيرفرك - Server id");
+        guild = client.guilds.get("382239191578312705");
 
     guild.fetchInvites().then((data) => {
 
@@ -1506,7 +1506,7 @@ client.channels.get("ايدي الشات الي تجي فيه الرساله").s
 
 client.on("guildMemberAdd", (member) => {
 
-    let channel = member.guild.channels.get("اي دي الروم - Room id");
+    let channel = member.guild.channels.get("478823041741225985");
 
     if (!channel) {
 
@@ -1528,7 +1528,7 @@ client.on("guildMemberAdd", (member) => {
 
     while (!guild)
 
-        guild = client.guilds.get("اي دي سيرفرك - Server id");
+        guild = client.guilds.get("382239191578312705");
 
     guild.fetchInvites().then((data) => {
 
@@ -1552,28 +1552,5 @@ client.on("guildMemberAdd", (member) => {
 
     });
 
-});
-client.on('message', message => {
-    
-    if(message.author.bot) return;
-    if(message.channel.type === 'dm') return;
-    
-    var command = message.content.toLowerCase().split(' ')[0];
-    var prefix = '*'; 
-    
-    if(command == prefix + 'guilds') {
-        if(message.member.hasPemrission('ADMINISTRATOR')) return message.channel.send('⛔ | You dont have **ADMINISTRATOR** Permission!');
-        
-        var number = 1;
-        
-        let serversInfo = new Discord.RichEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL)
-        .setDescription(client.guilds.map(g => `${number++}- ${g.name} (ID: ${g.id})`).slice(0, 10).join('\n'))
-        .setColor('GREEN')
-        .setTimestamp()
-        .setFooter(message.author.tag, message.author.avatarURL)
-        
-        message.channel.send(serversInfo);
-    }
 });
 client.login(process.env.BOT_TOKEN);
