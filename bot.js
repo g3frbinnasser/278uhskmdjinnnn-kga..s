@@ -324,9 +324,9 @@ if (message.content.startsWith(prefix + 'help')) {
         ***👑لاوامر الادارية👑***
 ** 
 ⤠ ${prefix}bc ⥨ رسالة جماعية الى كل اعضاء السيرفر
-⤠ ${prefix}clear ⥨ مسح الشات
-⤠ ${prefix}mute @user ⥨ اعطاء العضو ميوت
-⤠ ${prefix}unmute @user ⥨ لفك الميوت عن الشخص
+⤠ ${prefix}clear ⥨ حذف الرسائل بعدد
+⤠ ${prefix}mute ⥨ لإعطاء العضو ميوت
+⤠ ${prefix}unmute ⥨ لإزالة الميوت عن الشخص
 ⤠ ${prefix}unmutec ⥨ لفتح الشات
 ⤠ ${prefix}mutec ⥨ لقفل الشات
 ⤠ ${prefix}ban @user <reason> ⥨ حظر الشخص من السيرفر
@@ -2681,6 +2681,83 @@ setInterval(function(){})
           message.member.addRole(message.guild.roles.find("name",`${args}`));
   
       
+}
+});
+ client.on('message', message => {
+  if (!message.guild) return;
+
+  if (message.content === 'ادخل') {
+  if(!message.member.hasPermission("ADMINISTRATOR"))
+ return message.channel.send('لا تمتلك الصلاحيات الازمة لهذا الأمر' );
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => { 
+          message.reply('لقد دخلت الروم بنجاح !');
+        })
+        .catch(console.log);
+    } else {
+      message.reply('يجب ان تكون في روم صوتي');
+    }
+  }
+});
+const ms = require("ms"); //npm i ms
+let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+
+client.on('message', message =>{
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(1);
+    let prefix = '!!';
+     
+    if(cmd === `${prefix}warn`) {
+
+  //!warn @daeshan <reason>
+  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("U don't have enough permissions to warn Users!");
+  let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
+  if(!wUser) return message.reply("yo i can't find this User");
+  if(wUser.hasPermission("ADMINISTRATOR")) return message.reply("This User is very cool why warn him? >.>");
+  let reason = args.join(" ").slice(22);
+
+  if(!warns[wUser.id]) warns[wUser.id] = {
+    warns: 0
+  };
+
+  warns[wUser.id].warns++;
+
+  fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
+    if (err) console.log(err)
+  });
+  const channel = member.guild.channels.find('name', 'log');
+  let warnEmbed = new Discord.RichEmbed()
+  .setDescription("Warns")
+  .setAuthor(message.author.username)
+  .setColor("#fc6400")
+  .addField("Warned User", `<@${wUser.id}>`)
+  .addField("Warned In", message.channel)
+  .addField("Number of Warnings", warns[wUser.id].warns)
+  .addField("Reason", reason);
+
+
+  message.channel.send(warnEmbed);
+
+  if(warns[wUser.id].warns == 2){
+    let muterole = message.guild.roles.find(`name`, "muted");
+    if(!muterole) return message.reply("You should make A **muted** role, to mute this User!!");
+
+    let mutetime = "10s";
+    await(wUser.addRole(muterole.id));
+    message.channel.send(`<@${wUser.id}> Just muted for sometime!`);
+
+    setTimeout(function(){
+      wUser.removeRole(muterole.id)
+      message.reply(`<@${wUser.id}> Just unmuted!`)
+    }, ms(mutetime))
+  }
+  if(warns[wUser.id].warns == 3){
+    message.guild.member(wUser).ban(reason);
+    message.reply(`<@${wUser.id}> Just banned for 3 warns!!`)
+  }
+
 }
 });
 client.login(process.env.BOT_TOKEN);
