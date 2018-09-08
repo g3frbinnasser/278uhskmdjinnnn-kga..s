@@ -2626,8 +2626,6 @@ Dat = currentTime.getDate()
   client.on('message', message => {
   if (!message.guild) return;
   if (message.content === '-ادخل') {
-  if(!message.member.hasPermission("ADMINISTRATOR"))
- return message.channel.send('ا تمتلك الصلاحيات الازمة لهذا الأمر');
     if (message.member.voiceChannel) {
       message.member.voiceChannel.join()
         .then(connection => { 
