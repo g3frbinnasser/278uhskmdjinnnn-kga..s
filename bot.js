@@ -2683,81 +2683,64 @@ setInterval(function(){})
       
 }
 });
- client.on('message', message => {
-  if (!message.guild) return;
-
-  if (message.content === 'ادخل') {
-  if(!message.member.hasPermission("ADMINISTRATOR"))
- return message.channel.send('لا تمتلك الصلاحيات الازمة لهذا الأمر' );
-    if (message.member.voiceChannel) {
-      message.member.voiceChannel.join()
-        .then(connection => { 
-          message.reply('لقد دخلت الروم بنجاح !');
-        })
-        .catch(console.log);
-    } else {
-      message.reply('يجب ان تكون في روم صوتي');
-    }
-  }
-});
-const ms = require("ms"); //npm i ms
-let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
-
-client.on('message', message =>{
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
-    let prefix = '!!';
-     
-    if(cmd === `${prefix}warn`) {
-
-  //!warn @daeshan <reason>
-  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("U don't have enough permissions to warn Users!");
-  let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
-  if(!wUser) return message.reply("yo i can't find this User");
-  if(wUser.hasPermission("ADMINISTRATOR")) return message.reply("This User is very cool why warn him? >.>");
-  let reason = args.join(" ").slice(22);
-
-  if(!warns[wUser.id]) warns[wUser.id] = {
-    warns: 0
-  };
-
-  warns[wUser.id].warns++;
-
-  fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-    if (err) console.log(err)
+client.on('message',async msg => {
+  var p = "*";
+  if(msg.content.startsWith(p + "user")) {
+  if(!msg.guild.member(msg.author).hasPermissions('ADMINISTRATOR')) return msg.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
+  if(!msg.guild.member(client.user).hasPermissions(['ADMINISTRATOR'])) return msg.reply('البوت لا يمتلك الصلاحيات الازمة لهذا الأمر ');
+  msg.guild.createChannel(`يتم تحضير الروم :[]` , 'voice').then(time => {
+    time.overwritePermissions(msg.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+  setInterval(() => {
+      var currentTime = new Date(),
+Year = currentTime.getFullYear(),
+Month = currentTime.getMonth() + 1,
+Dat = currentTime.getDate()
+      time.setName(`Members : ◤ → ${client.users.size} ← ◢`);
+ },1000);
   });
-  const channel = member.guild.channels.find('name', 'log');
-  let warnEmbed = new Discord.RichEmbed()
-  .setDescription("Warns")
-  .setAuthor(message.author.username)
-  .setColor("#fc6400")
-  .addField("Warned User", `<@${wUser.id}>`)
-  .addField("Warned In", message.channel)
-  .addField("Number of Warnings", warns[wUser.id].warns)
-  .addField("Reason", reason);
-
-
-  message.channel.send(warnEmbed);
-
-  if(warns[wUser.id].warns == 2){
-    let muterole = message.guild.roles.find(`name`, "muted");
-    if(!muterole) return message.reply("You should make A **muted** role, to mute this User!!");
-
-    let mutetime = "10s";
-    await(wUser.addRole(muterole.id));
-    message.channel.send(`<@${wUser.id}> Just muted for sometime!`);
-
-    setTimeout(function(){
-      wUser.removeRole(muterole.id)
-      message.reply(`<@${wUser.id}> Just unmuted!`)
-    }, ms(mutetime))
   }
-  if(warns[wUser.id].warns == 3){
-    message.guild.member(wUser).ban(reason);
-    message.reply(`<@${wUser.id}> Just banned for 3 warns!!`)
-  }
-
-}
+ 
 });
+client.on("message", message => {
+        let args = message.content.split(" ").slice(1);
+      if (message.content.startsWith(prefix + 'report')) {
+            let user = message.mentions.users.first();
+            let reason = args.slice(1).join(' ');
+            let modlog = client.channels.find('name', 'report');
+            if (!reason) return message.reply('**ضع سبباً مقنعاً**');
+              if (message.mentions.users.size < 1) return message.reply('**يجب عليك منشن للعضو المراد الابلاغ عليه**').catch(console.error);
+       
+        if (!modlog) return message.reply('**لا يوجد روم بأسم report**');
+        const embed = new Discord.RichEmbed()
+          .setColor(0x00AE86)
+          .setTimestamp()
+          .addField('نوع الرسالة:', 'Report')
+          .addField('المراد الابلاغ عليه:', `${user.username}#${user.discriminator} (${user.id}`)
+          .addField('صاحب الابلاغ:', `${message.author.username}#${message.author.discriminator}`)
+          .addField('السبب', reason);
+          message.delete()
+          return client.channels.get(modlog.id).sendEmbed(embed).catch(console.error);
+          console.log('[report] Send By: ' + message.author.username)
+      }
+      });
+client.on('message', msg => { 
+    if (msg.content.startsWith(`*warn`)) {
+      if(!msg.member.hasPermission("MANAGE_MESSAGES")) return;
+       let args = msg.content.split(" ").slice(1);
+      if (!msg.mentions.members.first()) return msg.reply('منشن الشخص المحدد')
+      if (!args[0]) return msg.reply('اكتب السبب')
+       
+      if (msg.guild.channels.find('name', 'warns')) {
+        
+        msg.guild.channels.find('name', 'warns').send(`
+      تم اعطائك انذار : ${msg.mentions.members.first()}
+      لأنك قمت بما يلي
+      ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
+      `)
+      }
+    }
+})
 client.login(process.env.BOT_TOKEN);
