@@ -1586,38 +1586,4 @@ client.on('message', message => {
         message.channel.send(serversInfo);
     }
 });
-client.on('guildDelete', guild => {
-  client.channels.get("ايدي الروم")
-const embed = new Discord.RichEmbed()
-   .setAuthor(`Nameless Bot left a server ❎`)
-   .setDescription(`**
-Server name: __${guild.name}__
-Server id: __${guild.id}__
-Server owner: __${guild.owner}__
-Members Count: __${guild.memberCount}__
-Servers Counter : __${client.guilds.size}__**`)
-         .setColor("#f3ae10")
-         .setFooter('اسم بوتك' , client.user.avatarURL)
-           client.channels.get("ايدي الروم").send({embed});
-}
-
-);
-client.on('guildCreate', guild => {
-    
-  client.channels.get("ايدي الروم")
-const embed = new Discord.RichEmbed()
-   .setAuthor(`بوتك دخل سيرفر جديد مبروك ✅`)
-   .setDescription(`**
-Server name: __${guild.name}__
-Server id: __${guild.id}__
-Server owner: __${guild.owner}__
-Member Count: __${guild.memberCount}__
-Servers Counter : __${client.guilds.size}__**`)
-         .setColor("#f3ae10")
-         .addField("New Server!")
-         .setFooter('اسم بوتك' , client.user.avatarURL)
-           client.channels.get("ايدي الروم").send({embed});
-}
-
-);
 client.login(process.env.BOT_TOKEN);
