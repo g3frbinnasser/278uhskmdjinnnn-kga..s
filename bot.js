@@ -2724,34 +2724,51 @@ setInterval(function(){})
       
 }
 });
-client.on('message',async message => {
-  if(message.author.bot) return;
-  if(message.channel.type === 'dm') return;
-  let args = message.content.split(' ');
-  let tag;
-  if(args[0] === `${prefix}discrim`) {
-    if(args[1]) {
-      let discrim = Array.from(args[1]);
-      if(isNaN(args[1])) return message.channel.send(`- \`${message.author.username}\`, يجب ان تتكون هذه الخانة من ارقام وليس احرف`);
-      if(discrim.length !== 4) return message.channel.send(`- \`${message.author.username}\`, يجب ان يكون التاق مكون من 4 ارقام`);
+const bannedwords = [
+  "-help",
+  "-play",
+  "-skip",
+  "رابط",
+  "-pause",
+  "-server",
+  "-id",
+  "-stop",
+  "-vol",
+  "-queue",
+  "-invites",
+  "-bc",
+  "-ping",
+  "-bc",
+  "-clear",
+  "-mute",
+  "-unmute",
+  "-mutec",
+  "-unmutec",
+  "-ban",
+  "-kick",
+  "-cv",
+  "-ct",
+  "-np",
+  "-resume",
+  "-avatar"
 
-      tag = discrim.map(r => r.toString()).join('');
-      console.log(tag);
-      if(client.users.filter(f => f.discriminator === tag).size === 0) return message.channel.send(`- \`${message.author.username}\`, لا يوجد احد بهذا التاق`);
-      let iLD = new Discord.RichEmbed()
-      .setAuthor(message.author.username, message.author.avatarURL)
-      .setDescription(client.users.filter(f => f.discriminator === tag).map(r => r.username).slice(0, 10).join('\n'))
-      .setFooter('SOD BOT');
-      message.channel.send(iLD);
-    } else if(!args[1]) {
-      tag = message.author.discriminator;
-      if(client.users.filter(f => f.discriminator === tag).size === 0) return message.channel.send(`- \`${message.author.username}\`, لا يوجد احد بهذا التاق`);
-      let L4U = new Discord.RichEmbed()
-      .setAuthor(message.author.username, message.author.avatarURL)
-      .setDescription(client.users.filter(f => f.discriminator === tag).map(r => r.username).slice(0, 10).join('\n'))
-      .setFooter('SOD BOT');
-      message.channel.send(L4U);
-    }
+]
+client.on('message', message => {
+  var Muted = message.guild.roles.find("name", "muted");
+  var warn = message.guild.roles.find("name", "warn");
+  if(bannedwords.some(word => message.content.includes(word))) {
+  if(message.channel.id !== '481475376212606987') return;
+  if (message.author.bot) return;
+  if(message.member.roles.has(warn)) return;
+  if(!message.member.roles.has(warn.id)) {
+  message.member.addRole(warn)
+  message.reply("**`تم اعطائك تحذير لاستخدام اوامر البوت فى الشات العام` 😠**")
   }
-});
+  if(message.member.roles.has(warn.id)) {
+      message.member.addRole(Muted)
+      message.member.removeRole(warn)
+      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالتة` 🤐**")
+  }
+  }
+  })
 client.login(process.env.BOT_TOKEN);
