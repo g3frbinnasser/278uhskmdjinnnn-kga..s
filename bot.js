@@ -1975,17 +1975,6 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 
 			logChannel.send(serverUnmutev);
 		}
-		if(voiceOld.serverDeaf === false && voiceNew.serverDeaf === true) {
-			let serverDeafv = new Discord.RichEmbed()
-			.setTitle('**[VOICE DEAF]**')
-			.setThumbnail('https://images-ext-1.discordapp.net/external/7ENt2ldbD-3L3wRoDBhKHb9FfImkjFxYR6DbLYRjhjA/https/cdn.pg.sa/auWd5b95AV.png')
-			.setColor('RED')
-			.setDescription(`**User:** ${voiceOld} (ID: ${voiceOld.id})\n**By:** <@${userID}> (ID: ${userID})\n**Channel:** \`\`${voiceOld.voiceChannel.name}\`\` (ID: ${voiceOld.voiceChannel.id})`)
-			.setTimestamp()
-			.setFooter(userTag, userAvatar)
-
-			logChannel.send(serverDeafv);
-		}
 		if(voiceOld.serverDeaf === true && voiceNew.serverDeaf === false) {
 			let serverUndeafv = new Discord.RichEmbed()
 			.setTitle('**[VOICE UNDEAF]**')
@@ -1998,17 +1987,18 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
 			logChannel.send(serverUndeafv);
 		}
 	})
-	if(voiceOld.voiceChannelID !== voiceNew.voiceChannelID && !voiceOld.voiceChannel) {
-		let voiceJoin = new Discord.RichEmbed()
-		.setTitle('**[JOIN VOICE ROOM]**')
-		.setColor('GREEN')
-		.setThumbnail(voiceOld.user.avatarURL)
-		.setDescription(`**\n**:arrow_lower_right: Successfully \`\`JOIN\`\` To Voice Channel.\n\n**Channel:** \`\`${voiceNew.voiceChannel.name}\`\` (ID: ${voiceNew.voiceChannelID})\n**User:** ${voiceOld} (ID: ${voiceOld.id})`)
-		.setTimestamp()
-		.setFooter(voiceOld.user.tag, voiceOld.user.avatarURL)
+			if(voiceOld.serverDeaf === false && voiceNew.serverDeaf === true) {
+			let serverDeafv = new Discord.RichEmbed()
+			.setTitle('**[VOICE DEAF]**')
+			.setThumbnail('https://images-ext-1.discordapp.net/external/7ENt2ldbD-3L3wRoDBhKHb9FfImkjFxYR6DbLYRjhjA/https/cdn.pg.sa/auWd5b95AV.png')
+			.setColor('RED')
+			.setDescription(`**User:** ${voiceOld} (ID: ${voiceOld.id})\n**By:** <@${userID}> (ID: ${userID})\n**Channel:** \`\`${voiceOld.voiceChannel.name}\`\` (ID: ${voiceOld.voiceChannel.id})`)
+			.setTimestamp()
+			.setFooter(userTag, userAvatar)
 
-		logChannel.send(voiceJoin);
-	}
+			logChannel.send(serverDeafv);
+		}
+
 
 });
 client.login(process.env.BOT_TOKEN);
