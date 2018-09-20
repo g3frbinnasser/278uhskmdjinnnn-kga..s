@@ -2403,35 +2403,6 @@ client.on("guildMemberAdd", (member) => {
     });
 
 });
-    client.on('message', message => {
-          if (message.content.startsWith("-id")) {
-            if(!message.channel.guild) return message.reply('هذا الامر للسيرفرات فقط')
-    var args = message.content.split(" ").slice(1);
-    let user = message.mentions.users.first();
-    var men = message.mentions.users.first();
-       var heg;
-       if(men) {
-           heg = men
-       } else {
-           heg = message.author
-       }
-     var mentionned = message.mentions.members.first();
-        var h;
-       if(mentionned) {
-           h = mentionned
-       } else {
-           h = message.member
-       }
-              moment.locale('ar-TN');
-     var id = new  Discord.RichEmbed()
-   .setColor("RANDOM")
-   .setThumbnail(message.author.avatarURL)
-   .setAuthor(` ${message.author.username} `, message.author.avatarURL)
-   .addField(': تاريخ دخولك للديسكورد', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
-   .addField(': تاريخ دخولك لسيرفرنا', `${moment(h.joinedAt).format('YYYY/M/D HH:mm')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
-   .setFooter(`${message.author.username}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')
-   message.channel.send(id)
-}       });
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -2574,7 +2545,7 @@ client.on("message", message => {
 	} 
 });
   client.on('message', message => {
-    if (message.content.startsWith(prefix + "هويتي")) {
+    if (message.content.startsWith(prefix + "id")) {
 var args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first();
 var men = message.mentions.users.first();
@@ -2602,4 +2573,56 @@ var id = new  Discord.RichEmbed()
 .setThumbnail(heg.avatarURL);
 message.channel.send(id)
 }       });
+client.on('messageDelete', msg => {
+    if (msg.channel.type !== "text") return
+    if (msg.channel.topic && msg.channel.topic.includes("hano-modlog")) return;
+    exports.fire(`**#${msg.channel.name} | ${msg.author.tag}'s message was deleted:** \`${msg.content}\``, msg.guild)
+})
+ 
+client.on('messageUpdate', (msg, newMsg) => {
+    if (msg.content === newMsg.content) return
+    exports.fire(`**#${msg.channel.name} | ${msg.author.tag} edited their message:**\n**before:** \`${msg.content}\`\n**+after:** \`${newMsg.content}\``, msg.guild)
+})
+ 
+client.on('guildMemberUpdate', (old, nw) => {
+    let txt
+    if (old.roles.size !== nw.roles.size) {
+        if (old.roles.size > nw.roles.size) {
+            //Taken
+            let dif = old.roles.filter(r => !nw.roles.has(r.id)).first()
+            txt = `**${nw.user.tag} | Role taken -> \`${dif.name}\`**`
+        } else if (old.roles.size < nw.roles.size) {
+            //Given
+            let dif = nw.roles.filter(r => !old.roles.has(r.id)).first()
+            txt = `**${nw.user.tag} | Role given -> \`${dif.name}\`**`
+        }
+    } else if (old.nickname !== nw.nickname) {
+        txt = `**${nw.user.tag} | Changed their nickname to -> \`${nw.nickname}\`**`
+    } else return
+    exports.fire(txt, nw.guild)
+})
+ 
+client.on('roleCreate', (role) => {
+    exports.fire("**New role created**", role.guild)
+})
+ 
+client.on('roleDelete', (role) => {
+    exports.fire("**Role deleted -> `" + role.name + "`**", role.guild)
+})
+ 
+client.on('roleUpdate', (old, nw) => {
+    let txt
+    if (old.name !== nw.name) {
+        txt = `**${old.name} | Role name updated to -> \`${nw.name}\`**`
+    } else return
+    exports.fire(txt, nw.guild)
+})
+ 
+client.on('guildBanAdd', (guild, user) => {
+    exports.fire(`**User banned -> \`${user.tag}\`**`, guild)
+})
+ 
+client.on('guildBanRemove', (guild, user) => {
+    exports.fire(`**User unbanned -> \`${user.tag}\`**`, guild)
+})
 client.login(process.env.BOT_TOKEN);
