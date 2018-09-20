@@ -613,7 +613,7 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if(message.content === 'رابط'){
-        message.channel.send('https://discord.gg/Mt9TAxb')
+        message.channel.send('https://discord.gg/QMvpzSg')
     }
 });
 client.on('message', message => {
