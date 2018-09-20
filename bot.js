@@ -1811,8 +1811,8 @@ function parseDate(str) {
 function datediff(first, second) {
     return Math.round((second-first)/(1000*60*60*24));
 };
-var prefix = "-"
 client.on('message', message => {
+	var prefix = "-"
     if(message.content === prefix + 'createcolors') {
 	    		      if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_ROLES ` **").then(msg => msg.delete(6000))
                          if(!message.channel.guild) return message.channel.send('**This Commnad only For Servers !**'); 
