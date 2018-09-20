@@ -2573,4 +2573,86 @@ client.on("message", message => {
 		} 
 	} 
 });
+client.on("message", function(message) {
+	var prefix = "-";
+   if(message.content.startsWith(prefix + "حجرة ورقة مقص")) {
+    let messageArgs = message.content.split(" ").slice(1).join(" ");
+    let messageRPS = message.content.split(" ").slice(2).join(" ");
+    let arrayRPS = ['**# - حجرة**','**# - ورقة**','**# - مقص**'];
+    let result = `${arrayRPS[Math.floor(Math.random() * arrayRPS.length)]}`;
+    var RpsEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setThumbnail(message.author.avatarURL)
+    .addField("حجرة","🗿",true)
+    .addField("ورقة","📄",true)
+    .addField("مقص","✂",true)
+    message.channel.send(RpsEmbed).then(msg => {
+        msg.react(' 🗿')
+        msg.react("✂")
+        msg.react("📄")
+.then(() => msg.react('🗿'))
+.then(() =>msg.react('✂'))
+.then(() => msg.react('📄'))
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '🗿' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '✂' && user.id === message.author.id;
+let reaction3Filter = (reaction, user) => reaction.emoji.name === '📄' && user.id === message.author.id;
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+	    
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+let reaction3 = msg.createReactionCollector(reaction3Filter, { time: 12000 });
+reaction1.on("collect", r => {
+        message.channel.send(result)
+})
+reaction2.on("collect", r => {
+        message.channel.send(result)
+})
+reaction3.on("collect", r => {
+        message.channel.send(result)
+})
+
+    })
+}
+});
+client.on('message', message => {
+	var prefix = "-";
+if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'move')) {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك✅ `)
+var embed = new Discord.RichEmbed()
+.setTitle(`You are Moved in ${message.guild.name}`)
+ .setColor("RANDOM")
+.setDescription(`**<@${message.author.id}> Moved You To His Channel!\nServer --> ${message.guild.name}**`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+}
+} else {
+ message.channel.send("**``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``**")
+}
+} else {
+message.react("❌")
+ }}});
+client.on('message', message => {
+	var prefix = "-";
+if (message.content.startsWith(prefix + 'tag')) {
+    let args = message.content.split(" ").slice(1);
+if(!args[0]) return message.reply('مرجو كتابة النص الذي تريده');  
+
+    figlet(args.join(" "), (err, data) => {
+              message.channel.send("```" + data + "```")
+           })
+}
+});
 client.login(process.env.BOT_TOKEN);
