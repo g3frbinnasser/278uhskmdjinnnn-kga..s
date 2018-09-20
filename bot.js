@@ -664,8 +664,10 @@ client.on('guildMemberAdd', member => {
      channel.send({embed:embed});
 });
 client.on('guildMemberAdd',async member => {
+  const moment = require('moment');
   const Canvas = require('canvas');
   const jimp = require('jimp');
+  const fs = require('fs');
        const w = ['welcome.png'];
 		  
         let Image = Canvas.Image,
