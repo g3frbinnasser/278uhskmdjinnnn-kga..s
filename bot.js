@@ -2506,4 +2506,64 @@ client.on("guildMemberAdd", (member) => {
         })
     })
 });
+client.on('guildMemberAdd', (member) => {
+member.addRole(member.guild.roles.find('name', 'not active'));
+});
+
+
+client.on('message', message => {                      
+    if(!message.channel.guild) return;
+       if(message.content.startsWith(prefix + 'active')) {
+        let modlog = client.channels.find('name', 'only_ksa');
+       if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+       message.channel.sendMessage(`اضغط على الصح عشان تتفعل`).then(msg => {
+        
+        
+        msg.react('✅')
+       .then(() => msg.react('✅'))
+     
+     
+
+       let activeFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+     
+       let active = msg.createReactionCollector(activeFilter, { time: 15000 });
+     
+                                                        
+                               active.on("collect", r => {
+                                   message.member.addRole(message.guild.roles.find("name", "active"));
+                                   message.member.removeRole(message.guild.roles.find("name", "not active"));
+                                   msg.delete();
+                                   message.channel.send(`**تم تفعيلك استمتع.**`).then(m => m.delete(1000));
+     
+                                   })
+                                   })
+                                   }
+                                   });
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.get("ايدي الروووووم");
+    if (!channel) {
+        console.log("!the channel id it's not correct");
+        return;
+    }
+    if (member.id == client.user.id) {
+        return;
+    }
+    console.log('-');
+    var guild;
+    while (!guild)
+        guild = client.guilds.get("ايدي سيررفرك");
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+                    setTimeout(function() {
+ channel.send(`**Invited by** ${Invite.inviter} `) ;
+                    },1500);
+ }
+            dat[Inv] = Invite.uses;
+       
+       });
+    });
+})
 client.login(process.env.BOT_TOKEN);
