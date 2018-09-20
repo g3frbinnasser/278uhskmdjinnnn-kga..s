@@ -910,138 +910,10 @@ client.on('message' , message => {
   if(message.author.bot) return;
   if(message.content.startsWith(prefix + "ping")) {
  message.channel.send('Pong...').then((msg) => {
-      msg.edit(`\`\`\`javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.\`\`\``);
+      msg.edit(`\javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.`\);
  })
   }  
  });
- client.on('guildMemberRemove', member => {
-  const channel = member.guild.channels.find('name', 'welcome');
-  if (!channel) return;
-  channel.send(`الله يستر عليك, ${member}`);
-  
-})
-    client.on("guildBanRemove", (guild, member) => {
-  client.setTimeout(() => {
-    guild.fetchAuditLogs({
-        limit: 1,
-        type: 22
-      })
-      .then(audit => {
-        let exec = audit.entries.map(a => a.executor.username);
-        try {
-          let log = guild.channels.find('name', 'log');
-          if (!log) return;
-          client.fetchUser(member.id).then(myUser => {
-          let embed = new Discord.RichEmbed()
-        .setAuthor("ازالة الباند !")
-		.setColor("BLACK")
-		 .setThumbnail(myUser.avatarURL)
-        .addField('= العضو المبند',`**${myUser.username}**`,true)
-        .addField('= تم ازالة الباند بواسطة',`**${exec}**`,true)
-        .setFooter(myUser.username,myUser.avatarURL)
-            .setTimestamp();
-          log.send(embed).catch(e => {
-            console.log(e);
-          });
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      });
-  }, 1000);
-});
-      client.on("roleDelete", role => {
-  client.setTimeout(() => {
-    role.guild.fetchAuditLogs({
-        limit: 1,
-        type: 30
-      })
-      .then(audit => {
-        let exec = audit.entries.map(a => a.executor.username)
-        try {
-
-          let log = role.guild.channels.find('name', 'log');
-          if (!log) return;
-          let embed = new Discord.RichEmbed()
-            .setColor('#fd0101')            
-            .setTitle('❌ حذف الرتبة')
-            .addField('اسم الرتبة', role.name, true)
-            .addField('= بواسطة',`${exec}`,true)
-            .setTimestamp()
-          log.send(embed).catch(e => {
-            console.log(e);
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      })
-  }, 1000)
-})
-
-
-client.on('roleCreate', role => {
-  client.setTimeout(() => {
-    role.guild.fetchAuditLogs({
-        limit: 1,
-        type: 30
-      })
-      .then(audit => {
-        let exec = audit.entries.map(a => a.executor.username)
-        try {
-
-          let log = role.guild.channels.find('name', 'log');
-          if (!log) return;
-          let embed = new Discord.RichEmbed()
-            .setTitle('➕ انشاء رتبة')
-            .addField('اسم الرتبة', role.name, true)
-            .addField('= بواسطة',`${exec}`,true)
-            .setTimestamp()
-          log.send(embed).catch(e => {
-            console.log(e);
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      })
-  }, 1000)
-})
-client.on('messageDelete', message => {
-    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
-    const channel = message.guild.channels.find('name', 'log');
-    if (!channel) return;
-    
-    let embed = new Discord.RichEmbed()
-       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
-       .setColor('BLACK')
-       .setDescription(`🗑️ **حذف رساله**
-**ارسلها <@${message.author.id}>                                                                                                                        تم حذفها في شات** <#${message.channel.id}>\n\n \`${message.cleanContent}\``)
-       .setTimestamp();
-     channel.send({embed:embed});
-
-});
-client.on('messageUpdate', (message, newMessage) => {
-    if (message.content === newMessage.content) return;
-    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
-    const channel = message.guild.channels.find('name', 'log');
-    if (!channel) return;
-
-    let embed = new Discord.RichEmbed()
-       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
-       .setColor('SILVER')
-       .setDescription(`✏ **تعديل رساله
-ارسلها <@${message.author.id}>                                                                                                                         تم تعديلها في شات** <#${message.channel.id}>\n\nقبل التعديل:\n \`${message.cleanContent}\`\n\nبعد التعديل:\n \`${newMessage.cleanContent}\``)
-       .setTimestamp();
-     channel.send({embed:embed});
-
-
-});;
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
-:crown:${member}:crown:
-انت العضو رقم ${member.guild.memberCount} `) 
-}).catch(console.error)
-});
 client.on('guildMemberRemove', member => {
     if (!member || !member.id || !member.guild) return;
     const guild = member.guild;
@@ -1074,79 +946,6 @@ client.on('guildMemberAdd', member => {
        .setDescription(`📥 <@${member.user.id}> **دخل السيرفر**\n\n`)
        .setTimestamp();
      channel.send({embed:embed});
-});
- client.on('voiceStateUpdate', (oldM, newM) => {
-  let m1 = oldM.serverMute;
-  let m2 = newM.serverMute;
-   let d1 = oldM.serverDeaf;
-  let d2 = newM.serverDeaf;
-   let ch = oldM.guild.channels.find('name', 'log')
-  if(!ch) return;
-     oldM.guild.fetchAuditLogs()
-    .then(logs => {
-       let user = logs.entries.first().executor
-     if(m1 === false && m2 === true) {
-       let embed = new Discord.RichEmbed()
-       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`${newM} has muted in server`)
-       .setFooter(`By : ${user}`)
-        ch.send(embed)
-    }
-    if(m1 === true && m2 === false) {
-       let embed = new Discord.RichEmbed()
-       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`${newM} has unmuted in server`)
-       .setFooter(`By : ${user}`)
-       .setTimestamp()
-        ch.send(embed)
-    }
-    if(d1 === false && d2 === true) {
-       let embed = new Discord.RichEmbed()
-       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`${newM} has deafened in server`)
-       .setFooter(`By : ${user}`)
-       .setTimestamp()
-        ch.send(embed)
-    }
-    if(d1 === true && d2 === false) {
-       let embed = new Discord.RichEmbed()
-       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`${newM} has undeafened in server`)
-       .setFooter(`By : ${user}`)
-       .setTimestamp()
-        ch.send(embed)
-    }
-  })
-});
-  client.on("guildBanAdd", (guild, member) => {
-  client.setTimeout(() => {
-    guild.fetchAuditLogs({
-        limit: 1,
-        type: 22
-      })
-      .then(audit => {
-        let exec = audit.entries.map(a => a.executor.username);
-        try {
-          let log = guild.channels.find('name', 'log');
-          if (!log) return;
-          client.fetchUser(member.id).then(myUser => {
-          let embed = new Discord.RichEmbed()
-        .setAuthor("تم التبنيد")
-	    .setColor("BLACK")
-        .setThumbnail(myUser.avatarURL)
-        .addField('= العضو المبند:',`**${myUser.username}**`,true)
-        .addField('= تم تبنيده بواستطة:',`**${exec}**`,true)
-        .setFooter(myUser.username,myUser.avatarURL)
-            .setTimestamp();
-          log.send(embed).catch(e => {
-            console.log(e);
-          });
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      });
-  }, 1000);
 });
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
@@ -1337,7 +1136,7 @@ client.on('ready', function(){
   console.log('SOD is Online');
   require("./antispam.js")(client, function(message){
      message.delete().then(loloz => {
-     message.channel.send("ليرجى التوقف عن السبام").then(spammer => {
+     message.channel.send("الرجاء التوقف عن السبام").then(spammer => {
      spammer.delete(2000)
    });
    });
