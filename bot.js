@@ -2724,7 +2724,7 @@ setInterval(function(){})
       
 }
 });
-hero.on('message',async message => {
+client.on('message',async message => {
   if(message.author.bot) return;
   if(message.channel.type === 'dm') return;
   let args = message.content.split(' ');
@@ -2737,18 +2737,18 @@ hero.on('message',async message => {
 
       tag = discrim.map(r => r.toString()).join('');
       console.log(tag);
-      if(hero.users.filter(f => f.discriminator === tag).size === 0) return message.channel.send(`- \`${message.author.username}\`, لا يوجد احد بهذا التاق`);
+      if(client.users.filter(f => f.discriminator === tag).size === 0) return message.channel.send(`- \`${message.author.username}\`, لا يوجد احد بهذا التاق`);
       let iLD = new Discord.RichEmbed()
       .setAuthor(message.author.username, message.author.avatarURL)
-      .setDescription(hero.users.filter(f => f.discriminator === tag).map(r => r.username).slice(0, 10).join('\n'))
+      .setDescription(client.users.filter(f => f.discriminator === tag).map(r => r.username).slice(0, 10).join('\n'))
       .setFooter('SOD BOT');
       message.channel.send(iLD);
     } else if(!args[1]) {
       tag = message.author.discriminator;
-      if(hero.users.filter(f => f.discriminator === tag).size === 0) return message.channel.send(`- \`${message.author.username}\`, لا يوجد احد بهذا التاق`);
+      if(client.users.filter(f => f.discriminator === tag).size === 0) return message.channel.send(`- \`${message.author.username}\`, لا يوجد احد بهذا التاق`);
       let L4U = new Discord.RichEmbed()
       .setAuthor(message.author.username, message.author.avatarURL)
-      .setDescription(hero.users.filter(f => f.discriminator === tag).map(r => r.username).slice(0, 10).join('\n'))
+      .setDescription(client.users.filter(f => f.discriminator === tag).map(r => r.username).slice(0, 10).join('\n'))
       .setFooter('SOD BOT');
       message.channel.send(L4U);
     }
