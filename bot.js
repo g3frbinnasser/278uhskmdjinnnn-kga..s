@@ -2767,7 +2767,7 @@ client.on('message', message => {
   if(message.member.roles.has(warn.id)) {
       message.member.addRole(Muted)
       message.member.removeRole(warn)
-      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالتة` 🤐**")
+      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالته` 🤐**")
   }
   }
   })
