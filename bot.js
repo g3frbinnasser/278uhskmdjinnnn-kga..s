@@ -1915,34 +1915,4 @@ zgg.on("collect", r => {
 	 })
 	 }
 	 });
-client.on('message',async message => {
-var codes = "#";
-var args = message.content.split(" ").slice(1);
-var title = args[1]
-          if(message.content.startsWith(codes + "giveaway")) {
-              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **s You Dont Have Premission**');
-              if(!args) return message.channel.send(`**Use : #start  <Time> <Presentse>**`);
-              if(!title) return message.channel.send(`**Use : **\`$start ${args[0]} Minutes\`** <Presentse>**`);
-         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
-                           let giveEmbed = new Discord.RichEmbed()
-                  .setAuthor(message.guild.name, message.guild.iconURL)
-                  .setDescription(`**${title}** \nReact Whit 🎉 To Enter! \n**Time remaining: Minutes :${duration / 60000}**`)
-                  .setFooter(message.author.username, message.author.avatarURL);
-
-                  message.channel.send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
-                      message.delete();
-                      m.react('🎉');
-                     setTimeout(() => {
-                       let users = m.reactions.get("🎉").users;
-                       let list = users.array().filter(u => u.id !== client.user.id);
-                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
-                       let endEmbed = new Discord.RichEmbed()
-                       .setAuthor(message.author.username, message.author.avatarURL)
-                       .setTitle(title)
-                       .addField('Giveaway End !🎉',`Winners : ${gFilter}`)
-                     m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
-                     },args * 60000);
-                   });
-          }
-});
 client.login(process.env.BOT_TOKEN);
