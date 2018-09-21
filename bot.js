@@ -1638,6 +1638,7 @@ var mentionned = message.mentions.members.first();
 var id = new  Discord.RichEmbed()
 .setColor("RANDOM")
 .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
+.addField(` لقد قمت بدعوة :`, ` ${inviteCount} `)
 .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
 .addField(": النك نيم",`${h.nickname}`, true) .addField(": #",heg.discriminator, true)
 .addField(`: البلينق`,`${h.presence.game && h.presence.game.name || '-'}`,true) .addField(': الحالة',`${h.presence.status}`,true)
