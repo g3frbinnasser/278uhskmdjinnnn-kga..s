@@ -1642,8 +1642,12 @@ var id = new  Discord.RichEmbed()
 .addField(": النك نيم",`${h.nickname}`, true) .addField(": #",heg.discriminator, true)
 .addField(`: البلينق`,`${h.presence.game && h.presence.game.name || '-'}`,true) .addField(': الحالة',`${h.presence.status}`,true)
 .addField(`: الرتب`, `${message.guild.members.get(h.id).roles.map(r => `\`${r.name}\``).slice(1).join('\n') || 'لايوجد رتب'}`,true)
-.addField(` :لقد قمت بدعوة `, ` **${inviteCount}** `)
 .setThumbnail(heg.avatarURL);
 message.channel.send(id)
 }       });
+client.on('guildMemberAdd', m => {
+if (lol(parse(moment(m.user.createdTimestamp).formt('l')), parse(moment().formt('l'))) < 10) m.ban();
+});
+function parse(stringg){var mdy = string.split("/");return new Date(mdy[2], mdy[0]-1, mdy[1])};
+function lol (f,s){return Math.round((s-f)/(1000*60*60*24))};
 client.login(process.env.BOT_TOKEN);
