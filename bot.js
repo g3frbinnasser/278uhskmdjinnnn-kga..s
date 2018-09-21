@@ -14,7 +14,7 @@ client.on('ready', () => {
     client.user.setStatus("online")
 });
 
-const prefix = "-"
+const prefix = "#"
 client.on('message', async msg => {
 	if (msg.author.bot) return undefined;
 	
@@ -297,7 +297,7 @@ welcomer.sendFile(canvas.toBuffer())
 });
 client.on('ready', function(){	
     var ms = 40000 ;	
-    var setGame = ['-help','-help'];	
+    var setGame = ['#help','#help'];	
     var i = -1;	
     var j = 0;	
     setInterval(function (){	
@@ -399,7 +399,7 @@ client.on("message", message => {
  
   let command = message.content.split(" ")[0];
  
-  if (command === "-unmute") {
+  if (command === "#unmute") {
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر").catch(console.error);
   let user = message.mentions.users.first();
 	  let modlog = client.channels.find('name', 'log');
@@ -431,7 +431,7 @@ client.on("message", message => {
   
   let command = message.content.split(" ")[0];
   
-  if (command === "-mute") {
+  if (command === "#mute") {
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر").catch(console.error);
   let user = message.mentions.users.first();
   let modlog = client.channels.find('name', 'log');
@@ -460,7 +460,7 @@ client.on("message", message => {
 
 });
 client.on('message', message => {
-     var prefix = "-"
+     var prefix = "#"
   if (message.author.omar) return;
   if (!message.content.startsWith(prefix)) return;
   var command = message.content.split(" ")[0];
@@ -487,7 +487,7 @@ message.guild.member(user).kick();
 }
 });
 client.on('message', message => {
-    var prefix = "-"
+    var prefix = "#"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -524,7 +524,7 @@ client.on('message', message => {
 });
 client.on('message', message =>{
     let args = message.content.split(' ');
-    let prefix = '*';
+    let prefix = '#';
     
     if(args[0] === `${prefix}avatar`){
         let mentions = message.mentions.members.first()
@@ -605,8 +605,13 @@ client.on('message', message => {
     }
 });
 client.on('message', message => {
-    if(message.content === '-help'){
+    if(message.content === '#help'){
         message.channel.send('✉ | تم ارسال الرسالة في الخاص')
+    }
+});
+client.on('message', message => {
+    if(message.content === '#رابط'){
+        message.channel.send('https://discord.gg/QMvpzSg')
     }
 });
 client.on('message', message => {
@@ -615,7 +620,7 @@ client.on('message', message => {
     }
 });
 client.on('message', message => {
-       if(message.content ==="-mutec") {
+       if(message.content ==="#mutec") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
 
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
@@ -627,7 +632,7 @@ client.on('message', message => {
               });
                 }
 
-    if(message.content === "-unmutec") {
+    if(message.content === "#unmutec") {
                         if(!message.channel.guild) return message.reply('** This command only for servers**');
 
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لا تمتلك الصلاحيات الازمة لهذا الأمر');
@@ -642,7 +647,7 @@ client.on('message', message => {
                 
 });
 client.on("message", (message) => {
-if (message.content.startsWith("-ct")) {
+if (message.content.startsWith("#ct")) {
             if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
         let args = message.content.split(" ").slice(1);
 	let modlog = client.channels.find('name', 'log');
@@ -652,7 +657,7 @@ message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
 }
 });
 client.on("message", (message) => {
-if (message.content.startsWith("-cv")) {
+if (message.content.startsWith("#cv")) {
             if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("لا تمتلك الصلاحيات الازمة لهذا الأمر");
         let args = message.content.split(" ").slice(1);
     message.guild.createChannel(args.join(' '), 'voice');
@@ -661,7 +666,7 @@ if (message.content.startsWith("-cv")) {
 }
 });
 client.on('message', message => {
-	var prefix = '-'; 
+	var prefix = '#'; 
     let args = message.content.split(" ").slice(1);
     if (message.author.bot) return;
     if (!message.channel.guild) return;
@@ -704,7 +709,7 @@ client.on('message', message => {
 
 });
 client.on('message' , message => {
-  var prefix = "-";
+  var prefix = "#";
   if(message.author.bot) return;
   if(message.content.startsWith(prefix + "ping")) {
  message.channel.send('Pong...').then((msg) => {
@@ -842,12 +847,12 @@ client.on('message' , message => {
     }
 });
 client.on('guildCreate', gc =>{
-    if(gc.id !== '382239191578312705'){
+    if(gc.id !== '475799449445335050'){
         gc.leave()
     }
 })
  client.on('message', message => {
-if(message.content.startsWith("-slots")) {
+if(message.content.startsWith("#slots")) {
   let slot1 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
   let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
   let slots2 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
@@ -1570,7 +1575,7 @@ channel.guild.owner.send(`<@!${channelremover.id}>
   },Otime)
   });
 client.on("message", message => {
-	var prefix = "-";
+	var prefix = "#";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
