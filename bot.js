@@ -1666,4 +1666,19 @@ var mentionned = message.mentions.members.first();
 	   
       
      });
+client.on('message', message => {
+if (message.content.startsWith(prefix + 'addrole')) {
+             if(!message.channel.guild) return message.reply('**Commands in the server**');
+        if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('⚠ **You do not have permissions**');
+        let args = message.content.split(" ").slice(1);
+            message.guild.createRole({
+                name : args.join(' '),
+                permissions : [1]
+            }).then(function(role){
+        return message.reply('✅ **Added a Role**');
+                message.addRole(role)
+            })
+
+}
+});
 client.login(process.env.BOT_TOKEN);
