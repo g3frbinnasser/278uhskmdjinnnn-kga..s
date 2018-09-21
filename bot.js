@@ -1670,8 +1670,8 @@ client.on('message', message => {
   if(message.content === 'رابط') {
   const embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField(':رابط')
-.addField(':https://discord.gg/DbdgNYH')
+.addField('**رابط**')
+.addField('**https://discord.gg/DbdgNYH**')
   .setColor('RANDOM')
   message.channel.send({embed: embed});
   }
