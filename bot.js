@@ -1669,7 +1669,6 @@ var mentionned = message.mentions.members.first();
 client.on('message', message => {
   if(message.content === 'رابط') {
   const embed = new Discord.RichEmbed()
-  .setTitle('Click here')
   .setURL('https://discord.gg/DbdgNYH')
   .setColor('RANDOM')
   message.channel.send({embed: embed});
