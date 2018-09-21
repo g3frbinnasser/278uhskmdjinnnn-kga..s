@@ -320,14 +320,14 @@ if (message.content.startsWith(prefix + 'help')) {
 **
 ⤠ ${prefix}invites ⥨ يعرض لك  عدد انفايتات بالسيرفر
 ⤠ ${prefix}user ⥨ معلومات عن حسابك
-⤠ ${prefix}ping ⥨ سرعة اتصالك
+⤠ ${prefix}ping ⥨ يعرض لك سرعة اتصال البوت
 ⤠ ${prefix}avatar ⥨ صورتك او صورة الي تمنشنة
 **
   `
 ,`
         ***👑لاوامر الادارية👑***
 ** 
-⤠ ${prefix}bc ⥨ رسالة جماعية الى كل اعضاء السيرفر
+⤠ ${prefix}bc ⥨ ارسال رسالة جماعية لكل اعضاء السيرفر
 ⤠ ${prefix}clear ⥨ حذف الرسائل بعدد
 ⤠ ${prefix}mute ⥨ لإعطاء العضو ميوت
 ⤠ ${prefix}unmute ⥨ لإزالة الميوت عن الشخص
@@ -610,12 +610,17 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if(message.content === '#رابط'){
-        message.channel.send('https://discord.gg/QMvpzSg')
+        message.channel.send('https://discord.gg/ZzqUFBm')
     }
 });
 client.on('message', message => {
     if(message.content === 'رابط'){
-        message.channel.send('https://discord.gg/QMvpzSg')
+        message.channel.send('https://discord.gg/ZzqUFBm')
+    }
+});
+client.on('message', message => {
+    if(message.content === 'الرابط'){
+        message.channel.send('https://discord.gg/ZzqUFBm')
     }
 });
 client.on('message', message => {
@@ -853,7 +858,7 @@ client.on('message' , message => {
     }
 });
 client.on('guildCreate', gc =>{
-    if(gc.id !== '475799449445335050'){
+    if(gc.id !== '382239191578312705'){
         gc.leave()
     }
 })
@@ -1431,7 +1436,7 @@ function forEachObject(obj, func) {
 client.on("ready", () => {
     var guild;
     while (!guild)
-        guild = client.guilds.find("name", "SOD")
+        guild = client.guilds.find("name", "Smile Community")
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -1451,7 +1456,7 @@ client.on("guildMemberAdd", (member) => {
     console.log('made it till here!');
     var guild;
     while (!guild)
-        guild = client.guilds.find("name", "SOD")
+        guild = client.guilds.find("name", "Smile Community")
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -1471,7 +1476,7 @@ client.on("guildMemberAdd", (member) => {
 
     while (!guild)
 
-        guild = client.guilds.get("382239191578312705");
+        guild = client.guilds.get("475799449445335050");
 
     guild.fetchInvites().then((data) => {
 
@@ -1630,24 +1635,6 @@ var mentionned = message.mentions.members.first();
 	   
       
      });
-client.on('message', message => { 
-    var prefix = "#";
-    if (message.author.boss) return;
-    if (!message.content.startsWith(prefix)) return;
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-    if (command == "#role") {
-    if (!message.channel.guild) return;
-    if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return message.reply("**:no_entry_sign:انت لا تملك صلاحيات **").then(msg => msg.delete(5000));;
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
-    let user = message.mentions.users.first();
-    if (message.mentions.users.size < 1) return message.reply('**منشن الشخص**').then(msg => {msg.delete(5000)});
-    let MRole = message.content.split(" ").slice(2).join(" ");
-    if(!MRole)return message.reply("يجب عليك وضع اسم الرتبة").then(msg => {msg.delete(5000)});
-    message.guild.member(user).addRole(message.guild.roles.find("name", MRole));
-    message.reply('*** Done :white_check_mark:  ***').then(msg => {msg.delete(10000)});
-    }
-    });
 client.on('message', function(message) {
     if(message.content.startsWith(prefix + 'roll')) {
         let args = message.content.split(" ").slice(1);
@@ -1704,5 +1691,345 @@ if (message.content.startsWith(prefix + "uptime")) {
 
 
 }
+});
+         client.on('message' , message => {
+  var prefix = "#";
+  if(message.author.bot) return;
+
+  if(message.content.startsWith(prefix + "xo")) {
+ let array_of_mentions = message.mentions.users.array();
+  let symbols = [':o:', ':heavy_multiplication_x:'] 
+  var grid_message;
+
+  if (array_of_mentions.length == 1 || array_of_mentions.length == 2) {
+    let random1 = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+    let random2 = Math.abs(random1 - 1); 
+    if (array_of_mentions.length == 1) {
+      random1 = 0;
+      random2 = 0;
+    }
+    var player1_id = message.author.id
+    let player2_id = array_of_mentions[random2].id;
+    var turn_id = player1_id;
+    var symbol = symbols[0];
+    let initial_message = `Game match between <@${player1_id}> and <@${player2_id}>!`;
+    if (player1_id == player2_id) {
+      initial_message += '\n_( ألعب مع نفسك)_'
+    }
+    message.channel.send(`Xo ${initial_message}`)
+    .then(console.log("Successful tictactoe introduction"))
+    .catch(console.error);
+    message.channel.send(':one::two::three:' + '\n' +
+                         ':four::five::six:' + '\n' +
+                         ':seven::eight::nine:')
+    .then((new_message) => {
+      grid_message = new_message;
+    })
+    .then(console.log("Successful tictactoe game initialization"))
+    .catch(console.error);
+    message.channel.send('يجب الانتضار حيث ما يتم الموافقه')
+    .then(async (new_message) => {
+      await new_message.react('1⃣');
+      await new_message.react('2⃣');
+      await new_message.react('3⃣');
+      await new_message.react('4⃣');
+      await new_message.react('5⃣');
+      await new_message.react('6⃣');
+      await new_message.react('7⃣');
+      await new_message.react('8⃣');
+      await new_message.react('9⃣');
+      await new_message.react('🆗');
+      await new_message.edit(`It\'s <@${turn_id}>\'s turn! Your symbol is ${symbol}`)
+      .then((new_new_message) => {
+        require('./xo.js')(client, message, new_new_message, player1_id, player2_id, turn_id, symbol, symbols, grid_message);
+      })
+      .then(console.log("Successful tictactoe listener initialization"))
+      .catch(console.error);
+    })
+    .then(console.log("Successful tictactoe react initialization"))
+    .catch(console.error);
+  }
+  else {
+    message.reply(`منشن مع من تريد ألعب`)
+    .then(console.log("Successful error reply"))
+    .catch(console.error);
+  }
+}
+ });
+	client.on('message', async msg => {
+	    var user = msg.author;
+			var a = msg.guild.roles.find("name", 'Agar');
+		if(!a){
+        a = await msg.guild.createRole({
+		  name: "Agar",
+          color: "#ffffff",
+          permissions:[]
+		})
+
+        }
+	    var m = msg.guild.roles.find("name", 'Minecraft');
+	if(!m){
+        m =  await msg.guild.createRole({
+		  name: "Minecraft",
+          color: "#ffffff",
+          permissions:[]
+		})
+        }
+        var f = msg.guild.roles.find("name", 'Fortnite');
+		if(!f){
+        f =  await msg.guild.createRole({
+		  name: "Fortnite",
+          color: "#ffffff",
+          permissions:[]
+		})
+        }
+        var b = msg.guild.roles.find("name", 'Brawlhalla');
+		if(!b){
+        b =  await msg.guild.createRole({
+		  name: "Brawlhalla",
+          color: "#ffffff",
+          permissions:[]
+		})
+        }
+        var black = msg.guild.roles.find("name", 'Blacksquad');
+	if(!black){
+        black =  await msg.guild.createRole({
+		  name: "Blacksquad",
+          color: "#ffffff",
+          permissions:[]
+		})
+        }
+        var le = msg.guild.roles.find("name", 'League Of Legends');
+	if(!le){
+        le =  await msg.guild.createRole({
+		  name: "League Of Legends",
+          color: "#ffffff",
+          permissions:[]
+		})
+        }
+        var bn = msg.guild.roles.find("name", 'Bonk.io');
+	if(!bn){
+        bn =  await msg.guild.createRole({
+		  name: "Bonk.io",
+          color: "#ffffff",
+          permissions:[]
+		})
+        }
+var prefix = "#";
+		if (msg.content.startsWith(prefix +'add')) {
+
+		if(!msg.channel.guild) return msg.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+msg.channel.send(`**\n⚽ : \` Agar\`  \n👶 :\` Minecraft \` \n👊  :\` Fortnite \` \n👌 :\`  Brawlhalla\`  \n🍸 :\` Blacksquad\` \n🥂 :\`League Of Legends\` \n🌕 :\`Bonk.io\`**`).then(res => {     res.react('⚽').then(r=>{
+     res.react('👶').then(r=>{
+     res.react('👊').then(r=>{
+     res.react('👌').then(r=>{
+     res.react('🍸').then(r=>{
+     res.react('🥂').then(r=>{
+     res.react('🌕').then(r=>{
+    let aaa = (reaction ) => reaction.emoji.name === '⚽'&&user.id
+    let mmm = (reaction ) => reaction.emoji.name === '👶'&&user.id
+    let fff = (reaction ) => reaction.emoji.name === '👊'&&user.id
+    let bbb = (reaction ) => reaction.emoji.name === '👌'&&user.id
+    let bbbb = (reaction) => reaction.emoji.name === '🍸'&& user.id
+    let cn = (reaction) => reaction.emoji.name === '🥂'&& user.id
+    let zg = (reaction) => reaction.emoji.name === '🌕'&& user.id
+
+    let aa = res.createReactionCollector(aaa);
+    let mm = res.createReactionCollector(mmm);
+    let ff = res.createReactionCollector(fff);
+    let bb = res.createReactionCollector(bbb);
+    let bl = res.createReactionCollector(bbbb);
+    let zgg = res.createReactionCollector(zg);
+aa.on("collect", r => {
+    msg.guild.member(user.id).addRole(a);
+    msg.guild.member(user.id).removeRole(m);
+    msg.guild.member(user.id).removeRole(f);
+    msg.guild.member(user.id).removeRole(b);
+    msg.guild.member(user.id).removeRole(black);
+    msg.guild.member(user.id).removeRole(le);
+	msg.delete();
+	})
+mm.on("collect", r => {
+    msg.guild.member(user.id).addRole(m);
+    msg.guild.member(user.id).removeRole(a);
+    msg.guild.member(user.id).removeRole(f);
+    msg.guild.member(user.id).removeRole(b);
+    msg.guild.member(user.id).removeRole(black);
+    msg.guild.member(user.id).removeRole(le);
+	msg.delete();
+})
+ff.on("collect", r => {
+    msg.guild.member(user.id).addRole(f);
+    msg.guild.member(user.id).removeRole(m);
+    msg.guild.member(user.id).removeRole(a);
+    msg.guild.member(user.id).removeRole(b);
+    msg.guild.member(user.id).removeRole(black);
+    msg.guild.member(user.id).removeRole(le);
+	msg.delete();
+})
+bb.on("collect", r => {
+    msg.guild.member(user.id).addRole(b);
+    msg.guild.member(user.id).removeRole(m);
+    msg.guild.member(user.id).removeRole(f);
+    msg.guild.member(user.id).removeRole(a);
+    msg.guild.member(user.id).removeRole(black);
+    msg.guild.member(user.id).removeRole(le);
+	msg.delete();
+})
+bl.on("collect", r => {
+    msg.guild.member(user.id).addRole(black);
+    msg.guild.member(user.id).removeRole(m);
+    msg.guild.member(user.id).removeRole(f);
+    msg.guild.member(user.id).removeRole(b);
+    msg.guild.member(user.id).removeRole(a);
+    msg.guild.member(user.id).removeRole(le);
+	msg.delete();
+})
+cnn.on("collect", r => {
+    msg.guild.member(user.id).addRole(le);
+    msg.guild.member(user.id).removeRole(m);
+    msg.guild.member(user.id).removeRole(f);
+    msg.guild.member(user.id).removeRole(b);
+    msg.guild.member(user.id).removeRole(a);
+    msg.guild.member(user.id).removeRole(black);
+	msg.delete();
+})
+zgg.on("collect", r => {
+    msg.guild.member(user.id).addRole(bn);
+    msg.guild.member(user.id).removeRole(m);
+    msg.guild.member(user.id).removeRole(f);
+    msg.guild.member(user.id).removeRole(b);
+    msg.guild.member(user.id).removeRole(a);
+    msg.guild.member(user.id).removeRole(black);
+    msg.guild.member(user.id).removeRole(le);
+	msg.delete();
+})
+
+})
+	 })
+	 })
+	 })
+     })
+	 })
+     })
+	 })
+	 }
+	 });
+var user = {};
+var warn = {};
+client.on('message', async function(message) {
+    	 if (!message.channel.guild) return;
+let muteRole1 = message.guild.roles.find("name", "Muted");
+     if (!muteRole1) return;
+  if (message.author.id == client.user.id) return;
+  if(JSON.stringify(user).indexOf(message.author.id) == -1) {
+    user[message.author.id] = message.createdTimestamp;
+    return;
+  } else {
+    if (Date.now() - user[message.author.id] < 695){
+              message.author.delete
+      if (JSON.stringify(warn).indexOf(message.author.id) == -1) {
+        warn[message.author.id] = 1;
+      } else {
+        warn[message.author.id]++;
+        message.author.delete
+      }
+      if (warn[message.author.id] < 6) {
+        message.author.delete
+
+      }
+      delete user[message.author.id];
+              message.author.delete
+
+    } else {
+      delete user[message.author.id];
+              message.author.delete
+
+    }
+  }
+  if (warn[message.author.id] == 6) {
+     if (!message.channel.guild) return;
+             message.author.delete
+
+let muteRole1 = message.guild.roles.find("name", "Muted");
+if(!muteRole1) {
+        muteRole1 = await message.guild.createRole({
+          name: "Muted",
+          color: "#ffffff",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muteRole1, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false,
+			READ_MESSAGES_HISTORY:false
+        });
+		});
+  }
+     if (!muteRole1) return;
+    var guild = message.channel.guild;
+          var currentTime = new Date(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate(),
+            hours = currentTime.getHours() + 3 ,
+            minutes = currentTime.getMinutes()+1,
+            seconds = currentTime.getSeconds();
+
+           if (!message.channel.guild) return;
+     if (!muteRole1) return;
+    var guild = message.channel.guild;
+    message.guild.members.get(message.author.id).addRole(muteRole1);
+	setTimeout(function(){
+		    message.guild.members.get(message.author.id).removeRole(muteRole1);
+	},7200000);
+     var msg;
+        msg = parseInt();
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+delete warn[message.author.id];
+    delete user[message.author.id];
+	const embed500 = new Discord.RichEmbed()
+     .setTitle(`mark:  | There is someone trying `)
+      .setDescription(":white_check_mark:  | `There is someone trying to do spam`\n\nName:\n"+`${message.author.username}#${message.author.discriminator}`+"\nThe required procedures have been taken")      .setColor("ff0000")
+    message.channel.send(embed500)
+    	const embed20 = new Discord.RichEmbed()
+      .setTitle(":scales: | you are punished")
+      .setDescription(`**You have been Muted **\n\nBy:\n${client.user.tag}\n\nThe reason:\nSpam Chat\n\nMuted Date:\n`+ Year + "/" + Month + "/" + Day +', '+hours +'-' +minutes+'-'+seconds+"\n \n \n`If the punishment by mistake continues with the administration \n\nTime of unmute : Two hours after the date of the death`")
+          .setFooter(message.guild.iconURL)
+      .setColor("ff0000")
+
+     message.author.send(embed20)
+
+  }
+});
+client.on('message',async message => {
+var codes = "#";
+var args = message.content.split(" ").slice(1);
+var title = args[1]
+          if(message.content.startsWith(codes + "giveaway")) {
+              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **s You Dont Have Premission**');
+              if(!args) return message.channel.send(`**Use : #start  <Time> <Presentse>**`);
+              if(!title) return message.channel.send(`**Use : **\`$start ${args[0]} Minutes\`** <Presentse>**`);
+         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
+                           let giveEmbed = new Discord.RichEmbed()
+                  .setAuthor(message.guild.name, message.guild.iconURL)
+                  .setDescription(`**${title}** \nReact Whit 🎉 To Enter! \n**Time remaining: Minutes :${duration / 60000}**`)
+                  .setFooter(message.author.username, message.author.avatarURL);
+
+                  message.channel.send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
+                      message.delete();
+                      m.react('🎉');
+                     setTimeout(() => {
+                       let users = m.reactions.get("🎉").users;
+                       let list = users.array().filter(u => u.id !== client.user.id);
+                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
+                       let endEmbed = new Discord.RichEmbed()
+                       .setAuthor(message.author.username, message.author.avatarURL)
+                       .setTitle(title)
+                       .addField('Giveaway End !🎉',`Winners : ${gFilter}`)
+                     m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
+                     },args * 60000);
+                   });
+          }
 });
 client.login(process.env.BOT_TOKEN);
