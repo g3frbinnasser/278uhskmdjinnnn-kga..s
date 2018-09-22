@@ -295,23 +295,6 @@ welcomer.sendFile(canvas.toBuffer())
       });                    
  }
 });
-client.on('ready', function(){	
-    var ms = 40000 ;	
-    var setGame = ['#help','#help'];	
-    var i = -1;	
-    var j = 0;	
-    setInterval(function (){	
-        if( i == -1 ){	
-j = 1;	
-       }	
-        if( i == (setGame.length)-1 ){	
-            j = -1;	
-      }	
-       i = i+j;	
-        client.user.setGame(setGame[i],`http://www.youtube.com/gg`);	
-}, ms);	
-	
-});
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) {
     let pages = [`
@@ -615,11 +598,6 @@ client.on('message', message => {
 });
 client.on('message', message => {
     if(message.content === 'رابط'){
-        message.channel.send('https://discord.gg/ZzqUFBm')
-    }
-});
-client.on('message', message => {
-    if(message.content === 'الرابط'){
         message.channel.send('https://discord.gg/ZzqUFBm')
     }
 });
@@ -1635,18 +1613,4 @@ var mentionned = message.mentions.members.first();
 	   
       
      });
-client.on('message', function(message) {
-    if(message.content.startsWith(prefix + 'roll')) {
-        let args = message.content.split(" ").slice(1);
-        if (!args[0]) {
-            message.channel.send('**ضع اي رقم**');
-            return;
-            }
-    message.channel.send(Math.floor(Math.random() * args.join(' ')));
-            if (!args[0]) {
-          message.edit('1')
-          return;
-        }
-    }
-});
 client.login(process.env.BOT_TOKEN);
