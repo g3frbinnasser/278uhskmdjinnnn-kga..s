@@ -2,7 +2,7 @@ const fs = require('fs');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
-  client.user.setGame(`.`,'https://www.twitch.tv/v5bz');
+  client.user.setGame(`THE ANGLE`,'https://www.twitch.tv/v5bz');
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
@@ -59,7 +59,7 @@ const Canvas = require('canvas');
           ctx.clip();
           ctx.drawImage(ava, 36, 21, 260, 260);
             
-          const c = client.channels.get("505391156360642560");
+          const c = client.channels.get("503600956328640512");
           c.sendFile(canvas.toBuffer());
  
 });
@@ -84,7 +84,7 @@ client.on("ready", () => {
  
  
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("505391156360642560");
+    let channel = member.guild.channels.get("503600956328640512");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
