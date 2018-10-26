@@ -1,10 +1,10 @@
 {
-  "name": "bot.js",
+  "name": "bytetech",
   "version": "2.1.0",
   "description": "-- AWESOMENESS --",
   "main": "p.js",
   "scripts": {
-    "start": "node p.js"
+    "start": "node bot.js"
   },
   "dependencies": {
  "array-sort": "^1.0.0",
