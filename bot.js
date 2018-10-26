@@ -2,7 +2,7 @@ const fs = require('fs');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
-  client.user.setGame(`Welcome To The Angel.`,'https://www.twitch.tv/v5bz');
+  client.user.setGame(`.`,'https://www.twitch.tv/v5bz');
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
