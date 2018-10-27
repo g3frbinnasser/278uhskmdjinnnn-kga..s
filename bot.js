@@ -102,6 +102,7 @@ client.on("guildMemberAdd", (member) => {
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
                     setTimeout(function() {
+ channel.send(`Welcome To Fèarless Server..`) 
  channel.send(`**invited by** ${Invite.inviter} `) ;
                     },1500);
  }
