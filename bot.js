@@ -103,7 +103,7 @@ client.on("guildMemberAdd", (member) => {
                 if (dat[Inv] < Invite.uses) {
                     setTimeout(function() {
  channel.send(`**Welcome To The Angel Server.. :champagne_glass:**`) 
- channel.send(`**invited by** ${Invite.inviter} `) ;
+ channel.send(`**Invited by** ${Invite.inviter} `) ;
                     },1500);
  }
             dat[Inv] = Invite.uses;
