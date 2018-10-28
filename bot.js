@@ -59,7 +59,7 @@ const Canvas = require('canvas');
           ctx.clip();
           ctx.drawImage(ava, 36, 21, 260, 260);
             
-          const c = client.channels.get("503600956328640512");
+          const c = client.channels.get("506128754494406667");
           c.sendFile(canvas.toBuffer());
  
 });
@@ -72,7 +72,7 @@ function forEachObject(obj, func) {
 client.on("ready", () => {
     var guild;
     while (!guild)
-        guild = client.guilds.get("497864272492232714");
+        guild = client.guilds.get("503540196164501504");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -84,7 +84,7 @@ client.on("ready", () => {
  
  
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("503600956328640512");
+    let channel = member.guild.channels.get("506128754494406667");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
@@ -95,14 +95,14 @@ client.on("guildMemberAdd", (member) => {
     console.log('-');
     var guild;
     while (!guild)
-        guild = client.guilds.get("497864272492232714");
+        guild = client.guilds.get("503540196164501504");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
                     setTimeout(function() {
- channel.send(`Welcome To Fèarless Server..`) 
+ channel.send(`**Welcome To The Angel Server.. :champagne_glass:**`) 
  channel.send(`**invited by** ${Invite.inviter} `) ;
                     },1500);
  }
