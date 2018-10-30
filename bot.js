@@ -112,6 +112,6 @@ client.on("guildMemberAdd", (member) => {
     });
 });
 client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","• Angels"));
+    member.addRole(member.guild.roles.find("name","» ST - Shop"));
     });
 	client.login(process.env.BOT_TOKEN); 
