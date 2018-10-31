@@ -84,7 +84,7 @@ client.on("ready", () => {
  
  
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("506128754494406667");
+    let channel = member.guild.channels.get("507144416721371143");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
@@ -102,7 +102,7 @@ client.on("guildMemberAdd", (member) => {
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
                     setTimeout(function() {
- channel.send(`**Welcome To The Angel Server.. :champagne_glass:**`) 
+ channel.send(`**Welcome To The Śtranger Server.. :champagne_glass:**`) 
  channel.send(`**Invited by** ${Invite.inviter} `) ;
                     },1500);
  }
@@ -112,6 +112,6 @@ client.on("guildMemberAdd", (member) => {
     });
 });
 client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","» ST - Shop"));
+    member.addRole(member.guild.roles.find("name","• Śtranger"));
     });
 	client.login(process.env.BOT_TOKEN); 
