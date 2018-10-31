@@ -1,12 +1,7 @@
 const fs = require('fs');
 const Discord = require("discord.js");
 const client = new Discord.Client();
-client.on('ready', () => {
-  client.user.setGame(`THE ANGLE`,'https://www.twitch.tv/v5bz');
-  console.log('---------------');
-  console.log(' Bot Is Online')
-  console.log('---------------')
-});
+
 client.on('guildMemberAdd',async member => {
 const Canvas = require('canvas');
   const jimp = require('jimp');
@@ -102,7 +97,7 @@ client.on("guildMemberAdd", (member) => {
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
                     setTimeout(function() {
- channel.send(`**Welcome To The Śtranger Server.. :champagne_glass:**`) 
+ channel.send(`**Welcome To Śtranger Server.. :champagne_glass:**`) 
  channel.send(`**Invited by** ${Invite.inviter} `) ;
                     },1500);
  }
