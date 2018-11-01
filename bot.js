@@ -1,13 +1,14 @@
 const fs = require('fs');
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
+
 client.on('guildMemberAdd',async member => {
-const Canvas = require('canvas');
+  const Canvas = require('canvas');
   const jimp = require('jimp');
   const w = ['./welcome.png'];
         let Image = Canvas.Image,
@@ -57,13 +58,14 @@ const Canvas = require('canvas');
           ctx.closePath();
           ctx.clip();
           ctx.drawImage(ava, 36, 21, 260, 260);
-            
-          const c = client.channels.get("506128754494406667");
+           
+          const c = client.channels.get("507144416721371143");
           c.sendFile(canvas.toBuffer());
  
 });
 });
 });
+
 var dat = JSON.parse("{}");
 function forEachObject(obj, func) {
     Object.keys(obj).forEach(function (key) { func(key, obj[key]) });
