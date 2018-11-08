@@ -122,6 +122,9 @@ channel.send(`**Welcome To Śtranger Server :champagne_glass:**`)
         })
     })
 });
+client.on('guildMemberAdd', (member) => {
+member.addRole(member.guild.roles.find('name', '• Śtranger'));
+});
 var prefix = "#";
 client.on("message", message => {
 
