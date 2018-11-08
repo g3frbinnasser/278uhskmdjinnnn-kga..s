@@ -116,7 +116,7 @@ client.on("guildMemberAdd", (member) => {
                 if (dat[Inv] < Invite.uses) {
                     console.log(3);
 channel.send(`**Welcome To Śtranger Server :champagne_glass:**`)
- channel.send(`"**invited by** ${Invite.inviter}`)
+ channel.send(`**invited by** ${Invite.inviter}`)
  }
             dat[Inv] = Invite.uses;
         })
