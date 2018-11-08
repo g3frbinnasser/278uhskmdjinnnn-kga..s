@@ -122,34 +122,18 @@ channel.send(`**Welcome To Śtranger Server :champagne_glass:**`)
         })
     })
 });
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","• Śtranger"));
-    });
+var prefix = "#";
 client.on("message", message => {
-    var prefix = "#";
-        if (message.author.id === client.user.id) return;
-        if (message.guild) {
-       let embed = new Discord.RichEmbed()
-        let args = message.content.split(' ').slice(1).join(' ');
-    if(message.content.split(' ')[0] == prefix + 'bc') {
-        if (!args[1]) {
-    message.channel.send("**bc <message>**");
-    return;
-    }
-            message.guild.members.forEach(m => {
-       if(!message.member.hasPermission('ADMINISTRATOR')) return;
-                m.send(args);
-            });
-            const AziRo = new Discord.RichEmbed()
-            .setAuthor(message.author.username, message.author.avatarURL)   
-            .setTitle('✅| جاري ارسال رسالتك ') 
-            .addBlankField(true)
-            .addField('♨| عدد الاعضاء المرسل لهم ', message.guild.memberCount , true)        
-            .addField('📝| الرسالة ', args)
-            .setColor('RANDOM')  
-            message.channel.sendEmbed(AziRo);          
-        }
-        } else {
-            return;
-        }
+
+            if (message.content.startsWith(prefix + "bc")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+  let args = message.content.split(" ").slice(1);
+  var argresult = args.join(' '); 
+  message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => {
+ m.send(`${argresult}\n ${m}`);
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'all').size}\` : عدد الاعضاء المستلمين`); 
+ message.delete(); 
+};     
+});
 	client.login(process.env.BOT_TOKEN); 
