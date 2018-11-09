@@ -173,6 +173,7 @@ client.on("message", (message) => {
  
  
   if (message.content.startsWith("#close")) {
+	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
         if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
  
        message.channel.send(`هل انت متأكد من اقفالك للتذكرة اذا متأكد اكتب #confirm`)
