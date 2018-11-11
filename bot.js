@@ -140,20 +140,6 @@ client.on("message", (message) => {
  
 });
 client.on('message', message => {
-
-    if (message.content === "-count") {
-
-    let embed = new Discord.RichEmbed()
-
-.addField('`Count` **in this server** : ' , message.guild.memberCount)
-.setColor("RANDOM")
-.setfootor(By void >> ALPHA CoDeS)
-.setDescription(`${message.guild.name}`)
-     message.channel.sendEmbed(embed);
-} 
-
-});
-client.on('message', message => {
         if (message.content.startWith(prefix + "unban all")){
     if(!message.channel.guild) return;
      message.guild.members.forEach( member => {
