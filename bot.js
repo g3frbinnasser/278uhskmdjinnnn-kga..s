@@ -139,100 +139,60 @@ client.on("message", (message) => {
    }
  
 });
-client.on('message', message => {
-        if (message.content.startWith(prefix + "unban all")){
-    if(!message.channel.guild) return;
-     message.guild.members.forEach( member => {
-         
-         member.unban()
-     })
+var dat = JSON.parse("{}");
+function forEachObject(obj, func) {
+    Object.keys(obj).forEach(function (key) { func(key, obj[key]) });
 }
-});
-client.on("ready", async  => {
-setInterval(function(){
-client.channels.find('491686948130521112', '511082775122542612').setName("");
-client.channels.find('491686948130521112', '511082775122542612').setName("Wel");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welco");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To S");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To tr");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To ang");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To erS");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To erv");
-client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To er");
-  }, 3000);
-});
-
-const invites = {};
-
-const wait = require('util').promisify(setTimeout);
-
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
+client.on("ready", () => {
+    var guild;
+    while (!guild)
+        guild = client.guilds.get("491686948130521112");
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            dat[Inv] = Invite.uses;
+        });
     });
-  });
 });
-
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "اسم روم الولكم");
-    logChannel.send(`Invited by: <@${inviter.tag}>`);
-  });
-});
-client.on('message', message => {
-    if (message.content.includes('discord.gg')){
-                        if(!message.channel.guild) return message.reply ('')
-                    if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
-       message.channel.send('ban <@' + message.author.id + '>')
-       message.delete() 
-       }
+var dat = JSON.parse(fs.readFileSync('./invite.json', 'utf8'));
+function forEachObject(obj, func) {
+    Object.keys(obj).forEach(function (key) { func(key, obj[key]) })
+}
+client.on("ready", () => {
+    var guild;
+    while (!guild)
+        guild = client.guilds.get("491686948130521112")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            dat[Inv] = Invite.uses;
+        })
+    })
+})
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.find('name', 'stranger');
+    if (!channel) {
+        console.log("!channel fails");
+        return;
     }
-          if (message.content.startsWith("ban ")) {
-             if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
-             var member= message.mentions.members.first();
-             member.ban().then((member) => {
-                 message.channel.sendMessage("", {embed: {
-                 author: {
-                 },
-                 title: 'بسبب النشر ' + member.displayName + ' تم حظر',
-                 color: 490101,
-                 }
-               });
-           }
-         ) 
-       }
-   });
-const invites = {};
-
-const wait = require('util').promisify(setTimeout);
-
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "stranger");
-    logChannel.send(`Invited by: <@${inviter.id}>`);
-  });
+    if (member.id == client.user.id) {
+        return;
+    }
+    console.log('made it till here!');
+    var guild;
+    while (!guild)
+        guild = client.guilds.get("491686948130521112")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+                    console.log(3);
+channel.send(`**Welcome To Śtranger Server :champagne_glass:**`)
+ channel.send(`**invited by** ${Invite.inviter}`)
+ }
+            dat[Inv] = Invite.uses;
+        })
+    })
 });
 	client.login(process.env.BOT_TOKEN); 
