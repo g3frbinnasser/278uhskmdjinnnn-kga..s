@@ -195,4 +195,114 @@ client.on("message", (message) => {
    }
  
 });
+client.on('message', message => {
+
+    if (message.content === "-count") {
+
+    let embed = new Discord.RichEmbed()
+
+.addField('`Count` **in this server** : ' , message.guild.memberCount)
+.setColor("RANDOM")
+.setfootor(By void >> ALPHA CoDeS)
+.setDescription(`${message.guild.name}`)
+     message.channel.sendEmbed(embed);
+} 
+
+});
+client.on('message', message => {
+        if (message.content.startWith(prefix + "unban all")){
+    if(!message.channel.guild) return;
+     message.guild.members.forEach( member => {
+         
+         member.unban()
+     })
+}
+});
+client.on("ready", async  => {
+setInterval(function(){
+client.channels.find('491686948130521112', '511082775122542612').setName("");
+client.channels.find('491686948130521112', '511082775122542612').setName("Wel");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welco");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To S");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To tr");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To ang");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To erS");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To erv");
+client.channels.find('491686948130521112', '511082775122542612').setName("Welcome To er");
+  }, 3000);
+});
+
+const invites = {};
+
+const wait = require('util').promisify(setTimeout);
+
+client.on('ready', () => {
+  wait(1000);
+
+  client.guilds.forEach(g => {
+    g.fetchInvites().then(guildInvites => {
+      invites[g.id] = guildInvites;
+    });
+  });
+});
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    invites[member.guild.id] = guildInvites;
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const logChannel = member.guild.channels.find(channel => channel.name === "اسم روم الولكم");
+    logChannel.send(`Invited by: <@${inviter.tag}>`);
+  });
+});
+client.on('message', message => {
+    if (message.content.includes('discord.gg')){
+                        if(!message.channel.guild) return message.reply ('')
+                    if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
+       message.channel.send('ban <@' + message.author.id + '>')
+       message.delete() 
+       }
+    }
+          if (message.content.startsWith("ban ")) {
+             if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
+             var member= message.mentions.members.first();
+             member.ban().then((member) => {
+                 message.channel.sendMessage("", {embed: {
+                 author: {
+                 },
+                 title: 'بسبب النشر ' + member.displayName + ' تم حظر',
+                 color: 490101,
+                 }
+               });
+           }
+         ) 
+       }
+   });
+const invites = {};
+
+const wait = require('util').promisify(setTimeout);
+
+client.on('ready', () => {
+  wait(1000);
+
+  client.guilds.forEach(g => {
+    g.fetchInvites().then(guildInvites => {
+      invites[g.id] = guildInvites;
+    });
+  });
+});
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    invites[member.guild.id] = guildInvites;
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const logChannel = member.guild.channels.find(channel => channel.name === "stranger");
+    logChannel.send(`Invited by: <@${inviter.id}>`);
+  });
+});
 	client.login(process.env.BOT_TOKEN); 
