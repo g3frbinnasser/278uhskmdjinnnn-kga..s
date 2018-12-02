@@ -1,13 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
- 
- 
- client.on('guildMemberAdd', member => {
-const mohamed= member.guild.channels.get("517621662271799307");
-if(mohamed) {
-setTimeout(() => mohamed.send(`**.. Welcome To, - Future Community. :leaves::tulip: ** `), 4000)        
-}
-});
+
    client.on('message', message => {
 const yt = require('ytdl-core');
   if (message.content.startsWith('ji.')) {
