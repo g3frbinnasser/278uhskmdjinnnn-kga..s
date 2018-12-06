@@ -148,15 +148,10 @@ client.on('message', message => {
    
     }
     });
-client.on('message', msg => {
-  if (msg.content === 'euieikbjewb298wounj') {
-    msg.reply('Pong!');
-  }
-});
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
   const jimp = require('jimp');
-  const w = ['./welcome_4.png'];
+  const w = ['welcome_4.png'];
         let Image = Canvas.Image,
             canvas = new Canvas(800, 300),
             ctx = canvas.getContext('2d');
@@ -194,7 +189,7 @@ client.on('guildMemberAdd',async member => {
           ctx.fontSize = '72px';
           ctx.fillStyle = "#ffffff";
           ctx.textAlign = "center";
-          ctx.fillText(``, 580, 200);
+          ctx.fillText(`${member.guild.memberCount} Members`, 580, 200);
          
           let Avatar = Canvas.Image;
           let ava = new Avatar;
@@ -205,7 +200,7 @@ client.on('guildMemberAdd',async member => {
           ctx.clip();
           ctx.drawImage(ava, 36, 21, 260, 260);
            
-          const c = client.channels.get("519851339879284747");
+          const c = client.channels.get(" 519851339879284747 ");
           c.sendFile(canvas.toBuffer()); 
 });
 });
