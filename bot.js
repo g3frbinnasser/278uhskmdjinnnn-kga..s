@@ -130,7 +130,7 @@ client.on('message', message => {
     const embed = new Discord.RichEmbed()
    
     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-    .setDescription(`**Done , تم تغير لونك . :white_check_mark: **`)
+    .setDescription(`تم تغيير اللون بنجاح`)
    
     .setColor(`${a.hexColor}`)
     message.channel.sendEmbed(embed);
