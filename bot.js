@@ -178,7 +178,7 @@ client.on(`message`, message => {
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
   const jimp = require('jimp');
-  const w = ['./welcome.png'];
+  const w = ['welcome_4.png'];
         let Image = Canvas.Image,
             canvas = new Canvas(800, 300),
             ctx = canvas.getContext('2d');
@@ -227,9 +227,8 @@ client.on('guildMemberAdd',async member => {
           ctx.clip();
           ctx.drawImage(ava, 36, 21, 260, 260);
            
-          const c = client.channels.get("519851339879284747");
-          c.sendFile(canvas.toBuffer());
- 
+          const c = client.channels.get(" 519851339879284747 ");
+          c.sendFile(canvas.toBuffer()); 
 });
 });
 });
