@@ -84,15 +84,15 @@ client.on('message', message => {
     }
 });
 client.on('message', msg => {
-    if (msg.content === '#colors') {
-      msg.reply('https://d.top4top.net/p_10708dbgg1.png');
-    }
-  });
+  if (msg.content === 'الوان') {
+    msg.reply('https://d.top4top.net/p_10708dbgg1.png');
+  }
+});
 client.on('message', msg => {
-    if (msg.content === 'الوان') {
-      msg.reply('https://d.top4top.net/p_10708dbgg1.png');
-    }
-  });
+  if (msg.content === '#colors') {
+    msg.reply('https://d.top4top.net/p_10708dbgg1.png');
+  }
+});
 client.on(`message`, message => {
     var args = message.content.split(/[ ]+/)
     if(message.content.includes(`youtube.com`)){
