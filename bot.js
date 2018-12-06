@@ -148,10 +148,15 @@ client.on('message', message => {
    
     }
     });
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+
 client.on('guildMemberAdd',async member => {
   const Canvas = require('canvas');
   const jimp = require('jimp');
-  const w = ['welcome_4.png'];
+  const w = ['./welcome_4.png'];
         let Image = Canvas.Image,
             canvas = new Canvas(800, 300),
             ctx = canvas.getContext('2d');
@@ -200,11 +205,13 @@ client.on('guildMemberAdd',async member => {
           ctx.clip();
           ctx.drawImage(ava, 36, 21, 260, 260);
            
-          const c = client.channels.get(" 519851339879284747 ");
-          c.sendFile(canvas.toBuffer()); 
+          const c = hero.channels.get("519851339879284747");
+          c.sendFile(canvas.toBuffer());
+ 
 });
 });
 });
+
 const invites = {};
 
 const wait = require('util').promisify(setTimeout);
