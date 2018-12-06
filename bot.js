@@ -88,11 +88,6 @@ client.on('message', msg => {
     msg.reply('https://d.top4top.net/p_10708dbgg1.png');
   }
 });
-client.on('message', msg => {
-  if (msg.content === '#colors') {
-    msg.reply('https://d.top4top.net/p_10708dbgg1.png');
-  }
-});
 client.on(`message`, message => {
     var args = message.content.split(/[ ]+/)
     if(message.content.includes(`youtube.com`)){
@@ -100,16 +95,42 @@ client.on(`message`, message => {
     return message.reply(`** No Invite Links 😠 ! **`)
 }
 });
-client.on('message', message => {
-              if (!message.channel.guild) return;
-      if(message.content =='#count')
-      var IzRo = new Discord.RichEmbed()
-      .setThumbnail(message.author.iconURL)
-      .setFooter(message.author.username, message.author.avatarURL)
-      .setTitle(' عدد اعضاء السيرفر  ')
-      .addBlankField(true)
-      .addField('.',`${message.guild.memberCount}`)
-      message.channel.send(IzRo);
+  client.on('message', message => {
+    let args = message.content.split(' ').slice(1);
+    if(message.content.split(' ')[0] == `لون`){
+    const embedd = new Discord.RichEmbed()
+    .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+    .setDescription(`**لا يوجد لون بهذا الرقم ** :x: `)
+    .setColor(`ff0000`)
+   
+    if(!isNaN(args) && args.length > 0)
+   
+   
+    if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
+   
+   
+    var a = message.guild.roles.find("name",`${args}`)
+     if(!a)return;
+    const embed = new Discord.RichEmbed()
+   
+    .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+    .setDescription(`تم تغيير اللون بنجاح`)
+   
+    .setColor(`${a.hexColor}`)
+    message.channel.sendEmbed(embed);
+    if (!args)return;
+    setInterval(function(){})
+       let count = 0;
+       let ecount = 0;
+    for(let x = 1; x < 201; x++){
+   
+    message.member.removeRole(message.guild.roles.find("name",`${x}`))
+   
+    }
+     message.member.addRole(message.guild.roles.find("name",`${args}`));
+   
+   
+    }
     });
   client.on('message', message => {
     let args = message.content.split(' ').slice(1);
@@ -148,11 +169,6 @@ client.on('message', message => {
    
     }
     });
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
-
   const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
  
 client.on('message', message => {
@@ -243,28 +259,11 @@ client.on('message', message => {
                  
                 })
                
- 
-client.on("guildMemberAdd", member => {
-            if(!welcome[member.guild.id]) welcome[member.guild.id] = {
-          onoff: 'Off'
-        }
-        if(welcome[member.guild.id].onoff === 'Off') return;
-    let welcomer = member.guild.channels.find('name', `${welcome[member.guild.id].channel}`)
-    let memberavatar = member.user.avatarURL
-      if (!welcomer) return;
-      if(welcomer) {
-         welcome.locale('ar-ly');
-         var h = member.user;
-        let heroo = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(h.avatarURL)
-        .setAuthor(h.username,h.avatarURL)
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
-         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:heroo});
-      }})
- 
- 
+ client.on('message', msg => {
+  if (msg.content === '#colors') {
+    msg.reply('https://d.top4top.net/p_10708dbgg1.png');
+  }
+});
 client.on('guildMemberAdd',async member => {
             if(!welcome[member.guild.id]) welcome[member.guild.id] = {
           onoff: 'Off'
@@ -328,7 +327,8 @@ client.on('guildMemberAdd',async member => {
   });
   });
   });
-
+ 
+  const invites = {};
  
 const wait = require('util').promisify(setTimeout);
  
@@ -355,33 +355,8 @@ client.on('guildMemberAdd', member => {
     const logChannel = member.guild.channels.find(channel => channel.name === `${welcome[member.guild.id].channel}`);
     if(!logChannel) return;
       setTimeout(() => {
-    logChannel.send(`Invited by: <@${inviter.id}>`);
+    logChannel.send(`Invited By: <@${inviter.id}>`);
   },2000)
-  });
-});
-
-const invites = {};
-
-const wait = require('util').promisify(setTimeout);
-
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "future");
-    logChannel.send(`Invited by: <@${inviter.id}>`);
   });
 });
 client.on('message', message => {
