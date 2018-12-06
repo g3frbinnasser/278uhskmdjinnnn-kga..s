@@ -328,8 +328,7 @@ client.on('guildMemberAdd',async member => {
   });
   });
   });
- 
-  const invites = {};
+
  
 const wait = require('util').promisify(setTimeout);
  
