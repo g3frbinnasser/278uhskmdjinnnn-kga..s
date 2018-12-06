@@ -139,17 +139,12 @@ client.on('message', message => {
     )
     const embed = new Discord.RichEmbed()
         .setColor("2fff00")
-        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
-        .setFooter("Spring-Team")
+        .setDescription("Check Your DM.")
+        .setFooter("Future System")
       message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
               const Embed11 = new Discord.RichEmbed()
         .setColor("2fff00")
-        .setDescription(`
-**-------------------
--هذا هو الرابط 
--ارسله للي تحب وحيآك انت وياه
--ونورنا ياجميل :heart: 
-------------------- **`)
+        .setDescription(`**هذا الرابط صالح ل100 شخص .**`)
         .setFooter("Future System")
       message.author.sendEmbed(Embed11)
     }
