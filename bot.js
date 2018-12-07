@@ -432,7 +432,7 @@ client.on('message', message => {
     }
 });
 client.on("message", message => {
-
+var prefix = "#";
             if (message.content.startsWith(prefix + "bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
