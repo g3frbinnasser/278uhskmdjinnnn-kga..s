@@ -143,7 +143,7 @@ client.on('message', message => {
 }
 });
 client.on('message', message => {
-	var prefix = "-"
+	var prefix = "#"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -207,12 +207,13 @@ if(!message.channel.guild) return;
   const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
  
 client.on('message', message => {
+	var prefix = "#";
  
            if (!message.channel.guild) return;
  
     let room = message.content.split(" ").slice(1);
     let findroom = message.guild.channels.find('name', `${room}`)
-    if(message.content.startsWith(prefix + "!setWelcomer")) {
+    if(message.content.startsWith(prefix + "setWelcomer")) {
         if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
         if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
 if(!room) return message.channel.send('Please Type The Channel Name')
@@ -235,6 +236,7 @@ if (err) console.error(err)
 })
     }})
 client.on('message', message => {
+	var prefix = "#";
  
     if(message.content.startsWith(prefix + "toggleWelcome")) {
         if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
@@ -275,6 +277,7 @@ client.on('message', message => {
         })
  
         client.on('message', message => {
+		var prefix = "#";
  
             if(message.content.startsWith(prefix + "toggleInvitedby")) {
                 if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
