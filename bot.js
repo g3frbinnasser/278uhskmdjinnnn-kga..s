@@ -209,43 +209,6 @@ client.on('message', message => {
 });
 
 
-client.on('message', message => {
-var prefix = "-";
-       if(message.content === prefix + "mutechannel") {
-                           if(!message.channel.guild) return message.reply('** This command only for servers**');
-
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__ليس لديك صلاحيات__**');
-              message.channel.overwritePermissions(message.guild.id, {
-            SEND_MESSAGES: false
-
-              }).then(() => {
-                  message.reply("**__تم تقفيل الشات__ :white_check_mark: **")
-              });
-                }
-//FIRE BOT
-    if(message.content === prefix + "unmutechannel") {
-                        if(!message.channel.guild) return message.reply('** This command only for servers**');
-
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__ليس لديك صلاحيات__**');
-              message.channel.overwritePermissions(message.guild.id, {
-            SEND_MESSAGES: true
-
-              }).then(() => {
-                  message.reply("**__تم فتح الشات__:white_check_mark:**")
-              });
-    }
-       
-});
-
-
-
-client.on('message', message => {
-    if (message.content.startsWith("-bans")) {
-        message.guild.fetchBans()
-        .then(bans => message.channel.send(`${bans.size} عدد اشخاص المبندة من السيرفر `))
-  .catch(console.error);
-}
-});
 
 
  
@@ -305,10 +268,8 @@ const channel = sWlc[message.guild.id].channel
 });
  
 
-client.on("guildMemberAdd", member => {
-      if(!sWlc[member.guild.id]) sWlc[member.guild.id] = {
-    channel: "welcome"
-  }        
+client.on('guildMemberAdd',async member => {
+     
          
       var Canvas = require('canvas')
       var jimp = require('jimp')
