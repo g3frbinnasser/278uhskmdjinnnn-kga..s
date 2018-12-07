@@ -80,30 +80,6 @@ client.on('message', msg => {
     }
 }
 });
-client.on('message', msg => {
-	var prefix = "#";
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix)) return;
-  let command = msg.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = msg.content.split(" ").slice(1);
-
-    if(command === "clear") {
-        const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if (textxt == "") {
-        msg.delete().then
-    msg.channel.send("***```ضع عدد الرسائل التي تريد مسحها 👌```***").then(m => m.delete(3000));
-} else {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
-        }    
-    }
-}
-});
   client.on('message', async message => {
     var moment = require('moment');
     var mmss = require('ms')
@@ -353,61 +329,6 @@ client.on('guildMemberAdd', member => {
     logChannel.send(`Invited By: <@${inviter.id}>`);
   },2000)
   });
-});
-
-
-           
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
- client.on('message', message => {
-    let args = message.content.split(' ').slice(1);
-if(message.content.split(' ')[0] == '#color'){
-if (message.channel.id !== "478388106140057610") return;
-     const embedd = new Discord.RichEmbed()
-.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setDescription(`**There's No Color With This Number **`)
-.setColor(`ff0000`)
-
-if(!isNaN(args) && args.length > 0)
-
-
- var a = message.guild.roles.find("name",`${args}`)
-          if(!a)return;
-          if (a.name > 250 || a.name < 1) return;
-const embed = new Discord.RichEmbed()
-              
-.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setDescription(`**Color Changed Successfully**`)
-
-.setColor(`${a.hexColor}`)
-message.channel.sendEmbed(embed);
-    if (!args)return;
-setInterval(function(){})
-            let count = 0;
-            let ecount = 0;
-  for(let x = 1; x < 201; x++){
-     
-      message.member.removeRole(message.guild.roles.find("name",`${x}`))
-    
-      }
-          message.member.addRole(message.guild.roles.find("name",`${args}`));
-  
-      
-}
-});
- 	client.on('message', msg => {
-    if (msg.content === 'الوان') {
-      if (msg.channel.id !== "520153585493868564") return;
-      msg.channel.send({file : "https://cdn.discordapp.com/attachments/509204678207209472/520305660106113024/colors.png"})
-    }
-  });
-client.on(`message`, message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes(`youtube.com`)){
-    message.delete()
-    return message.reply(`** No Invite Links :angry:  ! **`)
-}
 });
 client.on('message', message => {
     if (message.content.startsWith("رابط")) {
