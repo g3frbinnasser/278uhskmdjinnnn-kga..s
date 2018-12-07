@@ -300,7 +300,7 @@ client.on('guildMemberAdd', member => {
     const logChannel = member.guild.channels.find(channel => channel.name === `${welcome[member.guild.id].channel}`);
     if(!logChannel) return;
       setTimeout(() => {
-    logChannel.send(`Invited By: <@${inviter.id}>`);
+    logChannel.send(`**Invited by** <@${inviter.id}>`);
   },2000)
   });
 });
