@@ -444,7 +444,7 @@ var prefix = "#";
  message.delete(); 
 };     
 });
-const adminprefix = "#"; 
+const adminprefix = "#set"; 
 const devs = ['507920205973028879'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
