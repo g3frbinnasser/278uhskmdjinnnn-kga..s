@@ -256,46 +256,6 @@ client.on('message', message => {
          
         })
        
-        client.on('message', message => {
- 
-    if(message.content.startsWith(prefix + "toggleDmwelcome")) {
-        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-        if(!welcome[message.guild.id]) welcome[message.guild.id] = {
-          dm: 'Off'
-        }
-          if(welcome[message.guild.id].dm === 'Off') return [message.channel.send(`**The Welcome Dm Is __𝐎𝐍__ !**`), welcome[message.guild.id].dm = 'On']
-          if(welcome[message.guild.id].dm === 'On') return [message.channel.send(`**The Welcome Dm Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].dm = 'Off']
-          fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
-            if (err) console.error(err)
-            .catch(err => {
-              console.error(err);
-          });
-            })
-          }
-         
-        })
- 
-        client.on('message', message => {
-		var prefix = "#";
- 
-            if(message.content.startsWith(prefix + "toggleInvitedby")) {
-                if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-                if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-                if(!welcome[message.guild.id]) welcome[message.guild.id] = {
-                  by: 'Off'
-                }
-                  if(welcome[message.guild.id].by === 'Off') return [message.channel.send(`**The Invited By Is __𝐎𝐍__ !**`), welcome[message.guild.id].by = 'On']
-                  if(welcome[message.guild.id].by === 'On') return [message.channel.send(`**The Invited By Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].by = 'Off']
-                  fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
-                    if (err) console.error(err)
-                    .catch(err => {
-                      console.error(err);
-                  });
-                    })
-                  }
-                 
-                })
                
  
 client.on("guildMemberAdd", member => {
@@ -420,5 +380,26 @@ client.on('guildMemberAdd', member => {
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
+ 
+        client.on('message', message => {
+		var prefix = "#";
+ 
+            if(message.content.startsWith(prefix + "toggleInvitedby")) {
+                if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+                if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+                if(!welcome[message.guild.id]) welcome[message.guild.id] = {
+                  by: 'Off'
+                }
+                  if(welcome[message.guild.id].by === 'Off') return [message.channel.send(`**The Invited By Is __𝐎𝐍__ !**`), welcome[message.guild.id].by = 'On']
+                  if(welcome[message.guild.id].by === 'On') return [message.channel.send(`**The Invited By Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].by = 'Off']
+                  fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
+                    if (err) console.error(err)
+                    .catch(err => {
+                      console.error(err);
+                  });
+                    })
+                  }
+                 
+                })
 client.login(process.env.BOT_TOKEN);
 			      
