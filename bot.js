@@ -56,6 +56,7 @@ client.on('message', msg => {
 }
 });
   client.on('message', async message => {
+	  var prefix = "#";
     var moment = require('moment');
     var mmss = require('ms')
     let date = moment().format('Do MMMM YYYY , hh:mm');
