@@ -104,34 +104,6 @@ client.on('message', msg => {
     }
 }
 });
-
-
-
-
-
-
-
-client.on("message", message => {
-    const prefix = "-"
-              
-          if(!message.channel.guild) return;
-   if(message.author.bot) return;
-      if(message.content === prefix + "image"){ 
-          const embed = new Discord.RichEmbed()
-  
-      .setTitle(`This is  ** ${message.guild.name} **  Photo !`)
-  .setAuthor(message.author.username, message.guild.iconrURL)
-    .setColor(0x164fe3)
-    .setImage(message.guild.iconURL)
-    .setURL(message.guild.iconrURL)
-                    .setTimestamp()
-
-   message.channel.send({embed});
-      }
-  });
-
-
- 
 client.on('message', message => {
 	var prefix = "#"
   if (message.author.x5bz) return;
@@ -170,7 +142,6 @@ client.on('message', message => {
   })
 }
 });
-
 client.on('message', message => {
 	var prefix = "-"
   if (message.author.x5bz) return;
@@ -207,20 +178,6 @@ client.on('message', message => {
   })
 }
 });
-
-
-
-
- 
- 
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`Welcome To **Future Avatar** :dove: `) 
-}).catch(console.error)
-})
-
- 
-
 client.on('message', message => {
     if(message.content.includes('discord.gg')){
                                             if(!message.channel.guild) return message.reply('** advertising me on DM ? :thinking:   **');
@@ -247,8 +204,6 @@ if(!message.channel.guild) return;
       message.channel.sendEmbed(embed);
     }
 });
-			      
-
   const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
  
 client.on('message', message => {
