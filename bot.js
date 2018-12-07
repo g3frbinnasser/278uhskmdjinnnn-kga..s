@@ -211,9 +211,8 @@ if (err) console.error(err)
 })
     }})
 client.on('message', message => {
-	var prefix = "#";
  
-    if(message.content.startsWith(prefix + "toggleWelcome")) {
+    if(message.content.startsWith(#togglewelcome")) {
         if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
         if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
         if(!welcome[message.guild.id]) welcome[message.guild.id] = {
