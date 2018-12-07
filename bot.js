@@ -444,6 +444,31 @@ var prefix = "#";
  message.delete(); 
 };     
 });
+const adminprefix = "K"; 
+const devs = ['427476285166452748'];
+client.on('message', message => {
+  var argresult = message.content.split(` `).slice(1).join(' ');
+    if (!devs.includes(message.author.id)) return;
+   
+if (message.content.startsWith(adminprefix + 'sg')) {
+  client.user.setGame(argresult);
+    message.channel.sendMessage(`**${argresult} :white_check_mark:  **`)
+} else
+  if (message.content.startsWith(adminprefix + 'sn')) {
+client.user.setUsername(argresult).then
+    message.channel.sendMessage(`**${argresult}** : تم تغير اسمك :white_check_mark: `)
+return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
+} else
+  if (message.content.startsWith(adminprefix + 'sa')) {
+client.user.setAvatar(argresult);
+  message.channel.sendMessage(`**${argresult}** : تم تغيير صورتك :white_check_mark: `);
+      } else    
+if (message.content.startsWith(adminprefix + 'st')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/idk");
+    message.channel.sendMessage(`**:white_check_mark: تم تغير الحاله الى واتشنق ${argresult}**`)
+}
+ 
+});
         client.on('message', message => {
 		var prefix = "#";
  
