@@ -305,26 +305,22 @@ client.on('guildMemberAdd', member => {
   },2000)
   });
 });
-client.on('message', message => {
+  client.on('message', message => {
     if (message.content.startsWith("رابط")) {
-        
+
   message.channel.createInvite({
         thing: true,
-        maxUses: 5,
+        maxUses: 10,
         maxAge: 86400
-    }).then(invite =>  
+    }).then(invite =>
       message.author.sendMessage(invite.url)
     )
-    const embed = new Discord.RichEmbed()
-        .setColor("2fff00")
-        .setDescription("Check Your DM.")
-        .setFooter("Future System")
-      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
-              const Embed11 = new Discord.RichEmbed()
-        .setColor("2fff00")
-        .setDescription(`**الرابط صالح لمئة شخص .**`)
-        .setFooter("Future System")
-      message.author.sendEmbed(Embed11)
+  message.channel.send("**تم ارسال الرابط برسالة خاصة**")
+
+message.author.send(`**مدة الرابط : يـوم
+عدد استخدامات الرابط : 10**`)
+
+
     }
 });
 client.on("message", message => {
